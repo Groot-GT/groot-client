@@ -1,6 +1,6 @@
 ---
-name: Feature
-about: refactor current code
+name: Refactor
+about: Refactor current code
 title: 'refactor: '
 labels: refactor
 ---
