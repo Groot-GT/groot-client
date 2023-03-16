@@ -1,6 +1,7 @@
+type NodeId = number;
+
 export interface Node {
-  id: number;
-  children: Node[];
+  [key: NodeId]: { children: NodeId[] };
 }
 
 export enum NodeDirection {
