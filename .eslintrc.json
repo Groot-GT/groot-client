@@ -23,5 +23,6 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": "off"
-  }
+  },
+  "ignorePatterns": ["vite.config.ts", "jest.config.ts"]
 }
