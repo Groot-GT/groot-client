@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useElementPosistion = () => {
+const useElementPosition = () => {
   const ref = useRef<HTMLElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -17,4 +17,4 @@ const useElementPosistion = () => {
   return { ref, position };
 };
 
-export default useElementPosistion;
+export default useElementPosition;
