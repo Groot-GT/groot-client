@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useElementPosition = () => {
-  const ref = useRef<HTMLElement>(null);
+const useElementPosition = <T extends HTMLElement>() => {
+  const ref = useRef<T>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {

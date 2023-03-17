@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import './App.css';
+import { RecoilRoot } from 'recoil';
+import Node from './components/organisms/Node';
+import { NodeDirection } from './constants/node';
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return <div className="App" />;
-}
+const App = () => (
+  <RecoilRoot>
+    <Node
+      nodeId={1}
+      direction={NodeDirection.right}
+      parentPosition={{ x: 0, y: 0 }}
+    />
+  </RecoilRoot>
+);
 
 export default App;

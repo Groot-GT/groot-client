@@ -11,12 +11,15 @@
   "packageManager": "yarn@3.2.4",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "recoil": "^0.7.7",
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
     "@types/eslint": "^8",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/styled-components": "^5",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@vitejs/plugin-react": "^3.1.0",
