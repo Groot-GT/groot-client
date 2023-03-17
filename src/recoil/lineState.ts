@@ -1,13 +1,8 @@
 import { atom } from 'recoil';
-import { NodeId } from 'src/types/node';
+import { NodeId, NodeLine } from 'src/types/node';
 
 interface LineState {
-  [key: NodeId]: {
-    x: number;
-    y: number;
-    parentX: number;
-    parentY: number;
-  };
+  [key: NodeId]: NodeLine;
 }
 
 const lineState = atom<LineState>({

@@ -4,6 +4,7 @@ import nodeState from 'src/recoil/nodeState';
 import { RootVariant } from 'src/constants/node';
 import BothSideRoot from './BothSideRoot';
 import * as s from './style';
+import LineContainer from '../LineContainer';
 
 const ROOT_ID = 0;
 
@@ -22,13 +23,16 @@ const Root = ({ rootVariant }: RootProps) => {
   const rootNode = <s.Node ref={ref}>ROOT</s.Node>;
 
   return (
-    <s.Wrapper>
-      <BothSideRoot
-        rootNode={rootNode}
-        children={children}
-        position={position}
-      />
-    </s.Wrapper>
+    <s.Background width={2000} height={1000}>
+      <s.Wrapper>
+        <BothSideRoot
+          rootNode={rootNode}
+          childrenNodes={children}
+          position={position}
+        />
+      </s.Wrapper>
+      <LineContainer width={2000} height={1000} />
+    </s.Background>
   );
 };
 

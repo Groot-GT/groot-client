@@ -19,6 +19,9 @@ const Node = ({ nodeId, direction, parentPosition }: NodeProps) => {
   const { ref, position } = useElementPosition<HTMLDivElement>();
 
   useEffect(() => {
+    if (!position.x && !position.y) {
+      return;
+    }
     setLine((state) => {
       const newState = { ...state };
       newState[nodeId] = {

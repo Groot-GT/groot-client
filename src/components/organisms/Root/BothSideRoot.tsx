@@ -6,14 +6,18 @@ import * as s from './style';
 
 interface BothSideRootProps {
   rootNode: ReactNode;
-  children: NodeChildren;
+  childrenNodes: NodeChildren;
   position: NodePosition;
 }
 
-const BothSideRoot = ({ rootNode, children, position }: BothSideRootProps) => (
+const BothSideRoot = ({
+  rootNode,
+  childrenNodes,
+  position,
+}: BothSideRootProps) => (
   <>
     <s.Column>
-      {children.map(
+      {childrenNodes.map(
         (id, index) =>
           !!(index % 2) && (
             <Node
@@ -29,7 +33,7 @@ const BothSideRoot = ({ rootNode, children, position }: BothSideRootProps) => (
     {rootNode}
 
     <s.Column>
-      {children.map(
+      {childrenNodes.map(
         (id, index) =>
           !(index % 2) && (
             <Node

@@ -18,7 +18,7 @@ export const Column = styled.div`
 export const Row = styled.div``;
 
 export const Node = styled.div`
-  margin: 10px;
+  margin: 20px;
   padding: 10px;
   background: aquamarine;
 `;
