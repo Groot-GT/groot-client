@@ -4,3 +4,8 @@ export enum NodeDirection {
   bottom = 3,
   left = 4,
 }
+
+export enum RootVariant {
+  BOTH_SIDE = 'bothSide',
+  OTHER = 'other',
+}

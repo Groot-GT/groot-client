@@ -1,17 +1,14 @@
 import { useRecoilValue } from 'recoil';
 import nodeState from 'src/recoil/nodeState';
 import useElementPosition from 'src/hooks/useElementPosition';
-import { NodeId } from 'src/types/node';
+import { NodeId, NodePosition } from 'src/types/node';
 import { NodeDirection } from 'src/constants/node';
 import * as s from './style';
 
 interface NodeProps {
   nodeId: NodeId;
   direction: NodeDirection;
-  parentPosition: {
-    x: number;
-    y: number;
-  };
+  parentPosition: NodePosition;
 }
 
 const Node = ({ nodeId, direction, parentPosition }: NodeProps) => {
@@ -28,7 +25,7 @@ const Node = ({ nodeId, direction, parentPosition }: NodeProps) => {
   ));
 
   return (
-    <s.Wrapper>
+    <s.Wrapper direction={direction}>
       {direction === NodeDirection.top && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.left && <s.Column>{childrenNodes}</s.Column>}
       <s.Node ref={ref}>{nodeId}</s.Node>

@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import { NodeDirection } from 'src/constants/node';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ direction: NodeDirection }>`
   display: flex;
   align-items: center;
+  justify-content: ${({ direction }) =>
+    [NodeDirection.top, NodeDirection.left].includes(direction)
+      ? 'flex-end'
+      : 'flex-start'};
 `;
 
 export const Column = styled.div`
