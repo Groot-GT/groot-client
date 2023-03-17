@@ -8,8 +8,7 @@
     "plugin:@typescript-eslint/recommended",
     "airbnb",
     "airbnb/hooks",
-    "airbnb-typescript",
-    "prettier"
+    "airbnb-typescript"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
