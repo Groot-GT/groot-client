@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import './App.css';
+import { RecoilRoot } from 'recoil';
+import Root from './components/organisms/Root';
+import { RootVariant } from './constants/node';
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return <div className="App" />;
-}
+const App = () => (
+  <RecoilRoot>
+    <Root rootVariant={RootVariant.BOTH_SIDE} />
+  </RecoilRoot>
+);
 
 export default App;
