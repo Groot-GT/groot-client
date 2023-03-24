@@ -5,6 +5,7 @@ import GlobalStyle from './styles/global';
 // import { RootVariant } from './constants/node';
 import theme from './styles/theme';
 import Button from './components/atoms/Button';
+import ToggleButton from './components/atoms/ToggleButton';
 
 const App = () => (
   <RecoilRoot>
@@ -12,6 +13,7 @@ const App = () => (
     <ThemeProvider theme={theme}>
       {/* <Root rootVariant={RootVariant.BOTH_SIDE} /> */}
       <Button>Example Button</Button>
+      <ToggleButton onClick={(e) => console.log(e)} />
     </ThemeProvider>
   </RecoilRoot>
 );
