@@ -55,11 +55,10 @@ const GlobalStyle = createGlobalStyle`
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
   }
-  button:focus,
-  button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
+  button:hover{
+    cursor: pointer;
   }
-
+  
   caption, figcaption, small{
     font-size: 0.75rem;
     font-weight: 400;

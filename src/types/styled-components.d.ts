@@ -10,15 +10,15 @@ declare module 'styled-components' {
       overline: string;
     };
     fontWeights: {
+      light: number;
       regular: number;
       medium: number;
-      bold: number;
     };
     colors: {
       main: {
-        primary: string;
-        secondary: string;
-        tertiary: string;
+        0: string;
+        1: string;
+        2: string;
       };
       white: {
         0: string;
@@ -54,7 +54,7 @@ declare module 'styled-components' {
     mixins: {
       flexCenter: string;
       flexCenterColumn: string;
-      felxCenterRow: string;
+      flexCenterRow: string;
       subtitle1: string;
       subtitle2: string;
       body1: string;
