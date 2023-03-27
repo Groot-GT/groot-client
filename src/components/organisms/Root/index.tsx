@@ -4,7 +4,6 @@ import useElementPosistion from 'src/hooks/useElementPosition';
 import nodeState from 'src/recoil/nodeState';
 import { RootVariant } from 'src/constants/node';
 import LineContainer from 'src/components/organisms/LineContainer';
-import Button from 'src/components/atoms/Button';
 import BothSideRoot from './BothSideRoot';
 import * as s from './style';
 
@@ -32,7 +31,6 @@ const Root = ({ rootVariant }: RootProps) => {
 
   return (
     <s.Background width={WIDTH} height={HEIGHT}>
-      <Button>fish</Button>
       <s.Wrapper>
         <BothSideRoot
           rootNode={rootNode}

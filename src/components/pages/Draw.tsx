@@ -1,6 +1,6 @@
-import { RootVariant } from 'src/constants/node';
-import Root from '../organisms/Root';
+import DrawTemplate from '../templates/DrawTemplate';
+// import SideBarTemplate from '../organisms/SideBar';
 
-const Draw = () => <Root rootVariant={RootVariant.BOTH_SIDE} />;
+const Draw = () => <DrawTemplate />;
 
 export default Draw;
