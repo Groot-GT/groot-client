@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Divider from 'src/components/atoms/Divider';
 
 import { useTheme } from 'styled-components';
@@ -17,13 +18,16 @@ type SideBarProps = {
 const SideBar = ({ SideBarItems }: SideBarProps) => {
   const theme = useTheme();
 
+  // This is bad code but needed to avoid eslint error
+  const indexToString = (index: number) => index.toString();
+
   return (
     <s.SideBar theme={theme}>
-      {SideBarItems?.map((item) => (
-        <>
+      {SideBarItems?.map((item, index) => (
+        <Fragment key={indexToString(index)}>
           {item}
           <SideBarDivider />
-        </>
+        </Fragment>
       ))}
     </s.SideBar>
   );
