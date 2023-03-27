@@ -1,6 +1,5 @@
 import Divider from 'src/components/atoms/Divider';
-import SideBarItem from 'src/components/atoms/SideBarItem';
-import ToggleButton from 'src/components/atoms/ToggleButton';
+
 import { useTheme } from 'styled-components';
 import * as s from './style';
 
@@ -11,27 +10,16 @@ const SideBarDivider = () => {
   );
 };
 
-const SideBarItems = [
-  <SideBarItem
-    title="Map theme"
-    element={<ToggleButton onClick={() => alert('searchIcon')} />}
-  />,
-  <SideBarItem
-    title="Theme direction"
-    element={<ToggleButton onClick={() => alert('Theme direction')} />}
-  />,
-  <SideBarItem
-    title="Pages"
-    element={<ToggleButton onClick={() => alert('pages')} />}
-  />,
-];
+type SideBarProps = {
+  SideBarItems: JSX.Element[];
+};
 
-const SideBar = () => {
+const SideBar = ({ SideBarItems }: SideBarProps) => {
   const theme = useTheme();
 
   return (
     <s.SideBar theme={theme}>
-      {SideBarItems.map((item) => (
+      {SideBarItems?.map((item) => (
         <>
           {item}
           <SideBarDivider />
