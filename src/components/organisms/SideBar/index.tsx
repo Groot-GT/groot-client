@@ -18,13 +18,11 @@ type SideBarProps = {
 const SideBar = ({ SideBarItems }: SideBarProps) => {
   const theme = useTheme();
 
-  // This is bad code but needed to avoid eslint error
-  const indexToString = (index: number) => index.toString();
-
   return (
     <s.SideBar theme={theme}>
       {SideBarItems?.map((item, index) => (
-        <Fragment key={indexToString(index)}>
+        // eslint-disable-next-line react/no-array-index-key
+        <Fragment key={index}>
           {item}
           <SideBarDivider />
         </Fragment>
