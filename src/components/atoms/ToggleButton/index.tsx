@@ -1,5 +1,5 @@
 import { useTheme } from 'styled-components';
-import { ToggleButtonAssets } from './asset';
+import { ToggleButtonAssets } from '../../../assets/asset';
 import * as s from './style';
 
 type ToggleButtonProps = {

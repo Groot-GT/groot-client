@@ -52,7 +52,6 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: row;
     font-size: 0.875rem;
     font-weight: 500;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
   }
   button:hover{

@@ -52,6 +52,7 @@ declare module 'styled-components' {
       };
     };
     mixins: {
+      shadow: string;
       flexCenter: string;
       flexCenterColumn: string;
       flexCenterRow: string;
