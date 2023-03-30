@@ -21,7 +21,7 @@ const ToggleButton = ({ clicked, onClick }: ToggleButtonProps) => {
             ? ToggleButtonAssets.chevronTop
             : ToggleButtonAssets.chevronDown
         }
-        alt="toggle button"
+        alt='toggle button'
       />
     </s.ToggleButton>
   );
