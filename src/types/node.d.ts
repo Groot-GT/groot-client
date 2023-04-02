@@ -1,4 +1,4 @@
-export type NodeId = number;
+export type NodeId = string;
 export type NodeChildren = NodeId[];
 
 export interface Node {
