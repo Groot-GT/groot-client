@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
-import useElementPosistion from 'src/hooks/useElementPosition';
 import nodeState from 'src/recoil/nodeState';
 import { RootVariant } from 'src/constants/node';
 import LineContainer from 'src/components/organisms/LineContainer';
@@ -16,8 +15,8 @@ interface RootProps {
 }
 
 const Root = ({ rootVariant }: RootProps) => {
-  const { children } = useRecoilValue(nodeState)[ROOT_ID];
-  const { ref, position } = useElementPosistion<HTMLDivElement>();
+  const nodes = useRecoilValue(nodeState);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(WIDTH / 7, HEIGHT / 7);
@@ -34,8 +33,8 @@ const Root = ({ rootVariant }: RootProps) => {
       <s.Wrapper>
         <BothSideRoot
           rootNode={rootNode}
-          childrenNodes={children}
-          position={position}
+          childrenNodes={nodes[ROOT_ID].children}
+          parentRef={ref}
         />
       </s.Wrapper>
       <LineContainer width={WIDTH} height={HEIGHT} />

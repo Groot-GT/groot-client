@@ -11,6 +11,7 @@ export const DrawTemplateWrapper = styled.div`
 `;
 
 export const SideWrapper = styled.div`
+  z-index: 2;
   display: flex;
   flex-direction: column;
 `;

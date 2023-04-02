@@ -10,9 +10,11 @@
   },
   "packageManager": "yarn@3.2.4",
   "dependencies": {
+    "immer": "^9.0.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
+    "react-uuid": "^2.0.0",
     "recoil": "^0.7.7",
     "styled-components": "^5.3.9",
     "styled-reset": "^4.4.5",

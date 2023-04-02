@@ -1,52 +1,57 @@
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useEffect, useRef } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import produce from 'immer';
+import uuid from 'react-uuid';
+
 import nodeState from 'src/recoil/nodeState';
 import lineState from 'src/recoil/lineState';
-import useElementPosition from 'src/hooks/useElementPosition';
-import { NodeId, NodePosition } from 'src/types/node';
+import { NodeId, NodeRef } from 'src/types/node';
 import { NodeDirection } from 'src/constants/node';
+import Button from 'src/components/atoms/Button';
 import * as s from './style';
 
 interface NodeProps {
   nodeId: NodeId;
   direction: NodeDirection;
-  parentPosition: NodePosition;
+  parentRef: NodeRef;
 }
 
-const Node = ({ nodeId, direction, parentPosition }: NodeProps) => {
-  const { children } = useRecoilValue(nodeState)[nodeId];
+const Node = ({ nodeId, direction, parentRef }: NodeProps) => {
+  const [nodes, setNode] = useRecoilState(nodeState);
   const setLine = useSetRecoilState(lineState);
-  const { ref, position } = useElementPosition<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleClickAddButton = () => {
+    const newNodeId = uuid();
+    setNode((prevNodes) =>
+      produce(prevNodes, (draft) => {
+        draft[newNodeId] = { children: [] };
+        draft[nodeId].children.push(newNodeId);
+        return draft;
+      }),
+    );
+  };
 
   useEffect(() => {
-    if (!position.x && !position.y) {
-      return;
-    }
-    setLine((state) => {
-      const newState = { ...state };
-      newState[nodeId] = {
-        ...position,
-        parentX: parentPosition.x,
-        parentY: parentPosition.y,
-      };
-      return newState;
+    setLine((prevLines) => {
+      const newLines = { ...prevLines };
+      newLines[nodeId] = { ref, parentRef };
+      return newLines;
     });
-  }, [nodeId, parentPosition, position, setLine]);
+  }, [nodeId, parentRef, ref, setLine]);
 
-  const childrenNodes = children.map((id) => (
-    <Node
-      key={id}
-      nodeId={id}
-      direction={direction}
-      parentPosition={position}
-    />
+  const childrenNodes = nodes[nodeId].children.map((id) => (
+    <Node key={id} nodeId={id} direction={direction} parentRef={ref} />
   ));
 
   return (
     <s.Wrapper direction={direction}>
       {direction === NodeDirection.top && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.left && <s.Column>{childrenNodes}</s.Column>}
-      <s.Node ref={ref}>{nodeId}</s.Node>
+      <s.Node ref={ref}>
+        {nodeId}
+        <Button onClick={handleClickAddButton}>+</Button>
+      </s.Node>
       {direction === NodeDirection.bottom && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.right && (
         <s.Column>{childrenNodes}</s.Column>

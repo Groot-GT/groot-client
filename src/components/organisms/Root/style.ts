@@ -28,5 +28,6 @@ export const Column = styled.div`
 
 export const Node = styled.div`
   padding: 10px;
+  height: fit-content;
   background: chartreuse;
 `;
