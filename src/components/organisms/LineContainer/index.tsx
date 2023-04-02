@@ -1,7 +1,9 @@
 import { useRecoilValue } from 'recoil';
 import lineState from 'src/recoil/lineState';
-import { NodeLine } from 'src/types/node';
+import nodeState from 'src/recoil/nodeState';
+import { NodeId, NodeRef } from 'src/types/node';
 import getElementPosition from 'src/utils/getElementPosition';
+import { ROOT_NODE_ID } from 'src/constants/node';
 import * as s from './style';
 
 interface LineContainerProps {
@@ -11,11 +13,18 @@ interface LineContainerProps {
 
 const LineContainer = ({ width, height }: LineContainerProps) => {
   const lineInfo = useRecoilValue(lineState);
-  const lines: NodeLine[] = Object.values(lineInfo);
+  const nodes = useRecoilValue(nodeState);
+  const lines: [NodeId, NodeRef][] = Object.entries(lineInfo);
 
   return (
     <s.Container viewBox={`0 0 ${width} ${height}`}>
-      {lines.map(({ ref, parentRef }) => {
+      {lines.map(([nodeId, ref]) => {
+        if (nodeId === ROOT_NODE_ID) {
+          return null;
+        }
+
+        const parentRef = lineInfo[nodes[nodeId].parentId];
+
         const { x, y } = getElementPosition(ref);
         const { x: parentX, y: parentY } = getElementPosition(parentRef);
 

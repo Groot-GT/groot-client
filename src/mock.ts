@@ -1,24 +1,24 @@
 import { Node } from './types/node';
 
 const nodeInfo: Node = {
-  0: {
+  root: {
     parentId: '',
     children: ['1', '2', '3', '4'],
   },
   1: {
-    parentId: '0',
+    parentId: 'root',
     children: ['5', '6', '7'],
   },
   2: {
-    parentId: '0',
+    parentId: 'root',
     children: ['8', '9'],
   },
   3: {
-    parentId: '0',
+    parentId: 'root',
     children: [],
   },
   4: {
-    parentId: '0',
+    parentId: 'root',
     children: ['10'],
   },
   5: {

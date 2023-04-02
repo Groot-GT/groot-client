@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import nodeState from 'src/recoil/nodeState';
-import { RootVariant } from 'src/constants/node';
+import { ROOT_NODE_ID, RootVariant } from 'src/constants/node';
 import LineContainer from 'src/components/organisms/LineContainer';
+import useLineCreation from 'src/hooks/useLineCreation';
 import BothSideRoot from './BothSideRoot';
 import * as s from './style';
 
-const ROOT_ID = 0;
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 
@@ -22,6 +22,8 @@ const Root = ({ rootVariant }: RootProps) => {
     window.scrollTo(WIDTH / 7, HEIGHT / 7);
   }, []);
 
+  useLineCreation({ nodeId: ROOT_NODE_ID, ref });
+
   if (rootVariant === RootVariant.OTHER) {
     return null;
   }
@@ -33,8 +35,7 @@ const Root = ({ rootVariant }: RootProps) => {
       <s.Wrapper>
         <BothSideRoot
           rootNode={rootNode}
-          childrenNodes={nodes[ROOT_ID].children}
-          parentRef={ref}
+          childrenNodes={nodes[ROOT_NODE_ID].children}
         />
       </s.Wrapper>
       <LineContainer width={WIDTH} height={HEIGHT} />

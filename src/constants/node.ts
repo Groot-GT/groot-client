@@ -1,3 +1,5 @@
+export const ROOT_NODE_ID = 'root';
+
 export enum NodeDirection {
   top = 1,
   right = 2,

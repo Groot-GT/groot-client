@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { NodeChildren, NodeRef } from 'src/types/node';
+import { NodeChildren } from 'src/types/node';
 import { NodeDirection } from 'src/constants/node';
 import Node from 'src/components/organisms/Node';
 import * as s from './style';
@@ -7,25 +7,15 @@ import * as s from './style';
 interface BothSideRootProps {
   rootNode: ReactNode;
   childrenNodes: NodeChildren;
-  parentRef: NodeRef;
 }
 
-const BothSideRoot = ({
-  rootNode,
-  childrenNodes,
-  parentRef,
-}: BothSideRootProps) => (
+const BothSideRoot = ({ rootNode, childrenNodes }: BothSideRootProps) => (
   <>
     <s.Column>
       {childrenNodes.map(
         (id, index) =>
           !!(index % 2) && (
-            <Node
-              key={id}
-              nodeId={id}
-              parentRef={parentRef}
-              direction={NodeDirection.left}
-            />
+            <Node key={id} nodeId={id} direction={NodeDirection.left} />
           ),
       )}
     </s.Column>
@@ -36,12 +26,7 @@ const BothSideRoot = ({
       {childrenNodes.map(
         (id, index) =>
           !(index % 2) && (
-            <Node
-              key={id}
-              nodeId={id}
-              parentRef={parentRef}
-              direction={NodeDirection.right}
-            />
+            <Node key={id} nodeId={id} direction={NodeDirection.right} />
           ),
       )}
     </s.Column>

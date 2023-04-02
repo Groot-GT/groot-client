@@ -7,8 +7,3 @@ export type NodeRef = RefObject<HTMLDivElement>;
 export interface Node {
   [key: NodeId]: { parentId: NodeId; children: NodeChildren };
 }
-
-export interface NodeLine {
-  ref: NodeRef;
-  parentRef: NodeRef;
-}
