@@ -5,7 +5,7 @@ export type NodeChildren = NodeId[];
 export type NodeRef = RefObject<HTMLDivElement>;
 
 export interface Node {
-  [key: NodeId]: { children: NodeChildren };
+  [key: NodeId]: { parentId: NodeId; children: NodeChildren };
 }
 
 export interface NodeLine {
