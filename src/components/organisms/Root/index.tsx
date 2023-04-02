@@ -8,8 +8,8 @@ import BothSideRoot from './BothSideRoot';
 import * as s from './style';
 
 const ROOT_ID = 0;
-const WIDTH = window.innerWidth * 0.9;
-const HEIGHT = window.innerHeight * 0.9;
+const WIDTH = window.innerWidth;
+const HEIGHT = window.innerHeight;
 
 interface RootProps {
   rootVariant: RootVariant;

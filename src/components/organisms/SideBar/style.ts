@@ -5,6 +5,7 @@ interface SideBarStyleProps {
 }
 
 export const SideBar = styled.div<SideBarStyleProps>`
+  z-index: 1;
   display: flex;
   flex-direction: column;
   place-items: center;
