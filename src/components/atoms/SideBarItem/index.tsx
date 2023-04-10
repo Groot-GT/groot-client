@@ -7,10 +7,10 @@ type SideBarItemProps = {
 
 const SideBarItem = ({ title, element }: SideBarItemProps) => (
   <s.SideBarItemWrapper>
-    <>
+    <s.SideBarItemTitle>
       {title}
-      {element}
-    </>
+    </s.SideBarItemTitle>
+    {element}
   </s.SideBarItemWrapper>
 );
 
