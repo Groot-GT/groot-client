@@ -1,29 +1,34 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
-interface DropdownListWrapperProps {
+type DropdownListProps = {
   width: number | undefined;
-  disabled?: boolean;
-  variant?: 'primary' | 'secondary';
-  theme: DefaultTheme;
 }
 
-export const DropdownWrapper = styled.div`
-  margin: 0;
-  width: 100%;
+export const DropdownListWrapper = styled.div<DropdownListProps>`
+  position: absolute;
+  background-color: ${({ theme }) => theme.colors.white[0]};
+  width: ${({ width }) => width}px;
+  z-index: 100;
+  border-radius: 4px;
+  box-shadow: ${({ theme }) => theme.mixins.shadow};
 `;
 
-export const DropdownTitleWrapper = styled.div`
+export const SelectedItemPlaceHolder = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 4px;
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.black[4]};
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-export const DropdownListWrapper = styled.div<DropdownListWrapperProps>`
-  position: absolute;
-  width: ${({ width }) => width}px;
-  border: 1px solid ${({ theme }) => theme.colors.black[1]};
-  z-index: 100;
-  box-shadow: ${({ theme }) => theme.mixins.shadow};
+export const DropdownWrapper = styled.div`
+  font-size: 12px;
+  width: 100%;
+  margin: 4px 0;
 `;

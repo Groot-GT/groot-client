@@ -1,43 +1,46 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'styled-components';
-import List from 'src/components/molecules/List';
-import ToggleButton from 'src/components/atoms/ToggleButton';
 import * as s from './style';
+import DropdownOption from '../../atoms/DropdownOption';
+import ToggleButton from '../../atoms/ToggleButton';
 
 type ToggleSelectorProps = {
-  title?: string | null;
   items: string[];
-  itemIcons?: JSX.Element[]
 }
 
-const defaultProps = {
-  title: null,
-  itemIcons: [],
-};
-
-const Dropdown = ({ title, items, itemIcons }: ToggleSelectorProps) => {
-  const theme = useTheme();
+const Dropdown = ({ items }: ToggleSelectorProps) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<number>(0);
+  const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const dropdownSize = dropdownRef.current?.getBoundingClientRect().width;
-  console.log(dropdownSize);
+  const theme = useTheme();
+
+
+  useEffect(() => {
+    setDropdownWidth(dropdownRef.current?.getBoundingClientRect().width);
+  }, []);
+
+  const handleOptionClick = (idx: number) => {
+    setSelectedItem(idx);
+    setOpen(false);
+  };
 
   return (
     <s.DropdownWrapper ref={dropdownRef}>
-      <s.DropdownTitleWrapper>
-        {title ?? title}
+      <s.SelectedItemPlaceHolder onClick={() => setOpen(!open)}>
+        {items[selectedItem]}
         <ToggleButton clicked={open} onClick={() => setOpen(!open)} />
-      </s.DropdownTitleWrapper>
+      </s.SelectedItemPlaceHolder>
       {open ?
-        <s.DropdownListWrapper width={dropdownSize} theme={theme}>
-          <List itemTitles={items} itemIcons={itemIcons} />
-        </s.DropdownListWrapper> :
-        null}
-
+        <s.DropdownListWrapper width={dropdownWidth} theme={theme}>
+          {items.map((item, idx) => (
+            <DropdownOption key={item} value={item} onClick={() => handleOptionClick(idx)} />
+          ))}
+        </s.DropdownListWrapper>
+        : null}
     </s.DropdownWrapper>
   );
 };
-
-Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;
