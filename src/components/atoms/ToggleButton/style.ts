@@ -7,9 +7,10 @@ interface ToggleButtonStyleProps {
 
 export const ToggleButton = styled.button<ToggleButtonStyleProps>`
   display: flex;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   width: 2rem;
   height: 2rem;
   border: none;
-  background-color: ${({ theme }) => theme.colors.black[0]};
+  background-color: transparent;
 `;

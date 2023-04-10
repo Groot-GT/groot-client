@@ -1,4 +1,3 @@
-import { useTheme } from 'styled-components';
 import { ToggleButtonAssets } from '../../../assets/asset';
 import * as s from './style';
 
@@ -11,10 +10,9 @@ const defaultProps = {
   clicked: false,
 };
 
-const ToggleButton = ({ clicked, onClick }: ToggleButtonProps) => {
-  const theme = useTheme();
-  return (
-    <s.ToggleButton theme={theme} clicked={clicked} onClick={onClick}>
+const ToggleButton = ({ clicked, onClick }: ToggleButtonProps) =>
+  (
+    <s.ToggleButton clicked={clicked} onClick={onClick}>
       <img
         src={
           clicked
@@ -25,7 +23,6 @@ const ToggleButton = ({ clicked, onClick }: ToggleButtonProps) => {
       />
     </s.ToggleButton>
   );
-};
 
 ToggleButton.defaultProps = defaultProps;
 
