@@ -1,31 +1,23 @@
 import { Fragment } from 'react';
-import Divider from '../../atoms/Divider';
+import Divider from 'src/components/atoms/Divider';
 import * as s from './style';
 
 type ListProps = {
-  itemIcons?: JSX.Element[];
-  itemTitles: string[];
+  items: JSX.Element[];
 }
 
-const defaultProps = {
-  itemIcons: [],
-};
 
-const List = ({ itemIcons, itemTitles }: ListProps) => (
+const List = ({ items }: ListProps) => (
   <s.List>
-    {itemTitles.map((itemTitle, index) => (
-      <Fragment key={itemTitle}>
-        <s.ListItem>
-          {itemIcons ? itemIcons[index] : null}
-          <s.ListItemTitle>{itemTitle}</s.ListItemTitle>
-        </s.ListItem>
-        {index !== itemTitles.length - 1 ? <Divider length={100} vertical={false} /> : null}
+    {items.map((item, index) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <Fragment key={index}>
+        {item}
+        {index !== items.length - 1 ? <Divider /> : null}
       </Fragment>
     ))}
   </s.List>
 );
 
-
-List.defaultProps = defaultProps;
 
 export default List;
