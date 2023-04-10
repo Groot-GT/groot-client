@@ -4,7 +4,7 @@ const getElementPosition = (ref: RefObject<HTMLElement>) => {
   const rect = ref.current?.getBoundingClientRect();
 
   if (!rect) {
-    return { x: 0, y: 0 };
+    return undefined;
   }
 
   return {

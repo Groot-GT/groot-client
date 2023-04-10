@@ -1,13 +1,12 @@
-import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import produce from 'immer';
 import uuid from 'react-uuid';
-
 import nodeState from 'src/recoil/nodeState';
 import { NodeId } from 'src/types/node';
 import { NodeDirection } from 'src/constants/node';
-import useLineCreation from 'src/hooks/useLineCreation';
 import Button from 'src/components/atoms/Button';
+import useNodeRef from 'src/hooks/useNodeRef';
+import getChildrensId from 'src/utils/getChildrensId';
 import * as s from './style';
 
 interface NodeProps {
@@ -17,7 +16,8 @@ interface NodeProps {
 
 const Node = ({ nodeId, direction }: NodeProps) => {
   const [nodes, setNode] = useRecoilState(nodeState);
-  const ref = useRef<HTMLDivElement>(null);
+
+  const ref = useNodeRef(nodeId);
 
   const handleClickAddButton = () => {
     const newNodeId = uuid();
@@ -34,22 +34,20 @@ const Node = ({ nodeId, direction }: NodeProps) => {
     setNode((prevNodes) =>
       produce(prevNodes, (draft) => {
         const { parentId } = draft[nodeId];
-        // 부모 노드의 children 배열에서 삭제 대상 노드 ID 제거
+        // 부모 노드 children 배열 업데이트
         draft[parentId].children = draft[parentId].children.filter(
           (id) => id !== nodeId,
         );
-        // 삭제 대상 노드의 자식 노드들 제거
-        draft[nodeId].children.forEach((childrenId) => {
-          delete draft[childrenId];
+        // 자식 노드 제거
+        getChildrensId(nodeId, nodes).forEach((id) => {
+          delete draft[id];
         });
-        // 삭제 대상 노드 제거
+        // 타겟 노드 제거
         delete draft[nodeId];
         return draft;
       }),
     );
   };
-
-  useLineCreation({ nodeId, ref });
 
   const childrenNodes = nodes[nodeId].children.map((id) => (
     <Node key={id} nodeId={id} direction={direction} />

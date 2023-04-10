@@ -1,9 +1,15 @@
-import { RefObject } from 'react';
+import { WritableDraft } from 'react';
 
 export type NodeId = string;
 export type NodeChildren = NodeId[];
-export type NodeRef = RefObject<HTMLDivElement>;
+export type NodeRef = WritableDraft<HTMLDivElement>;
+
+export interface NodeValue {
+  parentId: NodeId;
+  children: NodeChildren;
+  position?: { x: number; y: number };
+}
 
 export interface Node {
-  [key: NodeId]: { parentId: NodeId; children: NodeChildren };
+  [key: NodeId]: NodeValue;
 }

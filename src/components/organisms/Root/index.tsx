@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import nodeState from 'src/recoil/nodeState';
 import { ROOT_NODE_ID, RootVariant } from 'src/constants/node';
 import LineContainer from 'src/components/organisms/LineContainer';
-import useLineCreation from 'src/hooks/useLineCreation';
+import useNodeRef from 'src/hooks/useNodeRef';
 import BothSideRoot from './BothSideRoot';
 import * as s from './style';
 
@@ -16,13 +16,11 @@ interface RootProps {
 
 const Root = ({ rootVariant }: RootProps) => {
   const nodes = useRecoilValue(nodeState);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useNodeRef(ROOT_NODE_ID);
 
   useEffect(() => {
     window.scrollTo(WIDTH / 7, HEIGHT / 7);
   }, []);
-
-  useLineCreation({ nodeId: ROOT_NODE_ID, ref });
 
   if (rootVariant === RootVariant.OTHER) {
     return null;
