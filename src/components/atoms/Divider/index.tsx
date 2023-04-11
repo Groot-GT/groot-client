@@ -3,6 +3,7 @@ import { useTheme } from 'styled-components';
 import * as s from './style';
 
 type DividerProps = {
+  // percentage of the parent width
   length?: number;
   thickness?: number;
   vertical?: boolean;
