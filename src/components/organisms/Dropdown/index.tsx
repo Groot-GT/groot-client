@@ -1,14 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Fragment } from 'react';
 import { useTheme } from 'styled-components';
 import * as s from './style';
 import DropdownOption from '../../atoms/DropdownOption';
 import ToggleButton from '../../atoms/ToggleButton';
+import Divider from '../../atoms/Divider';
 
 type ToggleSelectorProps = {
   items: string[];
+  icons: string[] | undefined;
 }
 
-const Dropdown = ({ items }: ToggleSelectorProps) => {
+
+const Dropdown = ({ items, icons }: ToggleSelectorProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<number>(0);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
@@ -20,6 +23,18 @@ const Dropdown = ({ items }: ToggleSelectorProps) => {
   useEffect(() => {
     setDropdownWidth(dropdownRef.current?.getBoundingClientRect().width);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (ev: globalThis.MouseEvent): void => {
+      const target = ev.target as HTMLElement;
+      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', ev => handleClickOutside(ev));
+    return () => document.removeEventListener('mousedown', ev => handleClickOutside(ev));
+
+  }, [dropdownRef, setOpen]);
 
   const handleOptionClick = (idx: number) => {
     setSelectedItem(idx);
@@ -35,7 +50,11 @@ const Dropdown = ({ items }: ToggleSelectorProps) => {
       {open ?
         <s.DropdownListWrapper width={dropdownWidth} theme={theme}>
           {items.map((item, idx) => (
-            <DropdownOption key={item} value={item} onClick={() => handleOptionClick(idx)} />
+            <Fragment key={item}>
+              <DropdownOption value={item} icon={icons ? icons[idx] : null}
+                              onClick={() => handleOptionClick(idx)} />
+              <Divider vertical={false} length={100} />
+            </Fragment>
           ))}
         </s.DropdownListWrapper>
         : null}

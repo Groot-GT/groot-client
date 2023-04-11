@@ -4,9 +4,14 @@ import SideBarItem from 'src/components/atoms/SideBarItem';
 import ToggleButton from 'src/components/atoms/ToggleButton';
 import * as s from './style';
 import Dropdown from '../../organisms/Dropdown';
+import { ToggleButtonAssets } from '../../../assets/asset';
+
 
 const exampleListItems: string[] =
   Array.from({ length: 10 }).map((_, i) => `Item ${i}`);
+
+const exampleToggleButtons: string[] =
+  Array.from({ length: 10 }).map(() => ToggleButtonAssets.tree);
 
 const LeftBarItems: JSX.Element[] = [
   <SideBarItem
@@ -23,7 +28,7 @@ const LeftBarItems: JSX.Element[] = [
   />,
   <SideBarItem
     title='Themes'
-    element={<Dropdown items={exampleListItems} />}
+    element={<Dropdown icons={exampleToggleButtons} items={exampleListItems} />}
   />,
   <SideBarItem
     title='Pages'
