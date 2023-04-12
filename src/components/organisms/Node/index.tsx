@@ -1,52 +1,67 @@
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
+import produce from 'immer';
+import uuid from 'react-uuid';
 import nodeState from 'src/recoil/nodeState';
-import lineState from 'src/recoil/lineState';
-import useElementPosition from 'src/hooks/useElementPosition';
-import { NodeId, NodePosition } from 'src/types/node';
+import { NodeId } from 'src/types/node';
 import { NodeDirection } from 'src/constants/node';
+import Button from 'src/components/atoms/Button';
+import useNodeRef from 'src/hooks/useNodeRef';
+import getChildrensId from 'src/utils/getChildrensId';
 import * as s from './style';
 
 interface NodeProps {
   nodeId: NodeId;
   direction: NodeDirection;
-  parentPosition: NodePosition;
 }
 
-const Node = ({ nodeId, direction, parentPosition }: NodeProps) => {
-  const { children } = useRecoilValue(nodeState)[nodeId];
-  const setLine = useSetRecoilState(lineState);
-  const { ref, position } = useElementPosition<HTMLDivElement>();
+const Node = ({ nodeId, direction }: NodeProps) => {
+  const [nodes, setNode] = useRecoilState(nodeState);
 
-  useEffect(() => {
-    if (!position.x && !position.y) {
-      return;
-    }
-    setLine((state) => {
-      const newState = { ...state };
-      newState[nodeId] = {
-        ...position,
-        parentX: parentPosition.x,
-        parentY: parentPosition.y,
-      };
-      return newState;
-    });
-  }, [nodeId, parentPosition, position, setLine]);
+  const ref = useNodeRef(nodeId);
 
-  const childrenNodes = children.map((id) => (
-    <Node
-      key={id}
-      nodeId={id}
-      direction={direction}
-      parentPosition={position}
-    />
+  const handleClickAddButton = () => {
+    const newNodeId = uuid();
+    setNode((prevNodes) =>
+      produce(prevNodes, (draft) => {
+        draft[newNodeId] = { parentId: nodeId, children: [] };
+        draft[nodeId].children.push(newNodeId);
+        return draft;
+      }),
+    );
+  };
+
+  const handleClickDeleteButton = () => {
+    setNode((prevNodes) =>
+      produce(prevNodes, (draft) => {
+        const { parentId } = draft[nodeId];
+        // 부모 노드 children 배열 업데이트
+        draft[parentId].children = draft[parentId].children.filter(
+          (id) => id !== nodeId,
+        );
+        // 자식 노드 제거
+        getChildrensId(nodeId, nodes).forEach((id) => {
+          delete draft[id];
+        });
+        // 타겟 노드 제거
+        delete draft[nodeId];
+        return draft;
+      }),
+    );
+  };
+
+  const childrenNodes = nodes[nodeId].children.map((id) => (
+    <Node key={id} nodeId={id} direction={direction} />
   ));
 
   return (
     <s.Wrapper direction={direction}>
       {direction === NodeDirection.top && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.left && <s.Column>{childrenNodes}</s.Column>}
-      <s.Node ref={ref}>{nodeId}</s.Node>
+      <s.Node ref={ref}>
+        {nodeId}
+        <Button onClick={handleClickAddButton}>+</Button>
+        <Button onClick={handleClickDeleteButton}>-</Button>
+      </s.Node>
       {direction === NodeDirection.bottom && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.right && (
         <s.Column>{childrenNodes}</s.Column>

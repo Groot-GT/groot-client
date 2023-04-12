@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.svg<{ width: number; height: number }>`
+export const Container = styled.svg`
   width: ${({ width }) => `${width}px`};
   height: ${({ height }) => `${height}px`};
   position: absolute;

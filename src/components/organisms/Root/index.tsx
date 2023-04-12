@@ -1,23 +1,22 @@
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import useElementPosistion from 'src/hooks/useElementPosition';
 import nodeState from 'src/recoil/nodeState';
-import { RootVariant } from 'src/constants/node';
+import { ROOT_NODE_ID, RootVariant } from 'src/constants/node';
 import LineContainer from 'src/components/organisms/LineContainer';
+import useNodeRef from 'src/hooks/useNodeRef';
 import BothSideRoot from './BothSideRoot';
 import * as s from './style';
 
-const ROOT_ID = 0;
-const WIDTH = window.innerWidth * 0.9;
-const HEIGHT = window.innerHeight * 0.9;
+const WIDTH = window.innerWidth;
+const HEIGHT = window.innerHeight;
 
 interface RootProps {
   rootVariant: RootVariant;
 }
 
 const Root = ({ rootVariant }: RootProps) => {
-  const { children } = useRecoilValue(nodeState)[ROOT_ID];
-  const { ref, position } = useElementPosistion<HTMLDivElement>();
+  const nodes = useRecoilValue(nodeState);
+  const ref = useNodeRef(ROOT_NODE_ID);
 
   useEffect(() => {
     window.scrollTo(WIDTH / 7, HEIGHT / 7);
@@ -34,8 +33,7 @@ const Root = ({ rootVariant }: RootProps) => {
       <s.Wrapper>
         <BothSideRoot
           rootNode={rootNode}
-          childrenNodes={children}
-          position={position}
+          childrenNodes={nodes[ROOT_NODE_ID].children}
         />
       </s.Wrapper>
       <LineContainer width={WIDTH} height={HEIGHT} />
