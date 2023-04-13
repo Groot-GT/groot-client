@@ -5,12 +5,19 @@ type SideBarItemStyleProps = {
 };
 
 export const SideBarItemWrapper = styled.div<SideBarItemStyleProps>`
+  width: 100%;
   padding: 6px 18px;
-  font-size: 12px;
-  height: 46px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 100%;
+`;
+
+export const SideBarItemTitle = styled.div`
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
 `;
