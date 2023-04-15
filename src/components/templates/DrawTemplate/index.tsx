@@ -1,14 +1,19 @@
 import ProjectPanel from 'src/components/organisms/ProjectPanel';
 import SideBar from 'src/components/organisms/SideBar';
-import SideBarItem from 'src/components/atoms/SideBarItem';
+import SideBarItem from 'src/components/molecules/SideBarItem';
 import ToggleButton from 'src/components/atoms/ToggleButton';
 import * as s from './style';
 import Dropdown from '../../organisms/Dropdown';
 import { ToggleButtonAssets } from '../../../assets/asset';
+import List from '../../molecules/List';
+import ListItem from '../../atoms/ListItem';
 
 
-const exampleListItems: string[] =
-  Array.from({ length: 10 }).map((_, i) => `Item ${i}`);
+const exampleListItems: JSX.Element[] =
+  Array.from({ length: 10 }).map(() => <ListItem itemTitle='item' />);
+
+const dropdownItems: string[] =
+  Array.from({ length: 10 }).map((_, idx) => `item ${idx}`);
 
 const exampleToggleButtons: string[] =
   Array.from({ length: 10 }).map(() => ToggleButtonAssets.tree);
@@ -28,11 +33,15 @@ const LeftBarItems: JSX.Element[] = [
   />,
   <SideBarItem
     title='Themes'
-    element={<Dropdown icons={exampleToggleButtons} items={exampleListItems} />}
+    element={<Dropdown icons={exampleToggleButtons} items={dropdownItems} />}
   />,
   <SideBarItem
     title='Pages'
     element={<ToggleButton onClick={() => alert('pages')} />}
+  />,
+  <SideBarItem
+    title='Pages'
+    element={<List items={exampleListItems} />}
   />,
 ];
 
