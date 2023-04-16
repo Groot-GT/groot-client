@@ -7,7 +7,8 @@ import Dropdown from '../../organisms/Dropdown';
 import { ToggleButtonAssets } from '../../../assets/asset';
 import List from '../../molecules/List';
 import ListItem from '../../atoms/ListItem';
-
+import Root from '../../organisms/Root';
+import { RootVariant } from '../../../constants/node';
 
 const exampleListItems: JSX.Element[] =
   Array.from({ length: 10 }).map(() => <ListItem itemTitle='item' />);
@@ -19,10 +20,6 @@ const exampleToggleButtons: string[] =
   Array.from({ length: 10 }).map(() => ToggleButtonAssets.tree);
 
 const LeftBarItems: JSX.Element[] = [
-  <SideBarItem
-    title='Map theme'
-    element={<ToggleButton onClick={() => alert('searchIcon')} />}
-  />,
   <SideBarItem
     title='Theme direction'
     element={<ToggleButton onClick={() => alert('Theme direction')} />}
@@ -57,11 +54,12 @@ const DrawTemplate = () => (
   <s.DrawTemplateWrapper>
     <s.SideWrapper>
       <ProjectPanel projectName='Untitled_1' />
-      <SideBar SideBarItems={LeftBarItems} />
+      <SideBar sidebarItems={LeftBarItems} />
     </s.SideWrapper>
+    <Root rootVariant={RootVariant.BOTH_SIDE} />
     <s.SideWrapper>
       <ProjectPanel projectName='Untitled_1' />
-      <SideBar SideBarItems={RightBarItems} />
+      <SideBar sidebarItems={RightBarItems} />
     </s.SideWrapper>
   </s.DrawTemplateWrapper>
 );

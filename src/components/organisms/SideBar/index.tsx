@@ -1,8 +1,14 @@
-import { Fragment } from 'react';
-import Divider from 'src/components/atoms/Divider';
-
+import React, { SetStateAction, Dispatch, Fragment, useState } from 'react';
 import { useTheme } from 'styled-components';
+import Divider from 'src/components/atoms/Divider';
+import SearchBar from 'src/components/organisms/SearchBar';
 import * as s from './style';
+import SideBarItem from '../../molecules/SideBarItem';
+import DropdownList from '../../molecules/DropdownList';
+
+type SideBarProps = {
+  sidebarItems: JSX.Element[];
+};
 
 const SideBarDivider = () => {
   const theme = useTheme();
@@ -11,22 +17,31 @@ const SideBarDivider = () => {
   );
 };
 
-type SideBarProps = {
-  SideBarItems: JSX.Element[];
-};
 
-const SideBar = ({ SideBarItems }: SideBarProps) => {
-  const theme = useTheme();
+const DefaultMode = ({ sidebarItems }: SideBarProps) => (
+  <>
+    {sidebarItems?.map((item, index) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <Fragment key={index}>
+        {item}
+        <SideBarDivider />
+      </Fragment>
+    ))}
+  </>
+);
+
+const SideBar = ({ sidebarItems }: SideBarProps) => {
+  const [searchMode, setSearchMode] = useState<boolean>(false);
 
   return (
-    <s.SideBar theme={theme}>
-      {SideBarItems?.map((item, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Fragment key={index}>
-          {item}
-          <SideBarDivider />
-        </Fragment>
-      ))}
+    <s.SideBar>
+      <SideBarItem title='Search' element={
+        <SearchBar setSearchMode={setSearchMode} />
+      } />
+      {searchMode ?
+        null :
+        <DefaultMode sidebarItems={sidebarItems} />
+      }
     </s.SideBar>
   );
 };

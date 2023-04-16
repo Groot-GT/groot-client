@@ -1,24 +1,23 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react';
-import { useTheme } from 'styled-components';
+import React, { useState, useRef, useEffect } from 'react';
+import DropdownList from 'src/components/molecules/DropdownList';
+import ToggleButton from 'src/components/atoms/ToggleButton';
 import * as s from './style';
-import DropdownOption from '../../atoms/DropdownOption';
-import ToggleButton from '../../atoms/ToggleButton';
-import Divider from '../../atoms/Divider';
 
 type ToggleSelectorProps = {
   items: string[];
-  icons: string[] | undefined;
+  icons?: string[];
 }
+
+const defaultProps = {
+  icons: undefined,
+};
 
 
 const Dropdown = ({ items, icons }: ToggleSelectorProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<number>(0);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
-
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const theme = useTheme();
-
 
   useEffect(() => {
     setDropdownWidth(dropdownRef.current?.getBoundingClientRect().width);
@@ -36,8 +35,8 @@ const Dropdown = ({ items, icons }: ToggleSelectorProps) => {
 
   }, [dropdownRef, setOpen]);
 
-  const handleOptionClick = (idx: number) => {
-    setSelectedItem(idx);
+  const handleOptionClick = (idx: string) => {
+    setSelectedItem(items.indexOf(idx));
     setOpen(false);
   };
 
@@ -48,18 +47,12 @@ const Dropdown = ({ items, icons }: ToggleSelectorProps) => {
         <ToggleButton clicked={open} onClick={() => setOpen(!open)} />
       </s.SelectedItemPlaceHolder>
       {open ?
-        <s.DropdownListWrapper width={dropdownWidth} theme={theme}>
-          {items.map((item, idx) => (
-            <Fragment key={item}>
-              <DropdownOption value={item} icon={icons ? icons[idx] : null}
-                              onClick={() => handleOptionClick(idx)} />
-              <Divider vertical={false} length={100} />
-            </Fragment>
-          ))}
-        </s.DropdownListWrapper>
+        <DropdownList items={items} icons={icons} dropdownWidth={dropdownWidth} handleOptionClick={handleOptionClick} />
         : null}
     </s.DropdownWrapper>
   );
 };
+
+Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;
