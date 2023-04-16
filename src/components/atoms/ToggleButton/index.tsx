@@ -1,5 +1,5 @@
-import { ToggleButtonAssets } from '../../../assets/asset';
 import * as s from './style';
+import Icon from 'src/components/atoms/Icon';
 
 type ToggleButtonProps = {
   clicked?: boolean;
@@ -13,14 +13,10 @@ const defaultProps = {
 const ToggleButton = ({ clicked, onClick }: ToggleButtonProps) =>
   (
     <s.ToggleButton clicked={clicked} onClick={onClick}>
-      <img
-        src={
-          clicked
-            ? ToggleButtonAssets.chevronTop
-            : ToggleButtonAssets.chevronDown
-        }
-        alt='toggle button'
-      />
+      {clicked ?
+        <Icon iconImg='chevronTop' /> :
+        <Icon iconImg='chevronDown' />
+      }
     </s.ToggleButton>
   );
 
