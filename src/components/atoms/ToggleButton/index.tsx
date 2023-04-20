@@ -1,5 +1,5 @@
-import * as s from './style';
 import Icon from 'src/components/atoms/Icon';
+import * as s from './style';
 
 type ToggleButtonProps = {
   clicked?: boolean;

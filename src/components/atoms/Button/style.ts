@@ -10,7 +10,6 @@ export const Button = styled.button<ButtonStyleProps>`
   background-color: ${({ theme, variant }) =>
           variant === 'primary' ? theme.colors.white[0] : theme.colors.main[1]};
   color: ${({ theme }) => theme.colors.main[1]};
-
   border: none;
   min-height: 2rem;
   min-width: 2rem;
