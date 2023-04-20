@@ -7,6 +7,7 @@ type SideBarItemStyleProps = {
 export const SideBarItemWrapper = styled.div<SideBarItemStyleProps>`
   width: 100%;
   padding: 6px 18px;
+  //height: 48px;
   display: flex;
   flex-direction: row;
   align-items: center;

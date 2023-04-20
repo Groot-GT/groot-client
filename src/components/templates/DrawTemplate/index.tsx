@@ -1,14 +1,14 @@
 import ProjectPanel from 'src/components/organisms/ProjectPanel';
 import SideBar from 'src/components/organisms/SideBar';
+import Root from 'src/components/organisms/Root';
+import Dropdown from 'src/components/organisms/Dropdown';
 import SideBarItem from 'src/components/molecules/SideBarItem';
+import List from 'src/components/molecules/List';
+import ListItem from 'src/components/atoms/ListItem';
 import ToggleButton from 'src/components/atoms/ToggleButton';
+import { RootVariant } from 'src/constants/node';
+import { ToggleButtonAssets } from 'src/assets/asset';
 import * as s from './style';
-import Dropdown from '../../organisms/Dropdown';
-import { ToggleButtonAssets } from '../../../assets/asset';
-import List from '../../molecules/List';
-import ListItem from '../../atoms/ListItem';
-import Root from '../../organisms/Root';
-import { RootVariant } from '../../../constants/node';
 
 const exampleListItems: JSX.Element[] =
   Array.from({ length: 10 }).map(() => <ListItem itemTitle='item' />);

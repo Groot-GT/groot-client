@@ -5,13 +5,16 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  align-items: center;
-  justify-content: center;
   display: flex;
-  flex-direction: column;
-  padding: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   margin: 0;
   height: 48px;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.black[2]};
+  }
 `;
 
 export const ListItemTitle = styled.p`
