@@ -13,6 +13,15 @@ const fontWeights = {
   medium: 500,
 };
 
+const nodeColors = {
+  gray: '#6F6F6F',
+  red: '#FFBCC6',
+  purple: '#E6B2F0',
+  purpleBlue: '#BBC0F4',
+  blue: '#A6D6F9',
+  green: '#C9E3AA',
+};
+
 const colors = {
   main: {
     0: '#E7F6F4',
@@ -98,6 +107,7 @@ const theme = {
   fontSizes,
   fontWeights,
   colors,
+  nodeColors,
   mixins,
 };
 
