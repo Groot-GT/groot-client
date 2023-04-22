@@ -2,11 +2,12 @@ import * as s from './style';
 
 type SideBarItemProps = {
   title: string;
-  element: JSX.Element;
+  element?: JSX.Element;
   noPadding?: boolean;
 };
 
 const defaultProps = {
+  element: null,
   noPadding: false,
 };
 const SideBarItem = ({ title, element, noPadding }: SideBarItemProps) => (
