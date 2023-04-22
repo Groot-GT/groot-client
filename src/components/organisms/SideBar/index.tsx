@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import SideBarItem from 'src/components/molecules/SideBarItem';
 import Dropdown from 'src/components/organisms/Dropdown';
 import SideBarDivider from 'src/components/molecules/SideBarDivider';
+import ColorPanelCollection from 'src/components/molecules/ColorPanelCollection';
 import { IconType } from 'src/types/icon';
 import SearchMode from './Searchmode';
 import DefaultMode from './DefaultMode';
@@ -25,6 +26,7 @@ const RightBar = () => (
     />
     <SideBarItem
       title='Theme colors'
+      element={<ColorPanelCollection />}
     />
     <SideBarItem
       title='Image'
