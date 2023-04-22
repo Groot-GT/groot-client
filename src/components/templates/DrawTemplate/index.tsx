@@ -1,5 +1,5 @@
 import ProjectPanel from 'src/components/organisms/ProjectPanel';
-import SideBar from 'src/components/organisms/SideBar';
+import { LeftBar, RightBar } from 'src/components/organisms/SideBar';
 import Root from 'src/components/organisms/Root';
 import { RootVariant } from 'src/constants/node';
 import * as s from './style';
@@ -8,12 +8,12 @@ const DrawTemplate = () => (
   <s.DrawTemplateWrapper>
     <s.SideWrapper>
       <ProjectPanel projectName='Untitled_1' />
-      <SideBar />
+      <LeftBar />
     </s.SideWrapper>
     <Root rootVariant={RootVariant.BOTH_SIDE} />
     <s.SideWrapper>
       <ProjectPanel projectName='Untitled_1' />
-      <SideBar />
+      <RightBar />
     </s.SideWrapper>
   </s.DrawTemplateWrapper>
 );
