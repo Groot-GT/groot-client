@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const List = styled.ul`
-  width: 100%;
-`;
-
 export const ListItem = styled.li`
   display: flex;
   flex-direction: row;
@@ -11,6 +7,7 @@ export const ListItem = styled.li`
   align-items: center;
   margin: 0;
   height: 48px;
+  padding: 0 18px;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.black[2]};

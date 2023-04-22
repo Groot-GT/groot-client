@@ -1,13 +1,12 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
-type SideBarItemStyleProps = {
-  theme: DefaultTheme;
+type NoPaddingMode = {
+  noPadding: boolean | undefined;
 };
 
-export const SideBarItemWrapper = styled.div<SideBarItemStyleProps>`
+export const SideBarItemWrapper = styled.div<NoPaddingMode>`
   width: 100%;
-  padding: 6px 18px;
-  //height: 48px;
+  padding: ${({ noPadding }) => (noPadding ? '6px 0' : '6px 18px')};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,8 +14,9 @@ export const SideBarItemWrapper = styled.div<SideBarItemStyleProps>`
   flex-wrap: wrap;
 `;
 
-export const SideBarItemTitle = styled.div`
+export const SideBarItemTitle = styled.div<NoPaddingMode>`
   display: flex;
+  padding: ${({ noPadding }) => (noPadding ? '6px 18px' : '0')};
   font-size: 12px;
   align-items: center;
   justify-content: center;
