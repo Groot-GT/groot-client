@@ -2,12 +2,13 @@ import React, { Fragment } from 'react';
 import DropdownOption from 'src/components/atoms/DropdownOption';
 import Divider from 'src/components/atoms/Divider';
 import * as s from './style';
+import { IconType } from '../../../types/icon';
 
 type DropdownListProps = {
   items: string[];
   dropdownWidth: number | undefined;
   handleOptionClick: (idx: string) => void;
-  icons?: string[] | undefined;
+  icons?: IconType[] | undefined;
 }
 
 const defaultProps = {

@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import DropdownList from 'src/components/molecules/DropdownList';
 import ToggleButton from 'src/components/atoms/ToggleButton';
+import Icon from 'src/components/atoms/Icon';
+import { IconType } from 'src/types/icon';
 import * as s from './style';
+import { SelectedIconWrapper, SelectedItemWrapper } from './style';
 
 type ToggleSelectorProps = {
   items: string[];
-  icons?: string[];
+  icons?: IconType[];
 }
 
 const defaultProps = {
@@ -35,15 +38,20 @@ const Dropdown = ({ items, icons }: ToggleSelectorProps) => {
 
   }, [dropdownRef, setOpen]);
 
-  const handleOptionClick = (idx: string) => {
-    setSelectedItem(items.indexOf(idx));
+  const handleOptionClick = (option: string) => {
+    setSelectedItem(items.indexOf(option));
     setOpen(false);
   };
 
   return (
     <s.DropdownWrapper ref={dropdownRef}>
       <s.SelectedItemPlaceHolder onClick={() => setOpen(!open)}>
-        {items[selectedItem]}
+        <s.SelectedIconWrapper>
+          {icons ? <Icon iconImg={icons[selectedItem]} /> : null}
+        </s.SelectedIconWrapper>
+        <s.SelectedItemWrapper>
+          {items[selectedItem]}
+        </s.SelectedItemWrapper>
         <ToggleButton clicked={open} onClick={() => setOpen(!open)} />
       </s.SelectedItemPlaceHolder>
       {open ?
