@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import Divider from 'src/components/atoms/Divider';
 import * as s from './style';
 
 type ListProps = {
@@ -13,7 +12,6 @@ const List = ({ items }: ListProps) => (
       // eslint-disable-next-line react/no-array-index-key
       <Fragment key={index}>
         {item}
-        {index !== items.length - 1 ? <Divider /> : null}
       </Fragment>
     ))}
   </s.List>

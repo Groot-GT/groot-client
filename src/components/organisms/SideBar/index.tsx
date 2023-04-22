@@ -1,26 +1,32 @@
-import { Fragment, useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import SearchBar from 'src/components/organisms/SearchBar';
 import SearchResult from 'src/components/organisms/SearchResult';
+import Dropdown from 'src/components/organisms/Dropdown';
 import SideBarItem from 'src/components/molecules/SideBarItem';
 import IconButton from 'src/components/molecules/IconButton';
 import SideBarDivider from 'src/components/molecules/SideBarDivider';
+import List from 'src/components/molecules/List';
+import ListItem from 'src/components/atoms/ListItem';
+import ToggleButton from 'src/components/atoms/ToggleButton';
 import useNodesData from 'src/hooks/useNodeData';
+import { IconType } from 'src/types/icon';
 import * as s from './style';
 
-type SideBarProps = {
-  sidebarItems: JSX.Element[];
-};
-
-type SearchModeProps = {
+type SideBarModeProps = {
   changeMode: () => void;
 }
 
-type DefaultModeProps = {
-  changeMode: () => void;
-  sidebarItems: JSX.Element[];
-}
+const exampleToggleButtons: IconType[] =
+  Array.from({ length: 10 }).map(() => 'tree');
 
-const SearchMode = ({ changeMode }: SearchModeProps) => {
+const dropdownItems: string[] =
+  Array.from({ length: 10 }).map((_, idx) => `item ${idx}`);
+
+const exampleListItems: JSX.Element[] =
+  Array.from({ length: 10 }).map(() => <ListItem itemTitle='List item' />);
+
+
+const SearchMode = ({ changeMode }: SideBarModeProps) => {
   const { nodes } = useNodesData();
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchResults, setSearchResults] = useState<string[]>([]);
@@ -63,35 +69,42 @@ const SearchMode = ({ changeMode }: SearchModeProps) => {
 };
 
 
-const DefaultMode = ({ sidebarItems, changeMode }: DefaultModeProps) => (
-  // eslint-disable-next-line react/jsx-no-useless-fragment
+const DefaultMode = ({ changeMode }: SideBarModeProps) => (
   <>
-    <SideBarItem title='Search' element={
-      <IconButton icon='search' onClick={changeMode} />
-    } />
+    <SideBarItem
+      title='Search'
+      element={<IconButton icon='search' onClick={changeMode} />} />
     <SideBarDivider />
-    {sidebarItems?.map((item, index) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <Fragment key={index}>
-        {item}
-        <SideBarDivider />
-      </Fragment>
-    ))}
+    <SideBarItem
+      title='Theme direction'
+      element={<Dropdown icons={exampleToggleButtons} items={dropdownItems} />}
+    />
+    <SideBarDivider />
+    <SideBarItem
+      title='Theme colors'
+      element={<ToggleButton onClick={() => alert('Theme colors')} />}
+    />
+    <SideBarDivider />
+    <SideBarItem
+      title='Pages'
+      element={<List items={exampleListItems} />}
+      noPadding
+    />
+    <SideBarDivider />
   </>
 );
 
 
-const SideBar = ({ sidebarItems }: SideBarProps) => {
+const SideBar = () => {
   const [searchMode, setSearchMode] = useState<boolean>(false);
   const sideBarRef = useRef<HTMLDivElement>(null);
-  // const
   const changeMode = () => setSearchMode(!searchMode);
   return (
     <s.SideBar ref={sideBarRef}>
       {searchMode ?
         <SearchMode changeMode={changeMode} />
         :
-        <DefaultMode sidebarItems={sidebarItems} changeMode={changeMode} />
+        <DefaultMode changeMode={changeMode} />
       }
     </s.SideBar>
   );
