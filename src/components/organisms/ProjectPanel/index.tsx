@@ -1,5 +1,5 @@
 import Divider from 'src/components/atoms/Divider';
-import LogoButton from 'src/components/atoms/LogoButton';
+import Icon from 'src/components/atoms/Icon';
 import { useTheme } from 'styled-components';
 import * as s from './style';
 
@@ -7,7 +7,7 @@ const ProjectPanel = ({ projectName }: { projectName: string }) => {
   const theme = useTheme();
   return (
     <s.ProjectPanel theme={theme}>
-      <LogoButton />
+      <Icon iconImg='share'/>
       <Divider />
       <s.ProjectName>{projectName}</s.ProjectName>
     </s.ProjectPanel>
