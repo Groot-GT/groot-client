@@ -14,12 +14,37 @@ const fontWeights = {
 };
 
 const nodeColors = {
-  gray: '#6F6F6F',
-  red: '#FFBCC6',
-  purple: '#E6B2F0',
-  purpleBlue: '#BBC0F4',
-  blue: '#A6D6F9',
-  green: '#C9E3AA',
+  yellow: {
+    0: '#FBF6E5',
+    1: '#FFD99F',
+    2: '#5B4E3A',
+  },
+  red: {
+    0: '#FBECEE',
+    1: '#FFBCC6',
+    2: '#76454C',
+  },
+  purple: {
+    0: '#F2E8F4',
+    1: '#E6B2F0',
+    2: '#623C69',
+  },
+  violet: {
+    0: '#EAEBF5',
+    1: '#BBC0F4',
+    2: '#363B6A',
+  },
+  blue: {
+    0: '#E7F2FA',
+    1: '#A6D6F9',
+    2: '#2C495F',
+  },
+  green: {
+    0: '#F1F6EB',
+    1: '#C9E3AA',
+    2: '#516C31',
+  },
+
 };
 
 const colors = {
