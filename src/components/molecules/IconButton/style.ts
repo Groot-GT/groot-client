@@ -1,0 +1,9 @@
+import styled from 'styled-components';
+
+export const IconButton = styled.button`
+  padding: 1px 6px;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+`;
+

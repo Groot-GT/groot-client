@@ -1,10 +1,6 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
-interface SideBarStyleProps {
-  theme: DefaultTheme;
-}
-
-export const SideBar = styled.div<SideBarStyleProps>`
+export const SideBar = styled.div`
   display: flex;
   flex-direction: column;
   place-items: center;

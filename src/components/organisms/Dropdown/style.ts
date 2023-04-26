@@ -17,7 +17,7 @@ export const SelectedItemPlaceHolder = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px;
+  padding: 4px 4px;
   width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.black[4]};
   border-radius: 4px;
@@ -25,6 +25,17 @@ export const SelectedItemPlaceHolder = styled.div`
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const SelectedIconWrapper = styled.div`
+  margin-right: 8px;
+  background-color: ${({ theme }) => theme.colors.black[4]};
+  padding: 4px;
+  border-radius: 4px;
+`;
+
+export const SelectedItemWrapper = styled.div`
+  width: 100%;
 `;
 
 export const DropdownWrapper = styled.div`

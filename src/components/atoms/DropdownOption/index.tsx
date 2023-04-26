@@ -1,8 +1,10 @@
+import Icon from 'src/components/atoms/Icon';
+import { IconType } from '../../../types/icon';
 import * as s from './style';
 
 type DropDownOptionProps = {
   value: string;
-  icon?: string | null;
+  icon?: IconType | null;
   onClick: () => void;
 }
 
@@ -13,7 +15,7 @@ const defaultProps = {
 const DropDownOption = ({ value, onClick, icon }: DropDownOptionProps) =>
   <s.Option onClick={onClick}>
     <s.DropdownIconWrapper>
-      {icon ? <s.Icon src={icon} /> : null}
+      {icon ? <Icon iconImg={icon} /> : null}
     </s.DropdownIconWrapper>
     {value}
   </s.Option>;
