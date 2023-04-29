@@ -1,13 +1,18 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 import theme from 'src/styles/theme';
-
-const defaultTheme = 'yellow';
 
 type NodeThemeType = keyof typeof theme.nodeColors;
 
+const defaultTheme = 'yellow';
+
 const nodeThemeState = atom<NodeThemeType>({
-  key: 'themeState',
+  key: 'nodeThemeState',
   default: defaultTheme,
+});
+
+export const nodeThemeSelector = selector({
+  key: 'nodeThemeSelector',
+  get: ({ get }) => (theme.nodeColors[get(nodeThemeState)]),
 });
 
 export default nodeThemeState;

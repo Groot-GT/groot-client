@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import { NodeDirection } from 'src/constants/node';
-
-type NodeProps = {
-  nodeColor: {
-    0: string; // background color
-    1: string; // root color
-    2: string; // text color
-  },
-}
+import { NodeTheme } from 'src/types/node';
 
 export const Wrapper = styled.div<{ direction: NodeDirection }>`
   display: flex;
@@ -25,7 +18,7 @@ export const Column = styled.div`
 
 export const Row = styled.div``;
 
-export const Node = styled.div<NodeProps>`
+export const Node = styled.div<NodeTheme>`
   margin: 20px;
   padding: 10px;
   background: ${({ nodeColor }) => nodeColor[0]};
