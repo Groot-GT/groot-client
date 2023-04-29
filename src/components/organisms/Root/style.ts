@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NodeTheme } from 'src/types/node';
 
 export const Background = styled.div<{ width: number; height: number }>`
   width: ${({ width }) => `${width}px`};
@@ -26,8 +27,10 @@ export const Column = styled.div`
   flex-direction: column;
 `;
 
-export const Node = styled.div`
+export const Node = styled.div<NodeTheme>`
   padding: 10px;
   height: fit-content;
   background: chartreuse;
+  background: ${({ nodeColor }) => nodeColor[1]};
+  color: ${({ nodeColor }) => nodeColor[2]};
 `;
