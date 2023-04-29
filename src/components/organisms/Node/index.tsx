@@ -1,11 +1,12 @@
-import { useRecoilState } from 'recoil';
 import produce from 'immer';
 import uuid from 'react-uuid';
+import { useRecoilState } from 'recoil';
+import { useTheme } from 'styled-components';
 import nodeState from 'src/recoil/nodeState';
 import { NodeId } from 'src/types/node';
+import useNodeRef from 'src/hooks/useNodeRef';
 import { NodeDirection } from 'src/constants/node';
 import Button from 'src/components/atoms/Button';
-import useNodeRef from 'src/hooks/useNodeRef';
 import getChildrensId from 'src/utils/getChildrensId';
 import * as s from './style';
 
@@ -16,7 +17,8 @@ interface NodeProps {
 
 const Node = ({ nodeId, direction }: NodeProps) => {
   const [nodes, setNode] = useRecoilState(nodeState);
-
+  const theme = useTheme();
+  const nodeColor = theme.nodeColors.yellow;
   const ref = useNodeRef(nodeId);
 
   const handleClickAddButton = () => {
@@ -57,7 +59,7 @@ const Node = ({ nodeId, direction }: NodeProps) => {
     <s.Wrapper direction={direction}>
       {direction === NodeDirection.top && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.left && <s.Column>{childrenNodes}</s.Column>}
-      <s.Node ref={ref}>
+      <s.Node nodeColor={nodeColor}  ref={ref}>
         {nodeId}
         <Button onClick={handleClickAddButton}>+</Button>
         <Button onClick={handleClickDeleteButton}>-</Button>
