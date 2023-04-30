@@ -14,9 +14,11 @@ const defaultProps = {
 
 const DropDownOption = ({ value, onClick, icon }: DropDownOptionProps) =>
   <s.Option onClick={onClick}>
-    <s.DropdownIconWrapper>
-      {icon ? <Icon iconImg={icon} /> : null}
-    </s.DropdownIconWrapper>
+    {icon ?
+      <s.DropdownIconWrapper>
+        <Icon iconImg={icon} />
+      </s.DropdownIconWrapper>
+      : null}
     {value}
   </s.Option>;
 

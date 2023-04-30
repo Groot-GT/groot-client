@@ -13,13 +13,13 @@ export const DropdownListWrapper = styled.div<DropdownListProps>`
   box-shadow: ${({ theme }) => theme.mixins.shadow};
 `;
 
-export const SelectedItemPlaceHolder = styled.div`
+export const SelectedItemPlaceHolder = styled.div<{ borderNone: boolean | undefined }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px 4px;
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.black[4]};
+  border: 1px solid ${({ theme, borderNone }) => borderNone === true ? 'transparent' : theme.colors.black[4]};
   border-radius: 4px;
 
   &:hover {
