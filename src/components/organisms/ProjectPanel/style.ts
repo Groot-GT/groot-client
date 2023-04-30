@@ -9,8 +9,7 @@ export const ProjectPanel = styled.div`
   height: 48px;
   border-radius: 5px;
   padding: 0 30px;
-  margin: 11px 0 20px 0;
-  box-shadow: ${({ theme }) => theme.mixins.shadow};
+  margin: 0 0 16px 0;
   background-color: ${({ theme }) => theme.colors.black[0]};
 `;
 
