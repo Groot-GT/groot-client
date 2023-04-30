@@ -85,6 +85,16 @@ const colors = {
   },
 };
 
+const titleColors = {
+  ...nodeColors,
+  main: {
+    0: '#E7F6F4',
+    1: '#00AC83',
+    2: '#00776E',
+  },
+};
+
+
 const mixins = {
   shadow: `
     0px 4px 6px rgba(0, 0, 0, 0.15)
@@ -101,10 +111,10 @@ const mixins = {
     align-items: center;
   `,
   flexCenterRow: `
-    display: flex;
-    flex-direction: row;
-    justify-contents: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   `,
   subtitle1: `
     font-size: ${fontSizes.subtitle1};
@@ -132,6 +142,7 @@ const theme = {
   fontSizes,
   fontWeights,
   colors,
+  titleColors,
   nodeColors,
   mixins,
 };
