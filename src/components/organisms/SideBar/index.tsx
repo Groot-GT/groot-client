@@ -7,6 +7,7 @@ import { IconType } from 'src/types/icon';
 import SearchMode from './Searchmode';
 import DefaultMode from './DefaultMode';
 import * as s from './style';
+import { SideBarGap } from './style';
 
 const exampleToggleButtons: IconType[] =
   Array.from({ length: 10 }).map(() => 'tree');
@@ -28,9 +29,7 @@ const RightBar = () => (
       title='Theme colors'
       element={<ColorPanelCollection />}
     />
-    <SideBarItem
-      title='Image'
-    />
+    <s.SideBarGap />
   </s.SideBar>
 );
 
@@ -40,7 +39,7 @@ const LeftBar = () => {
   const sideBarRef = useRef<HTMLDivElement>(null);
   const changeMode = () => setSearchMode(!searchMode);
   return (
-    <s.SideBar ref={sideBarRef}>
+    <s.SideBar fullHeight ref={sideBarRef}>
       {searchMode ?
         <SearchMode changeMode={changeMode} />
         :
