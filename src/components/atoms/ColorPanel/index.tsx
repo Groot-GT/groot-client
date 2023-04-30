@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
-import theme from 'src/styles/theme';
 import * as s from './style';
 
 type ColorPanelProps = {
-  color: keyof typeof theme.titleColors;
+  color: string;
   onClick?: () => void;
   children?: ReactNode;
 }

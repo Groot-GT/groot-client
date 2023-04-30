@@ -44,7 +44,6 @@ const nodeColors = {
     1: '#C9E3AA',
     2: '#516C31',
   },
-
 };
 
 const colors = {
