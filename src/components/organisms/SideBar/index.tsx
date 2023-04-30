@@ -7,7 +7,6 @@ import { IconType } from 'src/types/icon';
 import SearchMode from './Searchmode';
 import DefaultMode from './DefaultMode';
 import * as s from './style';
-import { SideBarGap } from './style';
 
 const exampleToggleButtons: IconType[] =
   Array.from({ length: 10 }).map(() => 'tree');
