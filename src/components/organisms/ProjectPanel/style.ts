@@ -6,10 +6,10 @@ export const ProjectPanel = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 230px;
   height: 48px;
   border-radius: 5px;
   padding: 0 30px;
-  margin: 0 0 16px 0;
   background-color: ${({ theme }) => theme.colors.black[0]};
 `;
 

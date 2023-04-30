@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const PanelsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
 export const StatusPanel = styled.div`
   display: flex;
   flex-direction: row;
@@ -7,7 +13,6 @@ export const StatusPanel = styled.div`
   justify-content: space-between;
   height: 48px;
   border-radius: 5px;
-  margin: 0 0 16px 0;
   background-color: ${({ theme }) => theme.colors.black[0]};
 `;
 
