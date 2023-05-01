@@ -1,11 +1,13 @@
 import { useState, useRef } from 'react';
-import SideBarItem from 'src/components/molecules/SideBarItem';
 import Dropdown from 'src/components/organisms/Dropdown';
+import SearchBar from 'src/components/organisms/SearchBar';
 import SideBarDivider from 'src/components/molecules/SideBarDivider';
+import SideBarItem from 'src/components/molecules/SideBarItem';
+import List from 'src/components/molecules/List';
 import ColorPanelCollection from 'src/components/molecules/ColorPanelCollection';
+import ListItem from 'src/components/atoms/ListItem';
 import { IconType } from 'src/types/icon';
 import SearchMode from './Searchmode';
-import DefaultMode from './DefaultMode';
 import * as s from './style';
 
 const exampleToggleButtons: IconType[] =
@@ -13,6 +15,9 @@ const exampleToggleButtons: IconType[] =
 
 const dropdownItems: string[] =
   Array.from({ length: 10 }).map((_, idx) => `item ${idx}`);
+
+const exampleListItems: JSX.Element[] =
+  Array.from({ length: 10 }).map(() => <ListItem itemTitle='List item' />);
 
 const RightBar = () => (
   <s.SideBar>
@@ -34,16 +39,29 @@ const RightBar = () => (
 
 
 const LeftBar = () => {
-  const [searchMode, setSearchMode] = useState<boolean>(false);
+  const [searchInput, setSearchInput] = useState<string>('');
+
   const sideBarRef = useRef<HTMLDivElement>(null);
-  const changeMode = () => setSearchMode(!searchMode);
   return (
     <s.SideBar fullHeight ref={sideBarRef}>
-      {searchMode ?
-        <SearchMode changeMode={changeMode} />
+      <SideBarItem title='' element={
+        <SearchBar
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
+      } />
+      {searchInput.length ?
+        <SearchMode searchInput={searchInput} />
         :
-        <DefaultMode changeMode={changeMode} />
+        null
       }
+      <SideBarDivider />
+      <SideBarItem
+        title='Pages'
+        element={<List items={exampleListItems} />}
+        noPadding
+      />
+      <SideBarDivider />
     </s.SideBar>
   );
 };

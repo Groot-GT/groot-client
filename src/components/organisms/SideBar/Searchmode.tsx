@@ -1,56 +1,22 @@
-import { useState, useEffect } from 'react';
-import SearchBar from 'src/components/organisms/SearchBar';
 import SearchResult from 'src/components/organisms/SearchResult';
-import SideBarItem from 'src/components/molecules/SideBarItem';
 import SideBarDivider from 'src/components/molecules/SideBarDivider';
-
-import useNodesData from 'src/hooks/useNodeData';
+import * as s from './style';
 
 type SideBarModeProps = {
-  changeMode: () => void;
+  searchInput: string;
 }
 
 
-const SearchMode = ({ changeMode }: SideBarModeProps) => {
-  const { nodes } = useNodesData();
-  const [searchInput, setSearchInput] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (searchInput.length) {
-      setSearchResults(
-        [...Object.keys(nodes)].filter(v => v.includes(searchInput)),
-      );
-    } else {
-      setSearchResults([]);
-    }
-  }, [nodes, searchInput]);
-
-
-  const handleDropdownOptionClick = (optionValue: string) => {
-    alert(optionValue);
-  };
-
-  const collapseSearchBar = () => {
-    changeMode();
-    setSearchInput('');
-    setSearchResults([]);
-  };
+const SearchMode = ({ searchInput }: SideBarModeProps) => {
+  const handleDropdownOptionClick = (optionValue: string) => alert(optionValue);
 
   return (
-    <div>
-      <SideBarItem title='' element={
-        <SearchBar
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-          collapseSearchBar={collapseSearchBar}
-        />
-      } />
+    <s.SearchModeWrapper>
       <SideBarDivider />
-      <SearchResult results={searchResults} handleOptionClick={handleDropdownOptionClick} />
-
-    </div>
+      <SearchResult searchInput={searchInput} handleOptionClick={handleDropdownOptionClick} />
+    </s.SearchModeWrapper>
   );
 };
+
 
 export default SearchMode;
