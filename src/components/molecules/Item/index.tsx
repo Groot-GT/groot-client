@@ -19,7 +19,7 @@ const defaultProps = {
 
 const Item = ({ itemIcon, itemTitle, onClick, backgroundColor }: ListItemProps) => (
   <s.Item backgroundColor={backgroundColor} onClick={onClick}>
-    {itemIcon ? <Icon iconImg={itemIcon} /> : <Icon iconImg='blackDot' />}
+    {itemIcon ? <Icon iconImg={itemIcon} /> : null}
     <s.ItemTitle>{itemTitle}</s.ItemTitle>
   </s.Item>
 );
