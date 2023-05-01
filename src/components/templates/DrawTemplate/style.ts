@@ -18,6 +18,7 @@ export const TopWrapper = styled.div`
 `;
 
 export const TopRightWrapper = styled.div`
+  z-index: 3;
   display: flex;
   flex-direction: row;
 `;
