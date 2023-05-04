@@ -4,19 +4,20 @@ import ToggleButton from 'src/components/atoms/ToggleButton';
 import Icon from 'src/components/atoms/Icon';
 import { IconType } from 'src/types/icon';
 import * as s from './style';
-import { SelectedIconWrapper, SelectedItemWrapper } from './style';
 
 type ToggleSelectorProps = {
   items: string[];
   icons?: IconType[];
+  borderNone?: boolean;
 }
 
 const defaultProps = {
   icons: undefined,
+  borderNone: false,
 };
 
 
-const Dropdown = ({ items, icons }: ToggleSelectorProps) => {
+const Dropdown = ({ items, icons, borderNone }: ToggleSelectorProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<number>(0);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
@@ -45,10 +46,12 @@ const Dropdown = ({ items, icons }: ToggleSelectorProps) => {
 
   return (
     <s.DropdownWrapper ref={dropdownRef}>
-      <s.SelectedItemPlaceHolder onClick={() => setOpen(!open)}>
-        <s.SelectedIconWrapper>
-          {icons ? <Icon iconImg={icons[selectedItem]} /> : null}
-        </s.SelectedIconWrapper>
+      <s.SelectedItemPlaceHolder borderNone={borderNone} onClick={() => setOpen(!open)}>
+        {icons ?
+          <s.SelectedIconWrapper>
+            <Icon iconImg={icons[selectedItem]} />
+          </s.SelectedIconWrapper>
+          : null}
         <s.SelectedItemWrapper>
           {items[selectedItem]}
         </s.SelectedItemWrapper>

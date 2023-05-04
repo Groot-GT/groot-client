@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 
-export const SideBar = styled.div`
+type SideBarProps = {
+  fullHeight?: boolean;
+}
+
+export const SideBar = styled.div<SideBarProps>`
   display: flex;
   flex-direction: column;
   place-items: center;
   width: 230px;
-  height: 100%;
+  height: ${({ fullHeight }) => fullHeight ? '100%' : 'fit-content'};
   background-color: ${({ theme }) => theme.colors.white[0]};
+`;
+
+export const SideBarGap = styled.div`
+  width: 100%;
+  height: 32px;
 `;

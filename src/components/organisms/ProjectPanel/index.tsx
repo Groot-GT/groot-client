@@ -1,6 +1,6 @@
 import Divider from 'src/components/atoms/Divider';
-import LogoButton from 'src/components/atoms/LogoButton';
 import { useTheme } from 'styled-components';
+import LogoButton from 'src/components/atoms/LogoButton';
 import * as s from './style';
 
 const ProjectPanel = ({ projectName }: { projectName: string }) => {

@@ -1,20 +1,21 @@
 import theme from 'src/styles/theme';
+import { useSetRecoilState } from 'recoil';
+import nodeThemeState from 'src/recoil/nodeThemeState';
 import ColorPanel from 'src/components/atoms/ColorPanel';
 import * as s from './style';
-import useNodeColor from '../../../hooks/useNodeColor';
 
 type ColorType = keyof typeof theme.nodeColors;
 
 const ColorPanelCollection = () => {
-  const { setNodeColor } = useNodeColor();
+  const setNodeTheme = useSetRecoilState(nodeThemeState);
 
   return (
     <s.ColorPanelCollection>
-      {Object.values(theme.nodeColors).map((color) => (
+      {Object.entries(theme.nodeColors).map(([color, colorValue]) => (
         <ColorPanel
           key={color}
-          onClick={() => setNodeColor(color as ColorType)}
-          color={color as ColorType} />
+          onClick={() => setNodeTheme(color as ColorType)}
+          color={colorValue[1] as ColorType} />
       ))}
     </s.ColorPanelCollection>
   );
