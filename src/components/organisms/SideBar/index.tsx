@@ -7,7 +7,7 @@ import { IconType } from 'src/types/icon';
 import SearchMode from './Searchmode';
 import DefaultMode from './DefaultMode';
 import * as s from './style';
-import { SideBarGap } from './style';
+import Gap from '../../atoms/Gap';
 
 const exampleToggleButtons: IconType[] =
   Array.from({ length: 10 }).map(() => 'tree');
@@ -29,7 +29,7 @@ const RightBar = () => (
       title='Theme colors'
       element={<ColorPanelCollection />}
     />
-    <s.SideBarGap />
+    <Gap />
   </s.SideBar>
 );
 
