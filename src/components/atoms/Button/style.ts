@@ -1,20 +1,15 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
 interface ButtonStyleProps {
   disabled?: boolean;
   variant?: 'primary' | 'secondary';
-  theme: DefaultTheme;
 }
 
-// export const Button = styled.button<ButtonStyleProps>`
-//   border: none;
-// `;
 
 export const Button = styled.button<ButtonStyleProps>`
   background-color: ${({ theme, variant }) =>
-    variant === 'primary' ? theme.colors.white[0] : theme.colors.main[1]};
+          variant === 'primary' ? theme.colors.white[0] : theme.colors.main[1]};
   color: ${({ theme }) => theme.colors.main[1]};
-
   border: none;
   min-height: 2rem;
   min-width: 2rem;
@@ -22,7 +17,7 @@ export const Button = styled.button<ButtonStyleProps>`
 
   &:hover {
     background-color: ${({ theme, variant }) =>
-      variant === 'primary' ? theme.colors.main[0] : theme.colors.main[1]};
+            variant === 'primary' ? theme.colors.main[0] : theme.colors.main[1]};
     color: ${({ theme }) => theme.colors.white[0]};
   }
 `;

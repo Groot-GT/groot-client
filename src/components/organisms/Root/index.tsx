@@ -6,6 +6,7 @@ import LineContainer from 'src/components/organisms/LineContainer';
 import useNodeRef from 'src/hooks/useNodeRef';
 import BothSideRoot from './BothSideRoot';
 import * as s from './style';
+import { nodeThemeSelector } from '../../../recoil/nodeThemeState';
 
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
@@ -16,6 +17,7 @@ interface RootProps {
 
 const Root = ({ rootVariant }: RootProps) => {
   const nodes = useRecoilValue(nodeState);
+  const nodeColor = useRecoilValue(nodeThemeSelector);
   const ref = useNodeRef(ROOT_NODE_ID);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const Root = ({ rootVariant }: RootProps) => {
     return null;
   }
 
-  const rootNode = <s.Node ref={ref}>ROOT</s.Node>;
+  const rootNode = <s.Node nodeColor={nodeColor} ref={ref}>ROOT</s.Node>;
 
   return (
     <s.Background width={WIDTH} height={HEIGHT}>

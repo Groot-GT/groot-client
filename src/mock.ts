@@ -63,4 +63,15 @@ const nodeInfo: Node = {
   },
 };
 
+export const onlineUsers = {
+  0: {
+    'id': 'pinkishincoloragain',
+    'color': 'red',
+  },
+  1: {
+    'id': 'KingDonggyu',
+    'color': 'blue',
+  },
+};
+
 export default nodeInfo;

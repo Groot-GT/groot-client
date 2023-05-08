@@ -1,44 +1,34 @@
 import ProjectPanel from 'src/components/organisms/ProjectPanel';
-import SideBar from 'src/components/organisms/SideBar';
-import SideBarItem from 'src/components/atoms/SideBarItem';
-import ToggleButton from 'src/components/atoms/ToggleButton';
-import { RootVariant } from 'src/constants/node';
+import StatusPanel from 'src/components/organisms/StatusPanel';
+import CurrentUsersPanel from 'src/components/organisms/CurrentUsersPanel';
+import { LeftBar, RightBar } from 'src/components/organisms/SideBar';
 import Root from 'src/components/organisms/Root';
+import { RootVariant } from 'src/constants/node';
 import * as s from './style';
-
-const LeftBarItems = [
-  <SideBarItem
-    title="Map theme"
-    element={<ToggleButton onClick={() => alert('searchIcon')} />}
-  />,
-  <SideBarItem
-    title="Theme direction"
-    element={<ToggleButton onClick={() => alert('Theme direction')} />}
-  />,
-  <SideBarItem
-    title="Pages"
-    element={<ToggleButton onClick={() => alert('pages')} />}
-  />,
-];
-
-const RightBarItems = [
-  <SideBarItem
-    title="Map theme"
-    element={<ToggleButton onClick={() => alert('searchIcon')} />}
-  />,
-];
 
 const DrawTemplate = () => (
   <s.DrawTemplateWrapper>
-    <s.SideWrapper>
-      <ProjectPanel projectName="Untitled_1" />
-      <SideBar SideBarItems={LeftBarItems} />
-    </s.SideWrapper>
-    <Root rootVariant={RootVariant.BOTH_SIDE} />
-    <s.SideWrapper>
-      <ProjectPanel projectName="Untitled_1" />
-      <SideBar SideBarItems={RightBarItems} />
-    </s.SideWrapper>
+    {/* Top side */}
+    <s.TopWrapper>
+      <ProjectPanel projectName='Untitled_1' />
+      <s.TopRightWrapper>
+        <CurrentUsersPanel />
+        <StatusPanel />
+      </s.TopRightWrapper>
+    </s.TopWrapper>
+
+    {/* Middle side */}
+    <s.MiddleWrapper>
+      {/* Left sidebar */}
+      <s.SideWrapper>
+        <LeftBar />
+      </s.SideWrapper>
+      <Root rootVariant={RootVariant.BOTH_SIDE} />
+      {/* Right sidebar */}
+      <s.SideWrapper>
+        <RightBar />
+      </s.SideWrapper>
+    </s.MiddleWrapper>
   </s.DrawTemplateWrapper>
 );
 

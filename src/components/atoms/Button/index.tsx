@@ -1,36 +1,29 @@
-import { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from 'react';
-import { useTheme } from 'styled-components';
+import { MouseEvent, ButtonHTMLAttributes, PropsWithChildren, ReactNode, MouseEventHandler } from 'react';
 import * as s from './style';
 
 type ButtonAttributes = {
   children?: ReactNode[] | ReactNode | null;
   variant?: 'primary' | 'secondary';
   disabled?: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 const defaultProps = {
   children: null,
   variant: 'primary',
   disabled: false,
+  onClick: () => {
+  },
 };
 
 export type ButtonProps = ButtonAttributes &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({
-  children,
-  variant,
-  disabled,
-  ...props
-}: PropsWithChildren & ButtonProps) => {
-  const theme = useTheme();
-
-  return (
-    <s.Button theme={theme} variant={variant} disabled={disabled} {...props}>
-      {children}
-    </s.Button>
-  );
-};
+const Button = ({ children, variant, disabled, onClick }: PropsWithChildren & ButtonProps) => (
+  <s.Button onClick={onClick} variant={variant} disabled={disabled}>
+    {children}
+  </s.Button>
+);
 
 Button.defaultProps = defaultProps;
 
