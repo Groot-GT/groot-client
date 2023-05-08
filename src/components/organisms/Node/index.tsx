@@ -1,10 +1,13 @@
 import produce from 'immer';
-import nodeState from 'src/recoil/nodeState';
-import { nodeThemeSelector } from 'src/recoil/nodeThemeState';
 import uuid from 'react-uuid';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import nodeState from 'src/recoil/nodeState';
+import dragState from 'src/recoil/dragState';
+import { nodeThemeSelector } from 'src/recoil/nodeThemeState';
 import { NodeId } from 'src/types/node';
 import useNodeRef from 'src/hooks/useNodeRef';
+import useDragAndDrop from 'src/hooks/useDragAndDrop';
+import useNodeDrop from 'src/hooks/useNodeDrop';
 import { NodeDirection } from 'src/constants/node';
 import Button from 'src/components/atoms/Button';
 import getChildrensId from 'src/utils/getChildrensId';
@@ -17,8 +20,27 @@ interface NodeProps {
 
 const Node = ({ nodeId, direction }: NodeProps) => {
   const [nodes, setNode] = useRecoilState(nodeState);
+  const [dragNodeId, setDragNodeId] = useRecoilState(dragState);
   const nodeColor = useRecoilValue(nodeThemeSelector);
   const ref = useNodeRef(nodeId);
+  const handleNodeDrop = useNodeDrop();
+
+  useDragAndDrop({
+    ref,
+    onDragLeave: () => {
+      if (dragNodeId) {
+        return;
+      }
+      setDragNodeId(nodeId);
+      // 스타일 적용
+    },
+    onDragEnter: () => {
+      // 스타일 적용
+    },
+    onDrop: (e) => {
+      handleNodeDrop(e);
+    },
+  });
 
   const handleClickAddButton = () => {
     const newNodeId = uuid();
@@ -58,7 +80,7 @@ const Node = ({ nodeId, direction }: NodeProps) => {
     <s.Wrapper direction={direction}>
       {direction === NodeDirection.top && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.left && <s.Column>{childrenNodes}</s.Column>}
-      <s.Node nodeColor={nodeColor} ref={ref}>
+      <s.Node className="node" nodeColor={nodeColor} ref={ref} id={nodeId}>
         {nodeId}
         <Button onClick={handleClickAddButton}>+</Button>
         <Button onClick={handleClickDeleteButton}>-</Button>
