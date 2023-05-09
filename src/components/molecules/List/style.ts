@@ -5,7 +5,6 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -13,9 +12,4 @@ export const ListItem = styled.li`
   margin: 0;
   height: 48px;
 `;
-
-export const ListItemTitle = styled.p`
-  font-size: 12px;
-`;
-
 

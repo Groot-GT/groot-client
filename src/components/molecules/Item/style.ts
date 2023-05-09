@@ -9,7 +9,7 @@ export const Item = styled.div<ItemProps>`
   background-color: ${({ backgroundColor, theme }) => backgroundColor || theme.colors.black[2]};
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 16px;
   align-items: center;
   margin: 0;
