@@ -1,7 +1,7 @@
 import theme from 'src/styles/theme';
 
 export type UserId = string;
-export type UserColor = keyof typeof theme.titleColors;
+export type UserColor = keyof typeof theme.nodeColors;
 
 export interface User {
   id: UserId;
