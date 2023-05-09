@@ -1,5 +1,5 @@
 import List from 'src/components/molecules/List';
-import ListItem from 'src/components/atoms/ListItem';
+import ListItem from 'src/components/molecules/ListItem';
 import useNodeSearchResults from 'src/hooks/useNodeSearchResults';
 
 type SearchAutoCompleteProps = {
@@ -11,9 +11,11 @@ const SearchResult = ({ searchInput, handleOptionClick }: SearchAutoCompleteProp
   const searchResults = useNodeSearchResults(searchInput);
 
   return (
-    <List items={searchResults.map((result) => (
-      <ListItem key={result} itemTitle={result} onClick={() => handleOptionClick(result)} />
-    ))} />
+    <List>
+      {searchResults.map((result) => (
+        <ListItem key={result} itemTitle={result} onClick={() => handleOptionClick(result)} />
+      ))}
+    </List>
   );
 };
 

@@ -4,10 +4,10 @@ import Item from 'src/components/molecules/Item';
 import * as s from './style';
 
 type ListItemProps = {
-  itemIcon?: IconType;
   itemTitle: string;
-  onClick?: MouseEventHandler<HTMLDivElement>;
+  itemIcon?: IconType;
   backgroundColor?: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 const defaultProps = {
@@ -17,9 +17,14 @@ const defaultProps = {
   backgroundColor: 'transparent',
 };
 
-const ListItem = ({ itemIcon, itemTitle, onClick, backgroundColor }: ListItemProps) => (
+const ListItem = ({ itemTitle, itemIcon, onClick, backgroundColor }: ListItemProps) => (
   <s.ListItem>
-    <Item onClick={onClick} itemIcon={itemIcon} backgroundColor={backgroundColor} itemTitle={itemTitle} />
+    <Item
+      onClick={onClick}
+      itemIcon={itemIcon}
+      backgroundColor={backgroundColor}
+      itemTitle={itemTitle}
+    />
   </s.ListItem>
 );
 

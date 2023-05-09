@@ -1,11 +1,10 @@
 import { useState, useRef } from 'react';
 import Dropdown from 'src/components/organisms/Dropdown';
-import SearchBar from 'src/components/organisms/SearchBar';
+import PageList from 'src/components/organisms/PageList';
+import SearchBar from 'src/components/molecules/SearchBar';
 import SideBarDivider from 'src/components/molecules/SideBarDivider';
 import SideBarItem from 'src/components/molecules/SideBarItem';
-import List from 'src/components/molecules/List';
 import ColorPanelCollection from 'src/components/molecules/ColorPanelCollection';
-import ListItem from 'src/components/atoms/ListItem';
 import { IconType } from 'src/types/icon';
 import SearchMode from './Searchmode';
 import * as s from './style';
@@ -15,9 +14,6 @@ const exampleToggleButtons: IconType[] =
 
 const dropdownItems: string[] =
   Array.from({ length: 10 }).map((_, idx) => `item ${idx}`);
-
-const exampleListItems: JSX.Element[] =
-  Array.from({ length: 10 }).map(() => <ListItem itemTitle='List item' />);
 
 const RightBar = () => (
   <s.SideBar>
@@ -36,7 +32,6 @@ const RightBar = () => (
     <s.SideBarGap />
   </s.SideBar>
 );
-
 
 const LeftBar = () => {
   const [searchInput, setSearchInput] = useState<string>('');
@@ -58,7 +53,7 @@ const LeftBar = () => {
       <SideBarDivider />
       <SideBarItem
         title='Pages'
-        element={<List items={exampleListItems} />}
+        element={<PageList />}
         noPadding
       />
       <SideBarDivider />
