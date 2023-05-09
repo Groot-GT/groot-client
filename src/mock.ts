@@ -74,4 +74,22 @@ export const onlineUsers = {
   },
 };
 
+export const pageInfo = {
+  0: {
+    'id': 'page1Id',
+    'name': 'page1Name',
+    'url': '/page1',
+  },
+  1: {
+    'id': 'page2Id',
+    'name': 'page2Name',
+    'url': '/page2',
+  },
+  2: {
+    'id': 'page3Id',
+    'name': 'page2Name',
+    'url': '/page3',
+  },
+};
+
 export default nodeInfo;
