@@ -17,7 +17,7 @@ interface NodeProps {
 
 const Node = ({ nodeId, direction }: NodeProps) => {
   const [nodes, setNode] = useRecoilState(nodeState);
-  const nodeColor = useRecoilValue(nodeThemeSelector);
+  const nodeTheme = useRecoilValue(nodeThemeSelector);
   const ref = useNodeRef(nodeId);
 
   const handleClickAddButton = () => {
@@ -58,7 +58,7 @@ const Node = ({ nodeId, direction }: NodeProps) => {
     <s.Wrapper direction={direction}>
       {direction === NodeDirection.top && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.left && <s.Column>{childrenNodes}</s.Column>}
-      <s.Node nodeColor={nodeColor} ref={ref}>
+      <s.Node nodeColor={nodeTheme} ref={ref}>
         {nodeId}
         <Button onClick={handleClickAddButton}>+</Button>
         <Button onClick={handleClickDeleteButton}>-</Button>

@@ -12,9 +12,9 @@ export interface NodeValue {
 
 export interface NodeTheme {
   nodeColor: {
-    0: string; // background color
-    1: string; // root color
-    2: string; // text color
+    'background': string; // background color
+    'root': string; // root color
+    'text': string; // text color
   },
 }
 

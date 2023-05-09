@@ -31,6 +31,6 @@ export const Node = styled.div<NodeTheme>`
   padding: 10px;
   height: fit-content;
   background: chartreuse;
-  background: ${({ nodeColor }) => nodeColor[1]};
-  color: ${({ nodeColor }) => nodeColor[2]};
+  background: ${({ nodeColor }) => nodeColor.root};
+  color: ${({ nodeColor }) => nodeColor.text};
 `;
