@@ -76,18 +76,18 @@ export const onlineUsers = {
 
 export const pageInfo = {
   0: {
-    'id': 'page1Id',
-    'name': 'page1Name',
+    'id': 'pageId1',
+    'name': 'pageName1',
     'url': '/page1',
   },
   1: {
-    'id': 'page2Id',
-    'name': 'page2Name',
+    'id': 'pageId2',
+    'name': 'pageName2',
     'url': '/page2',
   },
   2: {
-    'id': 'page3Id',
-    'name': 'page2Name',
+    'id': 'pageId3',
+    'name': 'pageName3',
     'url': '/page3',
   },
 };
