@@ -7,6 +7,7 @@ import formatLeft from './icons/format-align-left.svg';
 import blackDot from './icons/black-dot.svg';
 import share from './icons/share.svg';
 import add from './icons/add.svg';
+import _delete from './icons/delete.svg';
 
 export const ToggleButtonAssets = {
   chevronDown,
@@ -18,4 +19,5 @@ export const ToggleButtonAssets = {
   blackDot,
   share,
   add,
+  _delete,
 };
