@@ -75,18 +75,15 @@ export const onlineUsers = {
 };
 
 export const pageInfo = {
-  0: {
-    'id': 'pageId1',
+  'page1': {
     'name': 'pageName1',
     'url': '/page1',
   },
-  1: {
-    'id': 'pageId2',
+  'page2': {
     'name': 'pageName2',
     'url': '/page2',
   },
-  2: {
-    'id': 'pageId3',
+  'page3': {
     'name': 'pageName3',
     'url': '/page3',
   },

@@ -4,7 +4,7 @@ export const List = styled.ul`
   width: 100%;
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;

@@ -3,7 +3,6 @@ export type PageURL = string;
 export type PageName = string;
 
 export interface Page {
-  id: PageId;
   url: PageURL;
   name: PageName;
 }

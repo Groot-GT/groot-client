@@ -1,12 +1,13 @@
-import { Page } from '../types/page';
+import uuid from 'react-uuid';
 
-const createNewPage = (newPageIdx: number) => {
-  const newPage: Page = {
-    id: `pageId${newPageIdx + 1}`,
-    name: `pageName${newPageIdx + 1}`,
-    url: `/page${newPageIdx + 1}`,
+const createNewPage = () => {
+  const newId = uuid();
+
+  const pageInfo = {
+    'name': `pageName${newId}`,
+    'url': `/page${newId}`,
   };
 
-  return newPage;
+  return { newId, pageInfo };
 };
 export default createNewPage;

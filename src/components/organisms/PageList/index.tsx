@@ -4,22 +4,31 @@ import createNewPage from 'src/utils/createNewPage';
 import List from 'src/components/molecules/List';
 import ListItem from 'src/components/molecules/ListItem';
 import IconButton from 'src/components/molecules/IconButton';
+import * as s from './style';
 
 const PageList = () => {
   const [pageData, setPageData] = useRecoilState(pageState);
-  const pageList = Object.values(pageData);
+  const pageList = Object.entries(pageData);
 
   const addPage = () => {
-    const newPage = createNewPage(pageList.length);
-    setPageData({ ...pageData, [newPage.id]: newPage });
+    const { newId, pageInfo } = createNewPage();
+    setPageData({ ...pageData, [newId]: pageInfo });
+  };
+
+  const deletePage = (pageId: string) => {
+    const newPageData = { ...pageData };
+    delete newPageData[pageId];
+    setPageData(newPageData);
   };
 
   return (
     <>
-      <IconButton icon='add' onClick={addPage} />
+      <s.IconButtonWrapper>
+        <IconButton icon='add' onClick={addPage} />
+      </s.IconButtonWrapper>
       <List>
-        {pageList.map((page) => (
-          <ListItem key={page.id} itemTitle={page.name} />
+        {pageList.map(([id, page]) => (
+          <ListItem key={id} itemTitle={page.name} deleteItem={() => deletePage(id)} />
         ))}
       </List>
     </>

@@ -7,7 +7,7 @@ type ListProps = {
 const List = ({ children }: ListProps) => (
   <s.List>
     {children.map((child) => (
-      <s.ListItem>
+      <s.ListItem key={child.key}>
         {child}
       </s.ListItem>
     ))}
