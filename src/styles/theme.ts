@@ -95,6 +95,9 @@ const titleColors = {
 
 
 const mixins = {
+  borderCurved: `
+    border-radius: 5px;
+  `,
   shadow: `
     0px 4px 6px rgba(0, 0, 0, 0.15)
   `,

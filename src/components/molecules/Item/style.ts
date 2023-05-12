@@ -16,9 +16,14 @@ export const Item = styled.div<ItemProps>`
   margin: 0;
   height: 48px;
 
+  transition: background-color 0.1s ease-in-out;
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.black[2]};
+    transition: background-color 0s ease-in-out;
   }
+
+
 `;
 
 export const ItemTitle = styled.p`

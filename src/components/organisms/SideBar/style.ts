@@ -5,6 +5,7 @@ type SideBarProps = {
 }
 
 export const SideBar = styled.div<SideBarProps>`
+  ${({ theme }) => theme.mixins.borderCurved};
   display: flex;
   flex-direction: column;
   place-items: center;
