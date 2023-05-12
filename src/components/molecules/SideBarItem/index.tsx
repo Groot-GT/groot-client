@@ -1,7 +1,7 @@
 import * as s from './style';
 
 type SideBarItemProps = {
-  title: string;
+  title: string | undefined;
   element?: JSX.Element;
   noPadding?: boolean;
 };
@@ -12,9 +12,11 @@ const defaultProps = {
 };
 const SideBarItem = ({ title, element, noPadding }: SideBarItemProps) => (
   <s.SideBarItemWrapper noPadding={noPadding}>
-    <s.SideBarItemTitle noPadding={noPadding}>
-      {title}
-    </s.SideBarItemTitle>
+    {title?.length ?
+      <s.SideBarItemTitle noPadding={noPadding}>
+        {title}
+      </s.SideBarItemTitle>
+      : null}
     {element}
   </s.SideBarItemWrapper>
 );

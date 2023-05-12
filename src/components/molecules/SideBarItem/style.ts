@@ -15,11 +15,11 @@ export const SideBarItemWrapper = styled.div<NoPaddingMode>`
 `;
 
 export const SideBarItemTitle = styled.div<NoPaddingMode>`
+  //width: 100%;
   display: flex;
   padding: ${({ noPadding }) => (noPadding ? '6px 18px' : '0')};
   font-size: 12px;
   font-weight: 500;
   align-items: center;
-  justify-content: center;
   height: 2rem;
 `;

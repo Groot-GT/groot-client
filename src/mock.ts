@@ -39,7 +39,7 @@ const nodeInfo: Node = {
   },
   9: {
     parentId: '2',
-    children: ['12', '13', '14'],
+    children: ['12', '13', '14', '15', '16'],
   },
   10: {
     parentId: '4',
@@ -61,6 +61,14 @@ const nodeInfo: Node = {
     parentId: '9',
     children: [],
   },
+  15: {
+    parentId: '9',
+    children: [],
+  },
+  16: {
+    parentId: '9',
+    children: [],
+  },
 };
 
 export const onlineUsers = {
@@ -71,6 +79,21 @@ export const onlineUsers = {
   1: {
     'id': 'KingDonggyu',
     'color': 'blue',
+  },
+};
+
+export const pageInfo = {
+  'page1': {
+    'name': 'pageName1',
+    'url': '/page1',
+  },
+  'page2': {
+    'name': 'pageName2',
+    'url': '/page2',
+  },
+  'page3': {
+    'name': 'pageName3',
+    'url': '/page3',
   },
 };
 

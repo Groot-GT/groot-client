@@ -20,8 +20,8 @@ interface NodeProps {
 
 const Node = ({ nodeId, direction }: NodeProps) => {
   const [nodes, setNode] = useRecoilState(nodeState);
+  const nodeTheme = useRecoilValue(nodeThemeSelector);
   const [dragNodeId, setDragNodeId] = useRecoilState(dragState);
-  const nodeColor = useRecoilValue(nodeThemeSelector);
   const ref = useNodeRef(nodeId);
   const handleNodeDrop = useNodeDrop();
 
@@ -80,7 +80,7 @@ const Node = ({ nodeId, direction }: NodeProps) => {
     <s.Wrapper direction={direction}>
       {direction === NodeDirection.top && <s.Row>{childrenNodes}</s.Row>}
       {direction === NodeDirection.left && <s.Column>{childrenNodes}</s.Column>}
-      <s.Node className="node" nodeColor={nodeColor} ref={ref} id={nodeId}>
+      <s.Node className="node" nodeColor={nodeTheme} ref={ref} id={nodeId}>
         {nodeId}
         <Button onClick={handleClickAddButton}>+</Button>
         <Button onClick={handleClickDeleteButton}>-</Button>

@@ -10,7 +10,9 @@ const DrawTemplate = () => (
   <s.DrawTemplateWrapper>
     {/* Top side */}
     <s.TopWrapper>
+      {/* Left sidebar */}
       <ProjectPanel projectName='Untitled_1' />
+      {/* Right sidebar */}
       <s.TopRightWrapper>
         <CurrentUsersPanel />
         <StatusPanel />
@@ -19,7 +21,6 @@ const DrawTemplate = () => (
 
     {/* Middle side */}
     <s.MiddleWrapper>
-      {/* Left sidebar */}
       <s.SideWrapper>
         <LeftBar />
       </s.SideWrapper>

@@ -21,6 +21,6 @@ export const Row = styled.div``;
 export const Node = styled.div<NodeTheme>`
   margin: 20px;
   padding: 10px;
-  background: ${({ nodeColor }) => nodeColor[0]};
-  color: ${({ nodeColor }) => nodeColor[2]};
+  background: ${({ nodeColor }) => nodeColor.background};
+  color: ${({ nodeColor }) => nodeColor.text};
 `;

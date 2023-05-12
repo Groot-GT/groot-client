@@ -20,7 +20,7 @@ const CurrentUsersPanel = () => {
     <s.CurrentUsersPanelWrapper>
       {Object.values(onlineUsers).map((user: User, idx) => (
         <Fragment key={user.id}>
-          <ColorPanel key={user.id} color={theme.titleColors[user.color][1]}>
+          <ColorPanel key={user.id} color={theme.nodeColors[user.color].root}>
             {user.id[0].toUpperCase()}
           </ColorPanel>
           {idx !== Object.values(onlineUsers).length - 1 && (

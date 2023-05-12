@@ -15,7 +15,7 @@ const ColorPanelCollection = () => {
         <ColorPanel
           key={color}
           onClick={() => setNodeTheme(color as ColorType)}
-          color={colorValue[1] as ColorType} />
+          color={colorValue.root as ColorType} />
       ))}
     </s.ColorPanelCollection>
   );

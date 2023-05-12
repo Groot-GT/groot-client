@@ -5,6 +5,7 @@ type SideBarProps = {
 }
 
 export const SideBar = styled.div<SideBarProps>`
+  ${({ theme }) => theme.mixins.borderCurved};
   display: flex;
   flex-direction: column;
   place-items: center;
@@ -16,4 +17,10 @@ export const SideBar = styled.div<SideBarProps>`
 export const SideBarGap = styled.div`
   width: 100%;
   height: 32px;
+`;
+
+export const SearchModeWrapper = styled.div`
+  width: 100%;
+  overflow: scroll;
+  scroll-behavior: smooth;
 `;

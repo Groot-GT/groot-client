@@ -17,6 +17,7 @@ export const SearchBarWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  height: 40px;
 `;
 
 export const SearchResultWrapper = styled.div`

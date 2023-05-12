@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
+  //max-height: calc(5.5 * 48px);
   width: 100%;
+  overflow: scroll;
 `;
 
-export const ListItem = styled.li`
-  align-items: center;
+export const ListItem = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -13,9 +14,4 @@ export const ListItem = styled.li`
   margin: 0;
   height: 48px;
 `;
-
-export const ListItemTitle = styled.p`
-  font-size: 12px;
-`;
-
 

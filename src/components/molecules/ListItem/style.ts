@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ListItem = styled.li`
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -9,8 +10,11 @@ export const ListItem = styled.li`
   height: 48px;
   padding: 0 18px;
 
+  transition: background-color 0.1s ease-in-out;
+
   &:hover {
-    background-color: ${({ theme }) => theme.colors.black[2]};
+    background-color: ${({ theme }) => theme.colors.main[0]};
+    transition: background-color 0s ease-in-out;
   }
 `;
 
