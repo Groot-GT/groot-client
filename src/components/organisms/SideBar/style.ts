@@ -21,7 +21,6 @@ export const SideBarGap = styled.div`
 
 export const SearchModeWrapper = styled.div`
   width: 100%;
-  max-height: calc(5.5 * 48px);
   overflow: scroll;
   scroll-behavior: smooth;
 `;

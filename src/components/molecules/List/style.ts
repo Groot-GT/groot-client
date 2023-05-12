@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
+  //max-height: calc(5.5 * 48px);
   width: 100%;
+  overflow: scroll;
 `;
 
 export const ListItem = styled.div`
