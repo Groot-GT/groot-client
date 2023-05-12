@@ -39,7 +39,7 @@ const nodeInfo: Node = {
   },
   9: {
     parentId: '2',
-    children: ['12', '13', '14'],
+    children: ['12', '13', '14', '15', '16'],
   },
   10: {
     parentId: '4',
@@ -58,6 +58,14 @@ const nodeInfo: Node = {
     children: [],
   },
   14: {
+    parentId: '9',
+    children: [],
+  },
+  15: {
+    parentId: '9',
+    children: [],
+  },
+  16: {
     parentId: '9',
     children: [],
   },
