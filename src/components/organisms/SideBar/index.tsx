@@ -6,6 +6,7 @@ import SideBarDivider from 'src/components/molecules/SideBarDivider';
 import SideBarItem from 'src/components/molecules/SideBarItem';
 import ColorPanelCollection from 'src/components/molecules/ColorPanelCollection';
 import { IconType } from 'src/types/icon';
+import Gap from 'src/components/atoms/Gap';
 import SearchMode from './Searchmode';
 import * as s from './style';
 
@@ -29,7 +30,7 @@ const RightBar = () => (
       title='Theme colors'
       element={<ColorPanelCollection />}
     />
-    <s.SideBarGap />
+    <Gap />
   </s.SideBar>
 );
 

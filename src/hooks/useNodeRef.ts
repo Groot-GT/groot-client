@@ -9,7 +9,13 @@ const useNodeRef = (nodeId: NodeId) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [nodes, setNode] = useRecoilState(nodeState);
 
-  const nodeCount = useMemo(() => Object.keys(nodes).length, [nodes]);
+  const parentIdList = useMemo(
+    () =>
+      Object.values(nodes)
+        .map(({ parentId }) => parentId)
+        .join(''),
+    [nodes],
+  );
 
   useEffect(() => {
     setNode((prevNodes) =>
@@ -19,7 +25,7 @@ const useNodeRef = (nodeId: NodeId) => {
         return draft;
       }),
     );
-  }, [nodeId, setNode, nodeCount]);
+  }, [nodeId, setNode, parentIdList]);
 
   return ref;
 };
