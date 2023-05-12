@@ -19,7 +19,7 @@ export const Item = styled.div<ItemProps>`
   transition: background-color 0.1s ease-in-out;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.black[2]};
+    background-color: ${({ theme }) => theme.colors.main[0]};
     transition: background-color 0s ease-in-out;
   }
 
