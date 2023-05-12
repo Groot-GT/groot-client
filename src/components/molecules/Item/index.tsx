@@ -1,4 +1,4 @@
-import { MouseEventHandler, useRef } from 'react';
+import { MouseEventHandler, useRef, useState } from 'react';
 import { IconType } from 'src/types/icon';
 import IconButton from 'src/components/molecules/IconButton';
 import Icon from 'src/components/atoms/Icon';
@@ -8,7 +8,7 @@ type ListItemProps = {
   itemIcon?: IconType;
   itemTitle: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
-  deleteItem: (id: string) => void;
+  deleteItem: (id: string) => void | undefined;
   backgroundColor?: string;
 }
 
@@ -21,12 +21,18 @@ const defaultProps = {
 
 const Item = ({ itemIcon, itemTitle, onClick, deleteItem, backgroundColor }: ListItemProps) => {
   const itemRef = useRef(null);
-
+  const [isHover, setIsHover] = useState(false);
   return (
-    <s.Item ref={itemRef} backgroundColor={backgroundColor} onClick={onClick}>
+    <s.Item
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      onClick={onClick}
+      ref={itemRef}
+      backgroundColor={backgroundColor}
+    >
       {itemIcon ? <Icon iconImg={itemIcon} /> : null}
       <s.ItemTitle>{itemTitle}</s.ItemTitle>
-      {deleteItem ? <IconButton icon='_delete' onClick={() => deleteItem(itemTitle)} /> : null}
+      {deleteItem !== undefined && isHover ? <IconButton icon='_delete' onClick={() => deleteItem(itemTitle)} /> : null}
     </s.Item>
   );
 };
