@@ -8,7 +8,7 @@ type ListItemProps = {
   itemIcon?: IconType;
   itemTitle: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
-  deleteItem: (id: string) => void | undefined;
+  deleteItem: ((id: string) => void ) | undefined;
   backgroundColor?: string;
 }
 

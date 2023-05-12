@@ -5,14 +5,15 @@ import * as s from './style';
 
 type ListItemProps = {
   itemTitle: string;
+  deleteItem?: ((id: string) => void) | undefined;
   itemIcon?: IconType;
   backgroundColor?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
-  deleteItem: (id: string) => void;
 }
 
 const defaultProps = {
   itemIcon: null,
+  deleteItem: undefined,
   onClick: () => {
   },
   backgroundColor: 'transparent',
