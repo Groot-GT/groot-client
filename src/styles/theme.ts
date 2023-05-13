@@ -82,6 +82,9 @@ const colors = {
     1: '#36C081',
     2: '#21B478',
   },
+  background: {
+    'green': '#2DC99E',
+  },
 };
 
 const titleColors = {
