@@ -8,6 +8,8 @@ import blackDot from './icons/black-dot.svg';
 import share from './icons/share.svg';
 import add from './icons/add.svg';
 import _delete from './icons/delete.svg';
+import menu from './icons/menu.svg';
+import viewBoxes from './icons/view-boxes.svg';
 
 export const ToggleButtonAssets = {
   chevronDown,
@@ -20,4 +22,6 @@ export const ToggleButtonAssets = {
   share,
   add,
   _delete,
+  menu,
+  viewBoxes,
 };
