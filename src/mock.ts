@@ -1,5 +1,6 @@
 import { Node } from './types/node';
-import { User } from './types/user';
+import { OnlineUsers } from './types/user';
+import { Projects } from './types/project';
 
 const nodeInfo: Node = {
   root: {
@@ -72,9 +73,7 @@ const nodeInfo: Node = {
   },
 };
 
-export const onlineUsers: {
-  [key: number]: User;
-} = {
+export const onlineUsers: OnlineUsers = {
   0: {
     'id': 'pinkishincoloragain',
     'color': 'red',
@@ -97,6 +96,19 @@ export const pageInfo = {
   'page3': {
     'name': 'pageName3',
     'url': '/page3',
+  },
+};
+
+export const projects: Projects = {
+  'project1': {
+    'id': 'project1',
+    'name': 'projectName1',
+    'owner': {
+      'id': 'pinkishincoloragain',
+      'color': 'red',
+    },
+    'createdAt': '2021-08-01 00:00:00',
+    'updatedAt': '2021-08-01 00:00:00',
   },
 };
 
