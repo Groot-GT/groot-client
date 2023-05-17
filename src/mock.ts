@@ -1,4 +1,5 @@
 import { Node } from './types/node';
+import { User } from './types/user';
 
 const nodeInfo: Node = {
   root: {
@@ -71,7 +72,9 @@ const nodeInfo: Node = {
   },
 };
 
-export const onlineUsers = {
+export const onlineUsers: {
+  [key: number]: User;
+} = {
   0: {
     'id': 'pinkishincoloragain',
     'color': 'red',
