@@ -1,4 +1,4 @@
-import WorkspaceTemplate from '../templates/WorkspaceTemplate';
+import WorkspaceTemplate from 'src/components/templates/WorkspaceTemplate';
 
 const Workspace = () => <WorkspaceTemplate />;
 
