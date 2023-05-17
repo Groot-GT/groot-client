@@ -14,7 +14,7 @@ export const TopWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin: 16px 0;
 `;
 
 export const TopRightWrapper = styled.div`

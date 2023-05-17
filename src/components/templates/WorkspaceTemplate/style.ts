@@ -12,14 +12,13 @@ export const WorkspaceWrapper = styled.div`
   `};
 `;
 
-export const TopWrapper = styled.div`
+export const LayerWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin: 16px 0;
 `;
-
 export const TopRightWrapper = styled.div`
   z-index: 3;
   display: flex;
