@@ -108,7 +108,77 @@ export const projects: Projects = {
       'color': 'red',
     },
     'createdAt': '2021-08-01 00:00:00',
-    'updatedAt': '2021-08-01 00:00:00',
+    'updatedAt': '2021-09-01 00:00:00',
+  },
+  'project2': {
+    'id': 'project2',
+    'name': 'projectName2',
+    'owner': {
+      'id': 'KingDonggyu',
+      'color': 'blue',
+    },
+    'createdAt': '2021-03-01 00:00:00',
+    'updatedAt': '2021-10-01 00:00:00',
+  },
+  'project3': {
+    'id': 'project3',
+    'name': 'projectName3',
+    'owner': {
+      'id': 'Choijaewon',
+      'color': 'red',
+    },
+    'createdAt': '2021-01-01 00:00:00',
+    'updatedAt': '2022-12-01 00:00:00',
+  },
+  'project4': {
+    'id': 'project4',
+    'name': 'projectName4',
+    'owner': {
+      'id': 'GoJaefe',
+      'color': 'green',
+    },
+    'createdAt': '2021-02-01 00:00:00',
+    'updatedAt': '2022-12-01 00:00:00',
+  },
+  'project5': {
+    'id': 'project5',
+    'name': 'projectName5',
+    'owner': {
+      'id': 'Hajung',
+      'color': 'yellow',
+    },
+    'createdAt': '2021-04-01 00:00:00',
+    'updatedAt': '2021-05-01 00:00:00',
+  },
+  'project6': {
+    'id': 'project6',
+    'name': 'projectName6',
+    'owner': {
+      'id': 'Ming',
+      'color': 'blue',
+    },
+    'createdAt': '2021-06-01 00:00:00',
+    'updatedAt': '2021-12-01 00:00:00',
+  },
+  'project7': {
+    'id': 'project7',
+    'name': 'projectName7',
+    'owner': {
+      'id': 'Fish',
+      'color': 'red',
+    },
+    'createdAt': '2021-07-01 00:00:00',
+    'updatedAt': '2022-01-01 00:00:00',
+  },
+  'project8': {
+    'id': 'project8',
+    'name': 'projectName8',
+    'owner': {
+      'id': 'Hello',
+      'color': 'green',
+    },
+    'createdAt': '2021-08-01 00:00:00',
+    'updatedAt': '2023-04-01 00:00:00',
   },
 };
 
