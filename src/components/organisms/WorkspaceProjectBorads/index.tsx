@@ -1,14 +1,15 @@
 import { useRecoilValue } from 'recoil';
+import { projectCreatedAtDatesSelector, projectOwnersSelector } from 'src/recoil/projectState';
 import Dropdown from 'src/components/organisms/Dropdown';
 import IconButton from 'src/components/molecules/IconButton';
 import Item from 'src/components/molecules/Item';
-import projectState, { projectCreatedAtDatesSelector, projectOwnersSelector } from 'src/recoil/projectState';
+import useSortedProjectsByOption from 'src/hooks/useSortedProjectsByOption';
 import * as s from './style';
 
 const WorkspaceProjectBorads = () => {
-  const projects = useRecoilValue(projectState);
   const projectOwners = useRecoilValue(projectOwnersSelector);
   const projectCreatedAtDates = useRecoilValue(projectCreatedAtDatesSelector);
+  const sortedProjects = useSortedProjectsByOption('createdAt');
 
   return (
     <s.BoardsWrapper>
@@ -23,7 +24,7 @@ const WorkspaceProjectBorads = () => {
         <IconButton icon='viewBoxes' onClick={() => {
         }} />
       </s.OptionsWrapper>
-      {Object.entries(projects).map(([projectId, project]) => (
+      {Object.entries(sortedProjects).map(([projectId, project]) => (
         <Item key={projectId} itemTitle={project.name} deleteItem={undefined} />))
       }
     </s.BoardsWrapper>
