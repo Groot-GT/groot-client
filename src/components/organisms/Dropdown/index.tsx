@@ -1,27 +1,39 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, SetStateAction } from 'react';
 import DropdownList from 'src/components/molecules/DropdownList';
 import ToggleButton from 'src/components/atoms/ToggleButton';
 import Icon from 'src/components/atoms/Icon';
 import { IconType } from 'src/types/icon';
+import { SetterOrUpdater } from 'recoil';
 import * as s from './style';
 
-type ToggleSelectorProps = {
+type DropdownProps = {
   items: string[];
+  selectedItem: string;
+  setSelectedItem:
+    | React.Dispatch<SetStateAction<string>>
+    | SetterOrUpdater<string>
+    | ((value: string) => void);
   icons?: IconType[];
   borderNone?: boolean;
-}
+};
 
 const defaultProps = {
   icons: undefined,
   borderNone: false,
 };
 
-
-const Dropdown = ({ items, icons, borderNone }: ToggleSelectorProps) => {
+const Dropdown = ({
+  items,
+  selectedItem,
+  setSelectedItem,
+  icons,
+  borderNone,
+}: DropdownProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<number>(0);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const selectedItemIdx = items.indexOf(selectedItem);
 
   useEffect(() => {
     setDropdownWidth(dropdownRef.current?.getBoundingClientRect().width);
@@ -34,32 +46,38 @@ const Dropdown = ({ items, icons, borderNone }: ToggleSelectorProps) => {
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', ev => handleClickOutside(ev));
-    return () => document.removeEventListener('mousedown', ev => handleClickOutside(ev));
-
+    document.addEventListener('mousedown', (ev) => handleClickOutside(ev));
+    return () =>
+      document.removeEventListener('mousedown', (ev) => handleClickOutside(ev));
   }, [dropdownRef, setOpen]);
 
   const handleOptionClick = (option: string) => {
-    setSelectedItem(items.indexOf(option));
+    setSelectedItem(option);
     setOpen(false);
   };
 
   return (
     <s.DropdownWrapper ref={dropdownRef}>
-      <s.SelectedItemPlaceHolder borderNone={borderNone} onClick={() => setOpen(!open)}>
-        {icons ?
+      <s.SelectedItemPlaceHolder
+        borderNone={borderNone}
+        onClick={() => setOpen(!open)}
+      >
+        {icons ? (
           <s.SelectedIconWrapper>
-            <Icon iconImg={icons[selectedItem]} />
+            <Icon iconImg={icons[selectedItemIdx]} />
           </s.SelectedIconWrapper>
-          : null}
-        <s.SelectedItemWrapper>
-          {items[selectedItem]}
-        </s.SelectedItemWrapper>
+        ) : null}
+        <s.SelectedItemWrapper>{selectedItem}</s.SelectedItemWrapper>
         <ToggleButton clicked={open} onClick={() => setOpen(!open)} />
       </s.SelectedItemPlaceHolder>
-      {open ?
-        <DropdownList items={items} icons={icons} dropdownWidth={dropdownWidth} handleOptionClick={handleOptionClick} />
-        : null}
+      {open ? (
+        <DropdownList
+          items={items}
+          icons={icons}
+          dropdownWidth={dropdownWidth}
+          handleOptionClick={handleOptionClick}
+        />
+      ) : null}
     </s.DropdownWrapper>
   );
 };

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import DropdownOption from 'src/components/atoms/DropdownOption';
 import Divider from 'src/components/atoms/Divider';
+import { IconType } from 'src/types/icon';
 import * as s from './style';
-import { IconType } from '../../../types/icon';
 
 type DropdownListProps = {
   items: string[];
