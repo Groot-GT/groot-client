@@ -14,6 +14,11 @@ import {
 } from 'src/constants/project';
 import { currentUserState } from './usersState';
 
+// #TODO: Project 정렬 상태를 어떻게 저장해야 할 지 논의
+// Localstorage에 저장해야 하나
+// 추가적으로 저장한다면, Recoil-Persist: https://github.com/polemius/recoil-persist#readme
+// vs AtomEffect https://recoiljs.org/docs/guides/atom-effects/#local-storage-persistence
+
 const projectsState = atom<Projects>({
   key: 'projectsState',
   default: projects,
