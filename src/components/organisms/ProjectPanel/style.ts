@@ -10,6 +10,7 @@ export const ProjectPanel = styled.div`
   max-width: 230px;
   height: 48px;
   padding: 0 30px;
+  z-index: 2;
   background-color: ${({ theme }) => theme.colors.black[0]};
 `;
 
