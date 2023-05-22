@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
-import onlineUsersState from 'src/recoil/onlineUsersState';
+import onlineUsersState from 'src/recoil/usersState';
 import ColorPanel from 'src/components/atoms/ColorPanel';
 import Divider from 'src/components/atoms/Divider';
 import { User } from 'src/types/user';
