@@ -1,5 +1,4 @@
-import DrawTemplate from '../templates/DrawTemplate';
-// import SideBarTemplate from '../organisms/SideBar';
+import DrawTemplate from 'src/components/templates/DrawTemplate';
 
 const Draw = () => <DrawTemplate />;
 

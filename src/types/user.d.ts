@@ -8,6 +8,6 @@ export interface User {
   color: UserColor;
 }
 
-export interface OnlineUsers {
+export interface Users {
   [key: number]: User;
 }

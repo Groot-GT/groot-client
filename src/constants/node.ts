@@ -8,6 +8,7 @@ export enum NodeDirection {
 }
 
 export enum RootVariant {
-  BOTH_SIDE = 'bothSide',
-  OTHER = 'other',
+  BOTH_SIDE = 'both side',
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal',
 }

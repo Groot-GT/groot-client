@@ -24,11 +24,15 @@ const Root = ({ rootVariant }: RootProps) => {
     window.scrollTo(WIDTH / 7, HEIGHT / 7);
   }, []);
 
-  if (rootVariant === RootVariant.OTHER) {
+  if (rootVariant !== RootVariant.BOTH_SIDE) {
     return null;
   }
 
-  const rootNode = <s.Node nodeColor={nodeColor} ref={ref}>ROOT</s.Node>;
+  const rootNode = (
+    <s.Node nodeColor={nodeColor} ref={ref}>
+      ROOT
+    </s.Node>
+  );
 
   return (
     <s.Background width={WIDTH} height={HEIGHT}>
