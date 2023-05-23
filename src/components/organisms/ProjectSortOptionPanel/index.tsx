@@ -43,21 +43,27 @@ const ProjectSortOptionPanel = () => {
   };
 
   return (
-    <s.OptionsWrapper>
+    <s.ProjectSortOptionPanelWrapper>
       <s.TitleWrapper>Project Boards</s.TitleWrapper>
-      <Dropdown
-        items={projectOwnerFilterOptions}
-        selectedItem={projectOwnerFilterOption}
-        setSelectedItem={setProjectOwnerFilterOption}
-      />
-      <Dropdown
-        items={DATE_SORT_OPTIONS}
-        selectedItem={projectsDateSortOption}
-        setSelectedItem={handleProjectsDateSortOptionChange}
-      />
-      <IconButton icon="menu" onClick={() => {}} />
-      <IconButton icon="viewBoxes" onClick={() => {}} />
-    </s.OptionsWrapper>
+      <s.OptionsWrapper>
+        <s.DropdownWrapper>
+          <Dropdown
+            items={projectOwnerFilterOptions}
+            selectedItem={projectOwnerFilterOption}
+            setSelectedItem={setProjectOwnerFilterOption}
+          />
+        </s.DropdownWrapper>
+        <s.DropdownWrapper>
+          <Dropdown
+            items={DATE_SORT_OPTIONS}
+            selectedItem={projectsDateSortOption}
+            setSelectedItem={handleProjectsDateSortOptionChange}
+          />
+        </s.DropdownWrapper>
+        <IconButton icon="menu" onClick={() => {}} />
+        <IconButton icon="viewBoxes" onClick={() => {}} />
+      </s.OptionsWrapper>
+    </s.ProjectSortOptionPanelWrapper>
   );
 };
 

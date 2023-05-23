@@ -4,9 +4,9 @@ import Item from 'src/components/molecules/Item';
 import ProjectSortOptionPanel from 'src/components/organisms/ProjectSortOptionPanel';
 import * as s from './style';
 
-const WorkspaceProjectBorads = () => {
+const WorkspaceProjectBoards = () => {
   const sortedProjects = useRecoilValue(sortedProjectsSelector);
-  
+
   return (
     <s.BoardsWrapper>
       <ProjectSortOptionPanel />
@@ -17,4 +17,4 @@ const WorkspaceProjectBorads = () => {
   );
 };
 
-export default WorkspaceProjectBorads;
+export default WorkspaceProjectBoards;
