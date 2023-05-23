@@ -3,6 +3,7 @@ import MagnifyAmountState from 'src/recoil/magnifyAmountState';
 import Divider from 'src/components/atoms/Divider';
 import Icon from 'src/components/atoms/Icon';
 import Dropdown from 'src/components/organisms/Dropdown';
+import { magnifyAmountOptions } from 'src/constants/magnify';
 import * as s from './style';
 
 const StatusPanel = () => {
@@ -25,7 +26,7 @@ const StatusPanel = () => {
             borderNone
             selectedItem={`${magnifyAmount}%`}
             setSelectedItem={handleMagnifyAmountChange}
-            items={['100%', '200%', '300%']}
+            items={magnifyAmountOptions.map((option) => `${option}%`)}
           />
         </s.MagnificationWrapper>
       </s.StatusPanel>
