@@ -4,10 +4,10 @@ import Divider from 'src/components/atoms/Divider';
 import { IconType } from 'src/types/icon';
 import * as s from './style';
 
-type DropdownListProps = {
-  items: string[];
+interface DropdownListProps<T> {
+  items: T[];
   dropdownWidth: number | undefined;
-  handleOptionClick: (idx: string) => void;
+  handleOptionClick: (value: T) => void;
   icons?: IconType[] | undefined;
 }
 
@@ -15,12 +15,20 @@ const defaultProps = {
   icons: undefined,
 };
 
-const DropdownList = ({ items, dropdownWidth, icons, handleOptionClick }: DropdownListProps) => (
+const DropdownList = <T extends string | number>({
+  items,
+  dropdownWidth,
+  icons,
+  handleOptionClick,
+}: DropdownListProps<T>) => (
   <s.DropdownListWrapper width={dropdownWidth}>
     {items.map((item, idx) => (
       <Fragment key={item}>
-        <DropdownOption value={item} icon={icons ? icons[idx] : null}
-                        onClick={() => handleOptionClick(item)} />
+        <DropdownOption
+          value={item}
+          icon={icons ? icons[idx] : null}
+          onClick={() => handleOptionClick(item)}
+        />
         <Divider vertical={false} length={100} />
       </Fragment>
     ))}

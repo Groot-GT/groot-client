@@ -31,23 +31,13 @@ const ProjectSortOptionPanel = () => {
     ...PROJECT_OWNERS_DEFAULT_OPTION,
     ...projectOwnersId,
   ];
-
-  const isProjectsDateSortOption = (x: string): x is ProjectsDateSortOption =>
-    Object.values(projectsDateSortOptions).includes(
-      x as ProjectsDateSortOption,
-    );
-  const handleProjectsDateSortOptionChange = (option: string) => {
-    if (!isProjectsDateSortOption(option)) return;
-    const dateSortOption = option as ProjectsDateSortOption;
-    setProjectsDateSortOption(dateSortOption);
-  };
-
+  
   return (
     <s.ProjectSortOptionPanelWrapper>
       <s.TitleWrapper>Project Boards</s.TitleWrapper>
       <s.OptionsWrapper>
         <s.DropdownWrapper>
-          <Dropdown
+          <Dropdown<ProjectsOwnerSortOption>
             items={projectOwnerFilterOptions}
             selectedItem={projectOwnerFilterOption}
             setSelectedItem={setProjectOwnerFilterOption}
@@ -57,7 +47,7 @@ const ProjectSortOptionPanel = () => {
           <Dropdown
             items={DATE_SORT_OPTIONS}
             selectedItem={projectsDateSortOption}
-            setSelectedItem={handleProjectsDateSortOptionChange}
+            setSelectedItem={setProjectsDateSortOption}
           />
         </s.DropdownWrapper>
         <IconButton icon="menu" onClick={() => {}} />
