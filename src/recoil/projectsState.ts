@@ -90,4 +90,9 @@ export const sortedProjectsSelector = selector<Projects>({
   },
 });
 
+export const projectGridViewState = atom<boolean>({
+  key: 'projectGridViewState',
+  default: true,
+});
+
 export default projectsState;

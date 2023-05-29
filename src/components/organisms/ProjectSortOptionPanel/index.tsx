@@ -3,6 +3,7 @@ import {
   projectsOwnerSortOptionState,
   projectOwnersSelector,
   ProjectsDateSortOptionState,
+  projectGridViewState,
 } from 'src/recoil/projectsState';
 import {
   projectsDateSortOptions,
@@ -26,12 +27,14 @@ const ProjectSortOptionPanel = () => {
   const [projectsDateSortOption, setProjectsDateSortOption] =
     useRecoilState<ProjectsDateSortOption>(ProjectsDateSortOptionState);
   const projectOwnersId = useRecoilValue<UserId[]>(projectOwnersSelector);
+  const [isProjectGridView, setIsProjectGridView] =
+    useRecoilState(projectGridViewState);
 
   const projectOwnerFilterOptions = [
     ...PROJECT_OWNERS_DEFAULT_OPTION,
     ...projectOwnersId,
   ];
-  
+
   return (
     <s.ProjectSortOptionPanelWrapper>
       <s.TitleWrapper>Project Boards</s.TitleWrapper>
@@ -50,8 +53,24 @@ const ProjectSortOptionPanel = () => {
             setSelectedItem={setProjectsDateSortOption}
           />
         </s.DropdownWrapper>
-        <IconButton icon="menu" onClick={() => {}} />
-        <IconButton icon="viewBoxes" onClick={() => {}} />
+        <s.GridSelectorWrapper>
+          <s.SelectedIconWrapper selected={!isProjectGridView}>
+            <IconButton
+              icon="menu"
+              onClick={() => {
+                setIsProjectGridView(false);
+              }}
+            />
+          </s.SelectedIconWrapper>
+          <s.SelectedIconWrapper selected={isProjectGridView}>
+            <IconButton
+              icon="viewBoxes"
+              onClick={() => {
+                setIsProjectGridView(true);
+              }}
+            />
+          </s.SelectedIconWrapper>
+        </s.GridSelectorWrapper>
       </s.OptionsWrapper>
     </s.ProjectSortOptionPanelWrapper>
   );
