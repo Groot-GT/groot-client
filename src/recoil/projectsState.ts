@@ -13,11 +13,7 @@ import {
   projectsDateSortOptions,
 } from 'src/constants/project';
 import { currentUserState } from './usersState';
-
-// #TODO: Project 정렬 상태를 어떻게 저장해야 할 지 논의
-// Localstorage에 저장해야 하나
-// 추가적으로 저장한다면, Recoil-Persist: https://github.com/polemius/recoil-persist#readme
-// vs AtomEffect https://recoiljs.org/docs/guides/atom-effects/#local-storage-persistence
+import localStorageEffect from './localStorageEffect';
 
 const projectsState = atom<Projects>({
   key: 'projectsState',
@@ -27,11 +23,34 @@ const projectsState = atom<Projects>({
 export const projectsOwnerSortOptionState = atom<ProjectsOwnerSortOption>({
   key: 'projectOwnerSortOptionState',
   default: projectsOwnerSortOptions[0],
+  effects: [
+    localStorageEffect<ProjectsOwnerSortOption>({
+      key: 'projectOwnerSortOptionState',
+      defaultValue: projectsOwnerSortOptions[0],
+    }),
+  ],
 });
 
 export const ProjectsDateSortOptionState = atom<ProjectsDateSortOption>({
   key: 'projectRecentSortOptionState',
   default: projectsDateSortOptions[0],
+  effects: [
+    localStorageEffect<ProjectsDateSortOption>({
+      key: 'projectRecentSortOptionState',
+      defaultValue: projectsDateSortOptions[0],
+    }),
+  ],
+});
+
+export const projectGridViewState = atom<boolean>({
+  key: 'projectGridViewState',
+  default: true,
+  effects: [
+    localStorageEffect<boolean>({
+      key: 'projectGridViewState',
+      defaultValue: true,
+    }),
+  ],
 });
 
 export const projectOwnersSelector = selector<UserId[]>({
@@ -44,8 +63,6 @@ export const projectOwnersSelector = selector<UserId[]>({
     return [...new Set(owners)];
   },
 });
-
-// #TODO: 정렬 기준이 CreatedAt, ModifiedAt임. 추가 정렬해야 할 것이 있는지.. 예시: 알파벳순 정렬 ..
 
 export const sortedProjectsSelector = selector<Projects>({
   key: 'sortedProjectsSelector',
@@ -88,11 +105,6 @@ export const sortedProjectsSelector = selector<Projects>({
       {},
     );
   },
-});
-
-export const projectGridViewState = atom<boolean>({
-  key: 'projectGridViewState',
-  default: true,
 });
 
 export default projectsState;
