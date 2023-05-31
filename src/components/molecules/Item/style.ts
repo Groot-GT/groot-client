@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 type ItemProps = {
   backgroundColor?: string;
-}
-
+};
 
 export const Item = styled.div<ItemProps>`
-  background-color: ${({ backgroundColor, theme }) => backgroundColor || theme.colors.black[2]};
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor || theme.colors.black[2]};
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -15,6 +15,7 @@ export const Item = styled.div<ItemProps>`
   align-items: center;
   margin: 0;
   height: 48px;
+  font-size: 12px;
 
   transition: background-color 0.1s ease-in-out;
 
@@ -22,12 +23,4 @@ export const Item = styled.div<ItemProps>`
     background-color: ${({ theme }) => theme.colors.main[0]};
     transition: background-color 0s ease-in-out;
   }
-
-
 `;
-
-export const ItemTitle = styled.p`
-  font-size: 12px;
-`;
-
-

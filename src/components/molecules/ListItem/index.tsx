@@ -1,36 +1,36 @@
-import React, { MouseEventHandler } from 'react';
-import { IconType } from 'src/types/icon';
+import React, { MouseEventHandler, ReactNode, useState } from 'react';
 import Item from 'src/components/molecules/Item';
 import * as s from './style';
 
 type ListItemProps = {
-  itemTitle: string;
-  deleteItem?: ((id: string) => void) | undefined;
-  itemIcon?: IconType;
+  children: ReactNode;
+  deleteItem?: (value: void) => void;
   backgroundColor?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
-}
+};
 
 const defaultProps = {
-  itemIcon: null,
   deleteItem: undefined,
-  onClick: () => {
-  },
+  onClick: () => {},
   backgroundColor: 'transparent',
 };
 
-const ListItem = ({ itemTitle, itemIcon, onClick, backgroundColor, deleteItem }: ListItemProps) => (
+const ListItem = ({
+  children,
+  onClick,
+  backgroundColor,
+  deleteItem,
+}: ListItemProps) => (
   <s.ListItem>
     <Item
       onClick={onClick}
-      itemIcon={itemIcon}
       backgroundColor={backgroundColor}
-      itemTitle={itemTitle}
       deleteItem={deleteItem}
-    />
+    >
+      {children}
+    </Item>
   </s.ListItem>
 );
-
 ListItem.defaultProps = defaultProps;
 
 export default ListItem;

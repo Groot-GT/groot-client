@@ -11,7 +11,7 @@ const WorkspaceProjectBoards = () => {
     <s.BoardsWrapper>
       <ProjectSortOptionPanel />
       {Object.entries(sortedProjects).map(([projectId, project]) => (
-        <Item key={projectId} itemTitle={project.name} deleteItem={undefined} />
+        <Item key={projectId}>{project.name}</Item>
       ))}
     </s.BoardsWrapper>
   );
