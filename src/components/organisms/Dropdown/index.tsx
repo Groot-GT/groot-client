@@ -15,11 +15,13 @@ interface DropdownProps<T> {
     | ((value: T) => void);
   icons?: IconType[];
   borderNone?: boolean;
+  dropdownIcon?: IconType | null;
 }
 
 const defaultProps = {
   icons: undefined,
   borderNone: false,
+  dropdownIcon: null,
 };
 
 const Dropdown = <T extends string | number>({
@@ -28,6 +30,7 @@ const Dropdown = <T extends string | number>({
   setSelectedItem,
   icons,
   borderNone,
+  dropdownIcon,
 }: DropdownProps<T>) => {
   const [open, setOpen] = useState<boolean>(false);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
@@ -62,6 +65,11 @@ const Dropdown = <T extends string | number>({
         borderNone={borderNone}
         onClick={() => setOpen(!open)}
       >
+        {dropdownIcon ? (
+          <s.DropdownIconWrapper>
+            <Icon iconImg={dropdownIcon} />
+          </s.DropdownIconWrapper>
+        ) : null}
         {icons ? (
           <s.SelectedIconWrapper>
             <Icon iconImg={icons[selectedItemIdx]} />

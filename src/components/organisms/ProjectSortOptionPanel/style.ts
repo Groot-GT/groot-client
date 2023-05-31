@@ -21,8 +21,11 @@ export const OptionsWrapper = styled.div`
 `;
 
 export const DropdownWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.white[0]};
   width: 160px;
+  height: fit-content;
   margin-left: 16px;
+  border-radius: 4px;
 `;
 
 export const GridSelectorWrapper = styled.div`

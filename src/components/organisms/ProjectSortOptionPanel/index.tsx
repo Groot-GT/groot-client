@@ -41,9 +41,11 @@ const ProjectSortOptionPanel = () => {
       <s.OptionsWrapper>
         <s.DropdownWrapper>
           <Dropdown<ProjectsOwnerSortOption>
+            dropdownIcon="user"
             items={projectOwnerFilterOptions}
             selectedItem={projectOwnerFilterOption}
             setSelectedItem={setProjectOwnerFilterOption}
+            borderNone
           />
         </s.DropdownWrapper>
         <s.DropdownWrapper>
@@ -51,6 +53,7 @@ const ProjectSortOptionPanel = () => {
             items={DATE_SORT_OPTIONS}
             selectedItem={projectsDateSortOption}
             setSelectedItem={setProjectsDateSortOption}
+            borderNone
           />
         </s.DropdownWrapper>
         <s.GridSelectorWrapper>
