@@ -15,7 +15,7 @@ export const SelectedItemPlaceHolder = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 4px 4px 8px;
+  padding: 0 4px 0 8px;
   width: 100%;
   border: 1px solid
     ${({ theme, borderNone }) =>

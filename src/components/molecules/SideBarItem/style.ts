@@ -6,7 +6,7 @@ type NoPaddingMode = {
 
 export const SideBarItemWrapper = styled.div<NoPaddingMode>`
   width: 100%;
-  padding: ${({ noPadding }) => (noPadding ? '6px 0' : '6px 18px')};
+  padding: ${({ noPadding }) => (noPadding ? '6px 0 0 0' : '6px 18px')};
   display: flex;
   flex-direction: row;
   align-items: center;

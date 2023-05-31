@@ -13,12 +13,14 @@ type ListItemProps = {
   onClick?: MouseEventHandler<HTMLDivElement>;
   deleteItem?: ((value: void) => void) | undefined;
   backgroundColor?: string;
+  hoverColor?: string;
 };
 
 const defaultProps = {
   onClick: () => {},
   deleteItem: undefined,
   backgroundColor: 'transparent',
+  hoverColor: 'transparent',
 };
 
 const Item = ({
@@ -26,6 +28,7 @@ const Item = ({
   onClick,
   deleteItem,
   backgroundColor,
+  hoverColor,
 }: ListItemProps) => {
   const itemRef = useRef(null);
   const [isHover, setIsHover] = useState(false);
@@ -41,6 +44,7 @@ const Item = ({
       onClick={onClick}
       ref={itemRef}
       backgroundColor={backgroundColor}
+      hoverColor={hoverColor}
     >
       {children}
       {deleteItem !== undefined && isHover ? (
