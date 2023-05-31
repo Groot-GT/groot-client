@@ -8,3 +8,9 @@ export const BoardsWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
+
+export const ProjectBoardTitleWrapper = styled.div`
+  margin: 12px 0;
+  ${({ theme }) => theme.mixins.body2}
+  color: ${({ theme }) => theme.colors.black[3]};
+`;

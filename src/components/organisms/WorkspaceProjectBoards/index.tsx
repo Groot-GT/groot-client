@@ -1,17 +1,26 @@
 import { useRecoilValue } from 'recoil';
-import { sortedProjectsSelector } from 'src/recoil/projectsState';
-import Item from 'src/components/molecules/Item';
+import {
+  projectGridViewState,
+  sortedProjectsSelector,
+} from 'src/recoil/projectsState';
 import ProjectSortOptionPanel from 'src/components/organisms/ProjectSortOptionPanel';
+import ProjectBoardItem from 'src/components/molecules/ProjectBoardItem/ProjectBoardItem';
 import * as s from './style';
 
 const WorkspaceProjectBoards = () => {
   const sortedProjects = useRecoilValue(sortedProjectsSelector);
+  const isProjectGridLayout = useRecoilValue(projectGridViewState);
 
   return (
     <s.BoardsWrapper>
       <ProjectSortOptionPanel />
+      <s.ProjectBoardTitleWrapper>Project name</s.ProjectBoardTitleWrapper>
       {Object.entries(sortedProjects).map(([projectId, project]) => (
-        <Item key={projectId}>{project.name}</Item>
+        <ProjectBoardItem
+          key={projectId}
+          project={project}
+          isGridLayout={isProjectGridLayout}
+        />
       ))}
     </s.BoardsWrapper>
   );
