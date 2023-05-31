@@ -4,9 +4,9 @@ import nodeState from 'src/recoil/nodeState';
 import { ROOT_NODE_ID, RootVariant } from 'src/constants/node';
 import LineContainer from 'src/components/organisms/LineContainer';
 import useNodeRef from 'src/hooks/useNodeRef';
+import { nodeThemeSelector } from 'src/recoil/nodeThemeState';
 import BothSideRoot from './BothSideRoot';
 import * as s from './style';
-import { nodeThemeSelector } from '../../../recoil/nodeThemeState';
 
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
