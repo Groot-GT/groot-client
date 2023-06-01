@@ -1,22 +1,24 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 import * as s from './style';
 
 type ColorPanelProps = {
   color: string;
-  onClick?: () => void;
+  onClick?: (() => void) | ((e: MouseEvent) => void);
   children?: ReactNode;
-}
-
-const defaultProps = {
-  onClick: () => {
-  },
-  children: null,
+  size?: number;
 };
 
-const ColorPanel = ({ color, onClick, children }: ColorPanelProps) =>
-  <s.ColorPanel onClick={onClick} color={color}>
+const defaultProps = {
+  onClick: () => {},
+  children: null,
+  size: 24,
+};
+
+const ColorPanel = ({ color, onClick, children, size }: ColorPanelProps) => (
+  <s.ColorPanel onClick={onClick} color={color} size={size}>
     {children}
-  </s.ColorPanel>;
+  </s.ColorPanel>
+);
 
 ColorPanel.defaultProps = defaultProps;
 
