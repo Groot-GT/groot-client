@@ -52,7 +52,7 @@ const ProjectBoardItem = ({
               size={36}
               onClick={(e: MouseEvent) => handleProjectOwnerClick(e)}
             >
-              {project.owner.id[0]}
+              {project.owner.id.toUpperCase()[0]}
             </ColorPanel>
             <IconButton icon="more_vertical" onClick={handleProjectInfoClick} />
           </s.ProjectSettings>
