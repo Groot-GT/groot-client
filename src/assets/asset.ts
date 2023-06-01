@@ -13,6 +13,7 @@ import bothSideTree from './icons/both-side-tree.svg';
 import menu from './icons/menu.svg';
 import viewBoxes from './icons/view-boxes.svg';
 import user from './icons/user.svg';
+import more_vertical from './icons/more-vertical.svg';
 
 export const ToggleButtonAssets = {
   chevronDown,
@@ -30,4 +31,5 @@ export const ToggleButtonAssets = {
   menu,
   viewBoxes,
   user,
+  more_vertical,
 };
