@@ -4,7 +4,6 @@ import {
   ProjectsOwnerSortOption,
   ProjectsDateSortOption,
   ProjectId,
-  ProjectCreatedAt,
 } from 'src/types/project';
 import { UserId } from 'src/types/user';
 import { projects } from 'src/mock';
@@ -12,8 +11,14 @@ import {
   projectsOwnerSortOptions,
   projectsDateSortOptions,
 } from 'src/constants/project';
+import {
+  getCreatedAtTimePhrase,
+  getUpdateAtTimePhrase,
+} from 'src/utils/getTimeIntervalPhrase';
 import { currentUserState } from './usersState';
 import localStorageEffect from './localStorageEffect';
+import { CREATED_AT } from '../constants/time';
+import sortProjectsByOptions from '../utils/sortProjectsByOptions';
 
 const projectsState = atom<Projects>({
   key: 'projectsState',
@@ -64,6 +69,57 @@ export const projectOwnersSelector = selector<UserId[]>({
   },
 });
 
+export const updatedAtTimePhrasesSelector = selector<{
+  [key in ProjectId]: string;
+}>({
+  key: 'updatedAtTimePhrasesSelector',
+  get: ({ get }) => {
+    const currentProjects = get(projectsState);
+    return Object.keys(currentProjects).reduce(
+      (acc, currentKey) => ({
+        [currentKey]: getUpdateAtTimePhrase(
+          currentProjects[currentKey].updatedAt,
+        ),
+        ...acc,
+      }),
+      {},
+    );
+  },
+});
+
+export const createdAtTimePhrasesSelector = selector<{
+  [key in ProjectId]: string;
+}>({
+  key: 'createdAtTimePhrasesSelector',
+  get: ({ get }) => {
+    const currentProjects = get(projectsState);
+    return Object.keys(currentProjects).reduce(
+      (acc, currentKey) => ({
+        [currentKey]: getCreatedAtTimePhrase(
+          currentProjects[currentKey].createdAt,
+        ),
+        ...acc,
+      }),
+      {},
+    );
+  },
+});
+
+export const projectDatePhrasesSelector = selector<{
+  [key in ProjectId]: string;
+}>({
+  key: 'projectDatePhrasesSelector',
+  get: ({ get }) => {
+    const projectsDateSortOption = get(ProjectsDateSortOptionState);
+    const updatedAtTimePhrases = get(updatedAtTimePhrasesSelector);
+    const createdAtTimePhrases = get(createdAtTimePhrasesSelector);
+
+    return projectsDateSortOption === CREATED_AT
+      ? createdAtTimePhrases
+      : updatedAtTimePhrases;
+  },
+});
+
 export const sortedProjectsSelector = selector<Projects>({
   key: 'sortedProjectsSelector',
   get: ({ get }) => {
@@ -72,37 +128,11 @@ export const sortedProjectsSelector = selector<Projects>({
     const projectsDateSortOption = get(ProjectsDateSortOptionState);
     const currentUser = get(currentUserState);
 
-    const filteredProjectsKeysByOwner: ProjectId[] = Object.keys(
+    return sortProjectsByOptions(
       currentProjects,
-    ).filter((key: keyof Projects) => {
-      const project = currentProjects[key];
-      return (
-        // Owned by specific user
-        project.owner.id === projectsOwnerSortOption ||
-        // Owned by anyone
-        projectsOwnerSortOption === projectsOwnerSortOptions[0] ||
-        // Owned by me
-        (projectsOwnerSortOption === projectsOwnerSortOptions[1] &&
-          project.owner.id === currentUser.id)
-      );
-    });
-
-    const sortedProjectsKeysByDate: ProjectId[] =
-      filteredProjectsKeysByOwner.sort((a: ProjectId, b: ProjectId) => {
-        const aDate: ProjectCreatedAt = currentProjects[a].createdAt;
-        const bDate: ProjectCreatedAt = currentProjects[b].createdAt;
-
-        return projectsDateSortOption === projectsDateSortOptions[0]
-          ? bDate.localeCompare(aDate)
-          : -bDate.localeCompare(aDate);
-      });
-
-    return sortedProjectsKeysByDate.reduce(
-      (acc, currentKey) => ({
-        [currentKey]: currentProjects[currentKey],
-        ...acc,
-      }),
-      {},
+      projectsOwnerSortOption,
+      projectsDateSortOption,
+      currentUser,
     );
   },
 });
