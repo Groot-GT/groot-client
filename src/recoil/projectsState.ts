@@ -2,14 +2,14 @@ import { atom, selector } from 'recoil';
 import {
   Projects,
   ProjectsOwnerSortOption,
-  ProjectsDateSortOption,
+  ProjectsAttributeSortOption,
   ProjectId,
 } from 'src/types/project';
 import { UserId } from 'src/types/user';
 import { projects } from 'src/mock';
 import {
   projectsOwnerSortOptions,
-  projectsDateSortOptions,
+  projectAttributeSortOptions,
 } from 'src/constants/project';
 import {
   getCreatedAtTimePhrase,
@@ -36,16 +36,17 @@ export const projectsOwnerSortOptionState = atom<ProjectsOwnerSortOption>({
   ],
 });
 
-export const ProjectsDateSortOptionState = atom<ProjectsDateSortOption>({
-  key: 'projectRecentSortOptionState',
-  default: projectsDateSortOptions[0],
-  effects: [
-    localStorageEffect<ProjectsDateSortOption>({
-      key: 'projectRecentSortOptionState',
-      defaultValue: projectsDateSortOptions[0],
-    }),
-  ],
-});
+export const projectsAttributeSortOptionState =
+  atom<ProjectsAttributeSortOption>({
+    key: 'projectRecentSortOptionState',
+    default: projectAttributeSortOptions[0],
+    effects: [
+      localStorageEffect<ProjectsAttributeSortOption>({
+        key: 'projectRecentSortOptionState',
+        defaultValue: projectAttributeSortOptions[0],
+      }),
+    ],
+  });
 
 export const projectGridViewState = atom<boolean>({
   key: 'projectGridViewState',
@@ -110,11 +111,11 @@ export const projectDatePhrasesSelector = selector<{
 }>({
   key: 'projectDatePhrasesSelector',
   get: ({ get }) => {
-    const projectsDateSortOption = get(ProjectsDateSortOptionState);
+    const projectsAttributeSortOption = get(projectsAttributeSortOptionState);
     const updatedAtTimePhrases = get(updatedAtTimePhrasesSelector);
     const createdAtTimePhrases = get(createdAtTimePhrasesSelector);
 
-    return projectsDateSortOption === CREATED_AT
+    return projectsAttributeSortOption === CREATED_AT
       ? createdAtTimePhrases
       : updatedAtTimePhrases;
   },
@@ -125,13 +126,13 @@ export const sortedProjectsSelector = selector<Projects>({
   get: ({ get }) => {
     const currentProjects = get(projectsState);
     const projectsOwnerSortOption = get(projectsOwnerSortOptionState);
-    const projectsDateSortOption = get(ProjectsDateSortOptionState);
+    const projectsAttributeSortOption = get(projectsAttributeSortOptionState);
     const currentUser = get(currentUserState);
 
     return sortProjectsByOptions(
       currentProjects,
       projectsOwnerSortOption,
-      projectsDateSortOption,
+      projectsAttributeSortOption,
       currentUser,
     );
   },

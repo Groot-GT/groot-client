@@ -1,6 +1,7 @@
-export const projectsDateSortOptions = {
+export const projectAttributeSortOptions = {
   0: 'updatedAt',
   1: 'createdAt',
+  2: 'name',
 } as const;
 
 export const projectsOwnerSortOptions = {

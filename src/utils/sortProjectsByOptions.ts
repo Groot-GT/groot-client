@@ -2,18 +2,15 @@ import { User } from 'src/types/user';
 import {
   ProjectId,
   Projects,
-  ProjectsDateSortOption,
+  ProjectsAttributeSortOption,
   ProjectsOwnerSortOption,
 } from 'src/types/project';
-import {
-  projectsDateSortOptions,
-  projectsOwnerSortOptions,
-} from 'src/constants/project';
+import { projectsOwnerSortOptions } from 'src/constants/project';
 
 const sortProjectsByOptions = (
   currentProjects: Projects,
   projectsOwnerSortOption: ProjectsOwnerSortOption,
-  projectsDateSortOption: ProjectsDateSortOption,
+  projectsAttributeSortOption: ProjectsAttributeSortOption,
   currentUser: User,
 ) => {
   const filteredProjectsKeysByOwner: ProjectId[] = Object.keys(
@@ -31,20 +28,15 @@ const sortProjectsByOptions = (
     );
   });
 
-  const sortedProjectsKeysByDate: ProjectId[] =
-    filteredProjectsKeysByOwner.sort((a: ProjectId, b: ProjectId) => {
-      const isUpdatedAt = projectsDateSortOption === projectsDateSortOptions[0];
-      const aDate = isUpdatedAt
-        ? currentProjects[a].updatedAt
-        : currentProjects[a].createdAt;
-      const bDate = isUpdatedAt
-        ? currentProjects[b].updatedAt
-        : currentProjects[b].createdAt;
+  const compareFunction = (a: ProjectId, b: ProjectId) =>
+    currentProjects[a][projectsAttributeSortOption].localeCompare(
+      currentProjects[b][projectsAttributeSortOption],
+    );
 
-      return aDate.localeCompare(bDate);
-    });
+  const sortedProjectsKeysByOption: ProjectId[] =
+    filteredProjectsKeysByOwner.sort(compareFunction);
 
-  return sortedProjectsKeysByDate.reduce(
+  return sortedProjectsKeysByOption.reduce(
     (acc, currentKey) => ({
       [currentKey]: currentProjects[currentKey],
       ...acc,

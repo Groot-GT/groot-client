@@ -1,5 +1,5 @@
 import {
-  projectsDateSortOptions,
+  projectAttributeSortOptions,
   projectsOwnerSortOptions,
 } from 'src/constants/project';
 import { User, UserId } from './user';
@@ -10,8 +10,8 @@ export type ProjectOwner = User;
 export type ProjectCreatedAt = string;
 export type ProjectUpdatedAt = string;
 
-export type ProjectsDateSortOption =
-  (typeof projectsDateSortOptions)[keyof typeof projectsDateSortOptions];
+export type ProjectsAttributeSortOption =
+  (typeof projectAttributeSortOptions)[keyof typeof projectAttributeSortOptions];
 
 export type ProjectsOwnerSortOption =
   | (typeof projectsOwnerSortOptions)[keyof typeof projectsOwnerSortOptions]

@@ -2,30 +2,32 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   projectsOwnerSortOptionState,
   projectOwnersSelector,
-  ProjectsDateSortOptionState,
+  projectsAttributeSortOptionState,
   projectGridViewState,
 } from 'src/recoil/projectsState';
 import {
-  projectsDateSortOptions,
+  projectAttributeSortOptions,
   projectsOwnerSortOptions,
 } from 'src/constants/project';
 import Dropdown from 'src/components/organisms/Dropdown';
 import IconButton from 'src/components/molecules/IconButton';
 import { UserId } from 'src/types/user';
 import {
-  ProjectsDateSortOption,
+  ProjectsAttributeSortOption,
   ProjectsOwnerSortOption,
 } from 'src/types/project';
 import * as s from './style';
 
-const DATE_SORT_OPTIONS = Object.values(projectsDateSortOptions);
+const DATE_SORT_OPTIONS = Object.values(projectAttributeSortOptions);
 const PROJECT_OWNERS_DEFAULT_OPTION = Object.values(projectsOwnerSortOptions);
 
 const ProjectSortOptionPanel = () => {
   const [projectOwnerFilterOption, setProjectOwnerFilterOption] =
     useRecoilState<ProjectsOwnerSortOption>(projectsOwnerSortOptionState);
   const [projectsDateSortOption, setProjectsDateSortOption] =
-    useRecoilState<ProjectsDateSortOption>(ProjectsDateSortOptionState);
+    useRecoilState<ProjectsAttributeSortOption>(
+      projectsAttributeSortOptionState,
+    );
   const projectOwnersId = useRecoilValue<UserId[]>(projectOwnersSelector);
   const [isProjectGridView, setIsProjectGridView] =
     useRecoilState(projectGridViewState);
