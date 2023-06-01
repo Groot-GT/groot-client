@@ -30,7 +30,7 @@ export const ProjectTitle = styled.div`
   ${({ theme }) => theme.mixins.title}
 `;
 
-export const ProjectDateSortOption = styled.div`
+export const ProjectDatePhrase = styled.div`
   ${({ theme }) => theme.mixins.body2}
 `;
 
