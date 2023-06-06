@@ -1,4 +1,9 @@
-import { MouseEvent, ButtonHTMLAttributes, PropsWithChildren, ReactNode, MouseEventHandler } from 'react';
+import {
+  ButtonHTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+  MouseEventHandler,
+} from 'react';
 import * as s from './style';
 
 type ButtonAttributes = {
@@ -12,14 +17,18 @@ const defaultProps = {
   children: null,
   variant: 'primary',
   disabled: false,
-  onClick: () => {
-  },
+  onClick: () => {},
 };
 
 export type ButtonProps = ButtonAttributes &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ children, variant, disabled, onClick }: PropsWithChildren & ButtonProps) => (
+const Button = ({
+  children,
+  variant,
+  disabled,
+  onClick,
+}: PropsWithChildren & ButtonProps) => (
   <s.Button onClick={onClick} variant={variant} disabled={disabled}>
     {children}
   </s.Button>

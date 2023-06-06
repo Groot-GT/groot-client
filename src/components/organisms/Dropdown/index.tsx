@@ -6,29 +6,29 @@ import { IconType } from 'src/types/icon';
 import { SetterOrUpdater } from 'recoil';
 import * as s from './style';
 
-type DropdownProps = {
-  items: string[];
-  selectedItem: string;
+interface DropdownProps<T> {
+  items: T[];
+  selectedItem: T;
   setSelectedItem:
-    | React.Dispatch<SetStateAction<string>>
-    | SetterOrUpdater<string>
-    | ((value: string) => void);
+    | React.Dispatch<SetStateAction<T>>
+    | SetterOrUpdater<T>
+    | ((value: T) => void);
   icons?: IconType[];
   borderNone?: boolean;
-};
+}
 
 const defaultProps = {
   icons: undefined,
   borderNone: false,
 };
 
-const Dropdown = ({
+const Dropdown = <T extends string | number>({
   items,
   selectedItem,
   setSelectedItem,
   icons,
   borderNone,
-}: DropdownProps) => {
+}: DropdownProps<T>) => {
   const [open, setOpen] = useState<boolean>(false);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -51,7 +51,7 @@ const Dropdown = ({
       document.removeEventListener('mousedown', (ev) => handleClickOutside(ev));
   }, [dropdownRef, setOpen]);
 
-  const handleOptionClick = (option: string) => {
+  const handleOptionClick = (option: T) => {
     setSelectedItem(option);
     setOpen(false);
   };
@@ -71,7 +71,7 @@ const Dropdown = ({
         <ToggleButton clicked={open} onClick={() => setOpen(!open)} />
       </s.SelectedItemPlaceHolder>
       {open ? (
-        <DropdownList
+        <DropdownList<T>
           items={items}
           icons={icons}
           dropdownWidth={dropdownWidth}
