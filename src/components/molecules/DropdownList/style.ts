@@ -12,3 +12,7 @@ export const DropdownListWrapper = styled.div<DropdownListProps>`
   z-index: 100;
   border-radius: 4px;
 `;
+
+export const GroupName = styled.div`
+  ${({ theme }) => theme.mixins.body1};
+`;

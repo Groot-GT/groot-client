@@ -70,22 +70,25 @@ const Dropdown = <T extends string | number>({
             <Icon iconImg={dropdownIcon} />
           </s.DropdownIconWrapper>
         ) : null}
-        {icons ? (
-          <s.SelectedIconWrapper>
-            <Icon iconImg={icons[selectedItemIdx]} />
-          </s.SelectedIconWrapper>
-        ) : null}
-        <s.SelectedItemWrapper>{selectedItem}</s.SelectedItemWrapper>
+        <s.SelectedItemWrapper>
+          {icons ? (
+            <s.SelectedIconWrapper>
+              <Icon iconImg={icons[selectedItemIdx]} />
+            </s.SelectedIconWrapper>
+          ) : null}
+          {selectedItem}
+        </s.SelectedItemWrapper>
         <ToggleButton clicked={open} onClick={() => setOpen(!open)} />
       </s.SelectedItemPlaceHolder>
-      {open ? (
-        <DropdownList<T>
-          items={items}
-          icons={icons}
-          dropdownWidth={dropdownWidth}
-          handleOptionClick={handleOptionClick}
-        />
-      ) : null}
+      <s.DropdownListWrapper width={dropdownWidth}>
+        {open ? (
+          <DropdownList<T>
+            items={items}
+            icons={icons}
+            handleOptionClick={handleOptionClick}
+          />
+        ) : null}
+      </s.DropdownListWrapper>
     </s.DropdownWrapper>
   );
 };

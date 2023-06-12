@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { nodeRootVariantState } from 'src/recoil/nodeThemeState';
-import Dropdown from 'src/components/organisms/Dropdown';
+import Dropdown from 'src/components/organisms/Dropdown/DefaultDropdown';
 import { IconType } from 'src/types/icon';
 import { RootVariant } from 'src/constants/node';
 
@@ -27,7 +27,7 @@ const ThemeDirectionDropdown = () => {
   };
 
   return (
-    <Dropdown
+    <Dropdown<RootVariant>
       icons={rootVariantIcons}
       items={rootVariantOptions}
       setSelectedItem={handleNodeRootVariantChange}
