@@ -2,47 +2,59 @@ import { User } from 'src/types/user';
 import {
   ProjectId,
   Projects,
-  ProjectsAttributeSortOption,
-  ProjectsOwnerSortOption,
+  ProjectsOrdering,
+  ProjectsOwnerFilter,
 } from 'src/types/project';
-import { projectsOwnerSortOptions } from 'src/constants/project';
+import { NAME, projectsOwnerFilterOptions } from 'src/constants/project';
 
 const sortProjectsByOptions = (
-  currentProjects: Projects,
-  projectsOwnerSortOption: ProjectsOwnerSortOption,
-  projectsAttributeSortOption: ProjectsAttributeSortOption,
+  projects: Projects,
+  owner: ProjectsOwnerFilter,
+  order: ProjectsOrdering,
   currentUser: User,
+  isReverse: boolean,
 ) => {
-  const filteredProjectsKeysByOwner: ProjectId[] = Object.keys(
-    currentProjects,
-  ).filter((key: ProjectId) => {
-    const project = currentProjects[key];
-    return (
-      // Owned by specific user
-      project.owner.id === projectsOwnerSortOption ||
-      // Owned by anyone
-      projectsOwnerSortOption === projectsOwnerSortOptions[0] ||
-      // Owned by me
-      (projectsOwnerSortOption === projectsOwnerSortOptions[1] &&
-        project.owner.id === currentUser.id)
-    );
-  });
+  const filteredProjectsKeysByOwner: ProjectId[] = Object.keys(projects).filter(
+    (key: ProjectId) => {
+      const project = projects[key];
+      return (
+        // Owned by specific user
+        project.owner.id === owner ||
+        // Owned by anyone
+        owner === projectsOwnerFilterOptions[0] ||
+        // Owned by me
+        (owner === projectsOwnerFilterOptions[1] &&
+          project.owner.id === currentUser.id)
+      );
+    },
+  );
 
-  const compareFunction = (a: ProjectId, b: ProjectId) =>
-    currentProjects[a][projectsAttributeSortOption].localeCompare(
-      currentProjects[b][projectsAttributeSortOption],
-    );
+  let sortedProjectsKeysByOption: ProjectId[];
 
-  const sortedProjectsKeysByOption: ProjectId[] =
-    filteredProjectsKeysByOwner.sort(compareFunction);
+  const compareByName = (a: ProjectId, b: ProjectId) =>
+    -projects[a][order]
+      .toLowerCase()
+      .localeCompare(projects[b][order].toLowerCase());
+
+  const compareByDate = (a: ProjectId, b: ProjectId) =>
+    projects[a][order].localeCompare(projects[b][order]);
+
+  if (order === NAME) {
+    sortedProjectsKeysByOption =
+      filteredProjectsKeysByOwner.sort(compareByName);
+  } else {
+    sortedProjectsKeysByOption =
+      filteredProjectsKeysByOwner.sort(compareByDate);
+  }
+
+  if (isReverse) sortedProjectsKeysByOption.reverse();
 
   return sortedProjectsKeysByOption.reduce(
     (acc, currentKey) => ({
-      [currentKey]: currentProjects[currentKey],
+      [currentKey]: projects[currentKey],
       ...acc,
     }),
     {},
   );
 };
-
 export default sortProjectsByOptions;

@@ -1,52 +1,60 @@
 import { atom, selector } from 'recoil';
-import {
-  Projects,
-  ProjectsOwnerSortOption,
-  ProjectsAttributeSortOption,
-  ProjectId,
-} from 'src/types/project';
-import { UserId } from 'src/types/user';
+import { currentUserState } from 'src/recoil/usersState';
+import localStorageEffect from 'src/recoil/localStorageEffect';
 import { projects } from 'src/mock';
 import {
-  projectsOwnerSortOptions,
-  projectAttributeSortOptions,
+  ProjectId,
+  Projects,
+  ProjectsOrdering,
+  ProjectsOrderingOption,
+  ProjectsOwnerFilter,
+} from 'src/types/project';
+import { UserId } from 'src/types/user';
+import {
+  NEWEST_FIRST,
+  projectOrderings,
+  projectOrderingWithOptions,
+  projectsOwnerFilterOptions,
+  UPDATED_AT,
+  CREATED_AT,
 } from 'src/constants/project';
 import {
   getCreatedAtTimePhrase,
   getUpdateAtTimePhrase,
 } from 'src/utils/getTimeIntervalPhrase';
-import { currentUserState } from './usersState';
-import localStorageEffect from './localStorageEffect';
-import { CREATED_AT } from '../constants/time';
-import sortProjectsByOptions from '../utils/sortProjectsByOptions';
+import sortProjectsByOptions from 'src/utils/sortProjectsByOptions';
 
 const projectsState = atom<Projects>({
   key: 'projectsState',
   default: projects,
 });
 
-export const projectsOwnerSortOptionState = atom<ProjectsOwnerSortOption>({
-  key: 'projectOwnerSortOptionState',
-  default: projectsOwnerSortOptions[0],
+export const projectsOwnerFilterState = atom<ProjectsOwnerFilter>({
+  key: 'projectsOwnerFilterState',
+  default: projectsOwnerFilterOptions[0],
   effects: [
-    localStorageEffect<ProjectsOwnerSortOption>({
-      key: 'projectOwnerSortOptionState',
-      defaultValue: projectsOwnerSortOptions[0],
+    localStorageEffect<ProjectsOwnerFilter>({
+      key: 'projectsOwnerFilterState',
+      defaultValue: projectsOwnerFilterOptions[0],
     }),
   ],
 });
 
-export const projectsAttributeSortOptionState =
-  atom<ProjectsAttributeSortOption>({
-    key: 'projectRecentSortOptionState',
-    default: projectAttributeSortOptions[0],
-    effects: [
-      localStorageEffect<ProjectsAttributeSortOption>({
-        key: 'projectRecentSortOptionState',
-        defaultValue: projectAttributeSortOptions[0],
-      }),
-    ],
-  });
+export const projectsOrderingState = atom<ProjectsOrdering>({
+  key: 'projectsOrderingState',
+  default: UPDATED_AT,
+  effects: [
+    localStorageEffect<ProjectsOrdering>({
+      key: 'projectsOrderingState',
+      defaultValue: projectOrderings[0],
+    }),
+  ],
+});
+
+export const projectsOrderingOptionState = atom<ProjectsOrderingOption>({
+  key: 'projectsOrderingOptionState',
+  default: NEWEST_FIRST,
+});
 
 export const projectGridViewState = atom<boolean>({
   key: 'projectGridViewState',
@@ -111,11 +119,11 @@ export const projectDatePhrasesSelector = selector<{
 }>({
   key: 'projectDatePhrasesSelector',
   get: ({ get }) => {
-    const projectsAttributeSortOption = get(projectsAttributeSortOptionState);
+    const projectsOrdering = get(projectsOrderingState);
     const updatedAtTimePhrases = get(updatedAtTimePhrasesSelector);
     const createdAtTimePhrases = get(createdAtTimePhrasesSelector);
 
-    return projectsAttributeSortOption === CREATED_AT
+    return projectsOrdering === CREATED_AT
       ? createdAtTimePhrases
       : updatedAtTimePhrases;
   },
@@ -125,15 +133,19 @@ export const sortedProjectsSelector = selector<Projects>({
   key: 'sortedProjectsSelector',
   get: ({ get }) => {
     const currentProjects = get(projectsState);
-    const projectsOwnerSortOption = get(projectsOwnerSortOptionState);
-    const projectsAttributeSortOption = get(projectsAttributeSortOptionState);
+    const projectOwnerFilter = get(projectsOwnerFilterState);
+    const projectOrdering = get(projectsOrderingState);
     const currentUser = get(currentUserState);
+    const isReverse =
+      get(projectsOrderingOptionState) ===
+      projectOrderingWithOptions[projectOrdering][1];
 
     return sortProjectsByOptions(
       currentProjects,
-      projectsOwnerSortOption,
-      projectsAttributeSortOption,
+      projectOwnerFilter,
+      projectOrdering,
       currentUser,
+      isReverse,
     );
   },
 });
