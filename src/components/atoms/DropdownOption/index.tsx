@@ -18,11 +18,9 @@ const DropDownOption = <T extends string | number>({
   icon,
 }: DropDownOptionProps<T>) => (
   <s.Option onClick={onClick}>
-    {icon ? (
-      <s.DropdownIconWrapper>
-        <Icon iconImg={icon} />
-      </s.DropdownIconWrapper>
-    ) : null}
+    <s.DropdownIconWrapper>
+      {icon ? <Icon iconImg={icon} /> : null}
+    </s.DropdownIconWrapper>
     {value}
   </s.Option>
 );

@@ -78,11 +78,13 @@ const GroupedDropdown = <T extends string, R extends string>({
             <GroupedDropdownList<T>
               groupName="Sort by"
               items={groupKeys}
+              selectedItem={selectedGroup}
               handleOptionClick={handleGroupClick}
             />
             <GroupedDropdownList<R>
               groupName="Order"
               items={itemValues}
+              selectedItem={selectedItem}
               handleOptionClick={handleItemClick}
             />
           </>
