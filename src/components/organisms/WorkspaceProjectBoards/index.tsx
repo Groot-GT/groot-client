@@ -17,14 +17,16 @@ const WorkspaceProjectBoards = () => {
     <s.BoardsWrapper>
       <ProjectSortOptionPanel />
       <s.ProjectBoardTitleWrapper>Project name</s.ProjectBoardTitleWrapper>
-      {Object.entries(sortedProjects).map(([projectId, project]) => (
-        <ProjectBoardItem
-          key={projectId}
-          project={project}
-          projectDatePhrase={projectDatePhrases[projectId]}
-          isGridLayout={isProjectGridLayout}
-        />
-      ))}
+      <s.ProjectBoardItemsWrapper isGridLayout={isProjectGridLayout}>
+        {Object.entries(sortedProjects).map(([projectId, project]) => (
+          <ProjectBoardItem
+            key={projectId}
+            project={project}
+            projectDatePhrase={projectDatePhrases[projectId]}
+            isGridLayout={isProjectGridLayout}
+          />
+        ))}
+      </s.ProjectBoardItemsWrapper>
     </s.BoardsWrapper>
   );
 };

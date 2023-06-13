@@ -4,11 +4,10 @@ export const WorkspaceWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 19px 31px;
   background: ${({ theme }) => `
     radial-gradient(circle at 50% 120%, #2DC99E, ${theme.colors.main['0']})
-    
   `};
 `;
 

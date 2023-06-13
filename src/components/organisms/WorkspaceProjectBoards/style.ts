@@ -14,3 +14,21 @@ export const ProjectBoardTitleWrapper = styled.div`
   ${({ theme }) => theme.mixins.body2}
   color: ${({ theme }) => theme.colors.black[3]};
 `;
+
+export const ProjectBoardItemsWrapper = styled.div<{
+  isGridLayout: boolean;
+}>`
+  width: 100%;
+  display: ${({ isGridLayout }) => (isGridLayout ? 'grid' : 'flex')};
+  flex-flow: row wrap;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+
+  grid-gap: 27px;
+  justify-content: space-between;
+  flex-direction: ${({ isGridLayout }) => (isGridLayout ? 'row' : 'column')};
+
+  ::after {
+    content: '';
+    flex: auto;
+  }
+`;
