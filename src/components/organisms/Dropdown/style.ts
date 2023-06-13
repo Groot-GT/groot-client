@@ -48,6 +48,9 @@ export const SelectedIconWrapper = styled.div`
 `;
 
 export const SelectedItemWrapper = styled.div`
+  display: flex;
+  padding: 2px 4px 2px 0;
+  align-items: center;
   width: 100%;
 `;
 
