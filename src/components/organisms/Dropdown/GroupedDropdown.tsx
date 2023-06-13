@@ -4,6 +4,7 @@ import ToggleButton from 'src/components/atoms/ToggleButton';
 import Icon from 'src/components/atoms/Icon';
 import GroupedDropdownList from 'src/components/molecules/DropdownList/GroupedDropdownList';
 import * as s from './style';
+import useDetectClickOutside from '../../../hooks/useDetectClickOutside';
 
 interface GroupedDropdownProps<T extends string, R extends string> {
   groups: { [key in T]: { [key2 in R]: string } };
@@ -32,17 +33,10 @@ const GroupedDropdown = <T extends string, R extends string>({
     setDropdownWidth(dropdownRef.current?.getBoundingClientRect().width);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (ev: globalThis.MouseEvent) => {
-      const target = ev.target as HTMLElement;
-      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', (ev) => handleClickOutside(ev));
-    return () =>
-      document.removeEventListener('mousedown', (ev) => handleClickOutside(ev));
-  }, [dropdownRef, setOpen]);
+  useDetectClickOutside({
+    ref: dropdownRef,
+    callback: () => setOpen(false),
+  });
 
   const groupKeys = Object.keys(groups) as T[];
   const itemValues = Object.values(groups[selectedGroup]) as R[];

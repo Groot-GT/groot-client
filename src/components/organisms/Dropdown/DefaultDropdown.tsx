@@ -5,6 +5,7 @@ import Icon from 'src/components/atoms/Icon';
 import { IconType } from 'src/types/icon';
 import { SetterOrUpdater } from 'recoil';
 import * as s from './style';
+import useDetectClickOutside from '../../../hooks/useDetectClickOutside';
 
 interface DropdownProps<T> {
   items: T[];
@@ -42,17 +43,10 @@ const Dropdown = <T extends string | number>({
     setDropdownWidth(dropdownRef.current?.getBoundingClientRect().width);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (ev: globalThis.MouseEvent): void => {
-      const target = ev.target as HTMLElement;
-      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', (ev) => handleClickOutside(ev));
-    return () =>
-      document.removeEventListener('mousedown', (ev) => handleClickOutside(ev));
-  }, [dropdownRef, setOpen]);
+  useDetectClickOutside({
+    ref: dropdownRef,
+    callback: () => setOpen(false),
+  });
 
   const handleOptionClick = (option: T) => {
     setSelectedItem(option);
