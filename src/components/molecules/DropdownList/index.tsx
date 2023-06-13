@@ -6,6 +6,7 @@ import { IconType } from 'src/types/icon';
 interface DropdownListProps<T> {
   items: T[];
   handleOptionClick: (value: T) => void;
+  selectedItem?: T | undefined;
   icons?: IconType[] | undefined;
 }
 
@@ -16,16 +17,25 @@ const defaultProps = {
 const DropdownList = <T extends string | number>({
   items,
   icons,
+  selectedItem = undefined,
   handleOptionClick,
 }: DropdownListProps<T>) => (
   <>
     {items.map((item, idx) => (
       <Fragment key={item}>
-        <DropdownOption
-          value={item}
-          icon={icons ? icons[idx] : null}
-          onClick={() => handleOptionClick(item)}
-        />
+        {selectedItem === item ? (
+          <DropdownOption
+            value={item}
+            icon="check_small"
+            onClick={() => handleOptionClick(item)}
+          />
+        ) : (
+          <DropdownOption
+            value={item}
+            icon={icons ? icons[idx] : null}
+            onClick={() => handleOptionClick(item)}
+          />
+        )}
         <Divider vertical={false} length={100} />
       </Fragment>
     ))}

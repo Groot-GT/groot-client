@@ -84,6 +84,7 @@ const Dropdown = <T extends string | number>({
         {open ? (
           <DropdownList<T>
             items={items}
+            selectedItem={selectedItem}
             icons={icons}
             handleOptionClick={handleOptionClick}
           />
