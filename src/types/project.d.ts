@@ -30,10 +30,10 @@ export type ProjectsOrderingOption = DateOrderingOption | NameOrderingOption;
 
 export interface Project {
   id: ProjectId;
-  name: ProjectName;
   owner: ProjectOwner;
-  createdAt: ProjectCreatedAt;
-  updatedAt: ProjectUpdatedAt;
+  [NAME]: ProjectName;
+  [CREATED_AT]: ProjectCreatedAt;
+  [UPDATED_AT]: ProjectUpdatedAt;
 }
 
 export interface Projects {
