@@ -17,14 +17,16 @@ const GridLayoutItem = ({
     <s.ProjectBoardGridItemWrapper>
       <Item hoverColor={theme.colors.main[0]} onClick={handleProjectItemClick}>
         <s.ProjectBoardGridItem>
-          <s.ProjectTitle>{project.name}</s.ProjectTitle>
-          <IconButton
-            icon="more_vertical"
-            onClick={(e: MouseEvent) => {
-              alert(`clicked ${project.name} info`);
-              e.stopPropagation();
-            }}
-          />
+          <s.GridHeaderWrapper>
+            <s.ProjectTitle>{project.name}</s.ProjectTitle>
+            <IconButton
+              icon="more_vertical"
+              onClick={(e: MouseEvent) => {
+                alert(`clicked ${project.name} info`);
+                e.stopPropagation();
+              }}
+            />
+          </s.GridHeaderWrapper>
           <s.ProjectSettings>
             <s.ProjectDatePhrase>{projectDatePhrase}</s.ProjectDatePhrase>
             <ProjectOwnerPanel project={project} />

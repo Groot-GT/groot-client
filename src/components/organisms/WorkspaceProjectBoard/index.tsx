@@ -19,7 +19,7 @@ const WorkspaceProjectBoard = () => {
   const navigate = useNavigate();
 
   const handleProjectItemClick = (projectId: ProjectId) => {
-    navigate(`/projects${projectId}`);
+    navigate(`/projects/${projectId}`);
   };
 
   const projectsProps = {
