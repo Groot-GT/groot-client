@@ -15,6 +15,6 @@ export const ColorPanel = styled.div<ColorPanelProps>`
 
   :hover {
     cursor: pointer;
-    border: 2px solid ${({ theme }) => theme.colors.black[6]};
+    border: 2px solid ${({ theme }) => theme.colors.black[5]};
   }
 `;

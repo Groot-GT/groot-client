@@ -14,9 +14,8 @@ export const DropdownListWrapper = styled.div<DropdownListProps>`
 `;
 
 export const GroupName = styled.div`
-  margin: 4px 0 2px 20px;
+  margin: 4px 0 2px 26px;
   padding: 4px 8px;
   color: ${({ theme }) => theme.colors.black[5]};
-  ${({ theme }) => theme.mixins.body1};
-  ${({ theme }) => theme.colors.main[1]};
+  font-size: inherit;
 `;
