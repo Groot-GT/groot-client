@@ -19,16 +19,12 @@ export const ProjectBoardItemsWrapper = styled.div<{
   isGridLayout: boolean;
 }>`
   width: 100%;
+  margin-top: 32px;
   display: ${({ isGridLayout }) => (isGridLayout ? 'grid' : 'flex')};
   flex-flow: row wrap;
-  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, auto));
 
-  grid-gap: 27px;
-  justify-content: space-between;
+  grid-gap: ${({ isGridLayout }) => (isGridLayout ? '27px' : '14px')};
+  justify-items: flex-start;
   flex-direction: ${({ isGridLayout }) => (isGridLayout ? 'row' : 'column')};
-
-  ::after {
-    content: '';
-    flex: auto;
-  }
 `;

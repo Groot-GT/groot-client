@@ -1,55 +1,32 @@
-import { MouseEvent } from 'react';
 import { useTheme } from 'styled-components';
-import { Project } from 'src/types/project';
 import Item from 'src/components/molecules/Item';
-import ColorPanel from 'src/components/atoms/ColorPanel';
-import IconButton from 'src/components/molecules/IconButton';
+import ProjectOwnerPanel from 'src/components/molecules/ProjectOwnerPanel';
+import ProjectInfoIcon from 'src/components/molecules/ProjectInfoIcon';
+import { Project } from 'src/types/project';
 import * as s from './style';
 
-type ProjectBoardItemProps = {
+export type LayoutItemProps = {
   project: Project;
   projectDatePhrase: string;
+  handleProjectItemClick: () => void;
 };
 
 const ListLayoutItem = ({
   project,
   projectDatePhrase,
-}: ProjectBoardItemProps) => {
+  handleProjectItemClick,
+}: LayoutItemProps) => {
   const theme = useTheme();
-  const projectColorPanelColor =
-    theme.nodeColors[project.owner.color].root || project.owner.color;
-  const projectColorPanelCapitalLetter = project.owner.id.toUpperCase()[0];
 
   return (
     <s.ProjectBoardListItemWrapper>
-      <Item
-        hoverColor={theme.colors.main[0]}
-        onClick={(e: MouseEvent) => {
-          e.stopPropagation();
-          alert(`clicked ${project.name}`);
-        }}
-      >
+      <Item hoverColor={theme.colors.main[0]} onClick={handleProjectItemClick}>
         <s.ProjectBoardListItem>
           <s.ProjectTitle>{project.name}</s.ProjectTitle>
           <s.ProjectDatePhrase>{projectDatePhrase}</s.ProjectDatePhrase>
           <s.ProjectSettings>
-            <ColorPanel
-              color={projectColorPanelColor}
-              size={36}
-              onClick={(e: MouseEvent) => {
-                e.stopPropagation();
-                alert(`clicked ${project.name} owner`);
-              }}
-            >
-              {projectColorPanelCapitalLetter}
-            </ColorPanel>
-            <IconButton
-              icon="more_vertical"
-              onClick={(e: MouseEvent) => {
-                e.stopPropagation();
-                alert(`clicked ${project.name} info`);
-              }}
-            />
+            <ProjectOwnerPanel project={project} />
+            <ProjectInfoIcon project={project} />
           </s.ProjectSettings>
         </s.ProjectBoardListItem>
       </Item>

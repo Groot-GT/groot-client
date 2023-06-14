@@ -37,6 +37,7 @@ const Item = ({
     e.stopPropagation();
     if (deleteItem !== undefined) deleteItem();
   };
+
   return (
     <s.Item
       onMouseEnter={() => setIsHover(true)}
