@@ -1,4 +1,4 @@
-import ProjectPanel from 'src/components/organisms/ProjectPanel';
+import ProjectDrawPanel from 'src/components/organisms/ProjectPanel';
 import StatusPanel from 'src/components/organisms/StatusPanel';
 import CurrentUsersPanel from 'src/components/organisms/CurrentUsersPanel';
 import { LeftBar, RightBar } from 'src/components/organisms/SideBar';
@@ -11,7 +11,7 @@ const DrawTemplate = () => (
     {/* Top side */}
     <s.TopWrapper>
       {/* Left sidebar */}
-      <ProjectPanel projectName='Untitled_1' />
+      <ProjectDrawPanel projectName="Untitled_1" />
       {/* Right sidebar */}
       <s.TopRightWrapper>
         <CurrentUsersPanel />
