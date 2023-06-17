@@ -1,17 +1,24 @@
-import { MouseEventHandler } from 'react';
-import Icon from 'src/components/atoms/Icon';
+import { MouseEventHandler, ReactNode } from 'react';
 import { IconType } from 'src/types/icon';
+import Icon from 'src/components/atoms/Icon';
 import * as s from './style';
-
 
 type IconButtonProps = {
   icon: IconType;
   onClick: MouseEventHandler<HTMLButtonElement>;
-}
-const IconButton = ({ icon, onClick, ...props }: IconButtonProps) =>
-  <s.IconButton onClick={onClick} {...props}>
+  padding?: string | undefined;
+  children?: ReactNode | null;
+};
+const IconButton = ({
+  icon,
+  onClick,
+  children = undefined,
+  padding = undefined,
+}: IconButtonProps) => (
+  <s.IconButton onClick={onClick} padding={padding}>
     <Icon iconImg={icon} />
-  </s.IconButton>;
-
+    {children}
+  </s.IconButton>
+);
 
 export default IconButton;

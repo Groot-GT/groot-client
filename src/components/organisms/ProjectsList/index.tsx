@@ -16,6 +16,7 @@ const ProjectsList = ({
   <>
     {Object.entries(sortedProjects).map(([projectId, project]) => (
       <ListLayoutItem
+        key={projectId}
         project={project}
         projectDatePhrase={projectsDatePhrases[projectId]}
         handleProjectItemClick={() => handleProjectItemClick(projectId)}
