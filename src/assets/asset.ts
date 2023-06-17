@@ -5,7 +5,9 @@ import close from './icons/close.svg';
 import formatLeft from './icons/format-align-left.svg';
 import blackDot from './icons/black-dot.svg';
 import share from './icons/share.svg';
+import share_green from './icons/share_green.svg';
 import add from './icons/add.svg';
+import add_white from './icons/add_white.svg';
 import _delete from './icons/delete.svg';
 import verticalTree from './icons/vertical-tree.svg';
 import horizontalTree from './icons/horizontal-tree.svg';
@@ -28,7 +30,9 @@ export const ToggleButtonAssets = {
   formatLeft,
   blackDot,
   share,
+  share_green,
   add,
+  add_white,
   _delete,
   menu,
   viewBoxes,
