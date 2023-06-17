@@ -15,6 +15,7 @@ import viewBoxes from './icons/view-boxes.svg';
 import user from './icons/user.svg';
 import more_vertical from './icons/more-vertical.svg';
 import check_small from './icons/check-small.svg';
+import full_logo from './icons/FullLogo.svg';
 
 export const ToggleButtonAssets = {
   chevronDown,
@@ -34,4 +35,5 @@ export const ToggleButtonAssets = {
   user,
   more_vertical,
   check_small,
+  full_logo,
 };

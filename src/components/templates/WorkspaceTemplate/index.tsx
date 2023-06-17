@@ -1,13 +1,13 @@
-import ProjectPanel from 'src/components/organisms/ProjectPanel';
 import CurrentUsersPanel from 'src/components/organisms/CurrentUsersPanel';
 import StatusPanel from 'src/components/organisms/StatusPanel';
 import WorkspaceProjectBoard from 'src/components/organisms/WorkspaceProjectBoard';
 import * as s from './style';
+import LogoButton from '../../atoms/LogoButton';
 
 const WorkspaceTemplate = () => (
   <s.WorkspaceWrapper>
     <s.LayerWrapper>
-      <ProjectPanel projectName="Untitled_1" />
+      <LogoButton fullLogo bgTransparent />
       <s.TopRightWrapper>
         <CurrentUsersPanel />
         <StatusPanel />
