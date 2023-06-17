@@ -1,4 +1,4 @@
-import ProjectDrawPanel from 'src/components/organisms/ProjectPanel';
+import ProjectDrawPanel from 'src/components/organisms/ProjectDrawPanel';
 import StatusPanel from 'src/components/organisms/StatusPanel';
 import CurrentUsersPanel from 'src/components/organisms/CurrentUsersPanel';
 import { LeftBar, RightBar } from 'src/components/organisms/SideBar';
