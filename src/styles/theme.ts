@@ -84,7 +84,7 @@ const colors = {
     2: '#21B478',
   },
   background: {
-    green: '#2DC99E',
+    green: '#38D9A8',
   },
 };
 
