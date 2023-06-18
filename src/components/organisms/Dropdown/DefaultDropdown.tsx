@@ -16,22 +16,16 @@ interface DropdownProps<T> {
     | ((value: T) => void);
   icons?: IconType[];
   borderNone?: boolean;
-  dropdownIcon?: IconType | null;
+  dropdownIcon?: IconType | undefined;
 }
-
-const defaultProps = {
-  icons: undefined,
-  borderNone: false,
-  dropdownIcon: null,
-};
 
 const Dropdown = <T extends string | number>({
   items,
   selectedItem,
   setSelectedItem,
-  icons,
-  borderNone,
-  dropdownIcon,
+  icons = undefined,
+  borderNone = false,
+  dropdownIcon = undefined,
 }: DropdownProps<T>) => {
   const [open, setOpen] = useState<boolean>(false);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
@@ -87,7 +81,5 @@ const Dropdown = <T extends string | number>({
     </s.DropdownWrapper>
   );
 };
-
-Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;

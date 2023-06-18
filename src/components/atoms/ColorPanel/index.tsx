@@ -8,18 +8,15 @@ type ColorPanelProps = {
   size?: number;
 };
 
-const defaultProps = {
-  onClick: () => {},
-  children: null,
-  size: 24,
-};
-
-const ColorPanel = ({ color, onClick, children, size }: ColorPanelProps) => (
+const ColorPanel = ({
+  color,
+  onClick = () => {},
+  children = null,
+  size = 24,
+}: ColorPanelProps) => (
   <s.ColorPanel onClick={onClick} color={color} size={size}>
     {children}
   </s.ColorPanel>
 );
-
-ColorPanel.defaultProps = defaultProps;
 
 export default ColorPanel;

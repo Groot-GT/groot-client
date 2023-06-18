@@ -10,15 +10,11 @@ interface DropdownListProps<T> {
   icons?: IconType[] | undefined;
 }
 
-const defaultProps = {
-  icons: undefined,
-};
-
 const DropdownList = <T extends string | number>({
   items,
-  icons,
-  selectedItem = undefined,
   handleOptionClick,
+  icons = undefined,
+  selectedItem = undefined,
 }: DropdownListProps<T>) => (
   <>
     {items.map((item, idx) => (
@@ -41,7 +37,5 @@ const DropdownList = <T extends string | number>({
     ))}
   </>
 );
-
-DropdownList.defaultProps = defaultProps;
 
 export default DropdownList;
