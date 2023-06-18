@@ -1,5 +1,6 @@
 // 1rem = 16px
 const fontSizes = {
+  title: '1.4rem',
   subtitle1: '1.25rem',
   subtitle2: '1rem',
   body1: '1rem',
@@ -15,34 +16,34 @@ const fontWeights = {
 
 const nodeColors = {
   yellow: {
-    'background': '#FBF6E5',
-    'root': '#FFD99F',
-    'text': '#5B4E3A',
+    background: '#FBF6E5',
+    root: '#FFD99F',
+    text: '#5B4E3A',
   },
   red: {
-    'background': '#FBECEE',
-    'root': '#FFBCC6',
-    'text': '#76454C',
+    background: '#FBECEE',
+    root: '#FFBCC6',
+    text: '#76454C',
   },
   purple: {
-    'background': '#F2E8F4',
-    'root': '#E6B2F0',
-    'text': '#623C69',
+    background: '#F2E8F4',
+    root: '#E6B2F0',
+    text: '#623C69',
   },
   violet: {
-    'background': '#EAEBF5',
-    'root': '#BBC0F4',
-    'text': '#363B6A',
+    background: '#EAEBF5',
+    root: '#BBC0F4',
+    text: '#363B6A',
   },
   blue: {
-    'background': '#E7F2FA',
-    'root': '#A6D6F9',
-    'text': '#2C495F',
+    background: '#E7F2FA',
+    root: '#A6D6F9',
+    text: '#2C495F',
   },
   green: {
-    'background': '#F1F6EB',
-    'root': '#C9E3AA',
-    'text': '#516C31',
+    background: '#F1F6EB',
+    root: '#C9E3AA',
+    text: '#516C31',
   },
 };
 
@@ -83,7 +84,7 @@ const colors = {
     2: '#21B478',
   },
   background: {
-    'green': '#2DC99E',
+    green: '#2DC99E',
   },
 };
 
@@ -96,13 +97,12 @@ const titleColors = {
   },
 };
 
-
 const mixins = {
   borderCurved: `
     border-radius: 5px;
   `,
   shadow: `
-    0px 4px 6px rgba(0, 0, 0, 0.15)
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.15)
   `,
   flexCenter: `
     display: flex;
@@ -121,6 +121,10 @@ const mixins = {
   align-items: center;
   justify-content: center;
   `,
+  title: `
+    font-size: ${fontSizes.title};
+    font-weight: ${fontWeights.regular};
+    `,
   subtitle1: `
     font-size: ${fontSizes.subtitle1};
     font-weight: ${fontWeights.regular};

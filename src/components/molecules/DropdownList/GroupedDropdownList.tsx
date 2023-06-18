@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react';
 import DropdownOption from 'src/components/atoms/DropdownOption';
-import Divider from 'src/components/atoms/Divider';
-import { IconType } from 'src/types/icon';
+import * as s from './style';
 
 interface DropdownListProps<T> {
   items: T[];
+  groupName: string;
+  selectedItem: T;
   handleOptionClick: (value: T) => void;
-  selectedItem?: T | undefined;
-  icons?: IconType[] | undefined;
 }
 
-const DropdownList = <T extends string | number>({
+const GroupedDropdownList = <T extends string>({
   items,
+  groupName,
+  selectedItem,
   handleOptionClick,
-  icons = undefined,
-  selectedItem = undefined,
 }: DropdownListProps<T>) => (
   <>
-    {items.map((item, idx) => (
+    <s.GroupName>{groupName}</s.GroupName>
+    {items.map((item) => (
       <Fragment key={item}>
         {selectedItem === item ? (
           <DropdownOption
@@ -28,14 +28,12 @@ const DropdownList = <T extends string | number>({
         ) : (
           <DropdownOption
             value={item}
-            icon={icons ? icons[idx] : null}
             onClick={() => handleOptionClick(item)}
           />
         )}
-        <Divider vertical={false} length={100} />
       </Fragment>
     ))}
   </>
 );
 
-export default DropdownList;
+export default GroupedDropdownList;

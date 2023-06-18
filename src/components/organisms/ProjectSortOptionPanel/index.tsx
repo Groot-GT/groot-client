@@ -1,60 +1,88 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  projectsOwnerSortOptionState,
+  projectsOwnerFilterState,
   projectOwnersSelector,
-  ProjectsDateSortOptionState,
+  projectsOrderingState,
+  projectGridViewState,
+  projectsOrderingOptionState,
 } from 'src/recoil/projectsState';
 import {
-  projectsDateSortOptions,
-  projectsOwnerSortOptions,
+  projectOrderingWithOptions,
+  projectsOwnerFilterOptions,
 } from 'src/constants/project';
-import Dropdown from 'src/components/organisms/Dropdown';
+import Dropdown from 'src/components/organisms/Dropdown/DefaultDropdown';
 import IconButton from 'src/components/molecules/IconButton';
 import { UserId } from 'src/types/user';
 import {
-  ProjectsDateSortOption,
-  ProjectsOwnerSortOption,
+  ProjectsOrdering,
+  ProjectsOrderingOption,
+  ProjectsOwnerFilter,
 } from 'src/types/project';
 import * as s from './style';
+import GroupedDropdown from '../Dropdown/GroupedDropdown';
 
-const DATE_SORT_OPTIONS = Object.values(projectsDateSortOptions);
-const PROJECT_OWNERS_DEFAULT_OPTION = Object.values(projectsOwnerSortOptions);
+const PROJECT_OWNERS_DEFAULT_OPTION = Object.values(projectsOwnerFilterOptions);
 
 const ProjectSortOptionPanel = () => {
-  const [projectOwnerFilterOption, setProjectOwnerFilterOption] =
-    useRecoilState<ProjectsOwnerSortOption>(projectsOwnerSortOptionState);
-  const [projectsDateSortOption, setProjectsDateSortOption] =
-    useRecoilState<ProjectsDateSortOption>(ProjectsDateSortOptionState);
   const projectOwnersId = useRecoilValue<UserId[]>(projectOwnersSelector);
+  const [projectOwnerFilterOption, setProjectOwnerFilterOption] =
+    useRecoilState<ProjectsOwnerFilter>(projectsOwnerFilterState);
+  const [projectsOrdering, setProjectsOrdering] =
+    useRecoilState<ProjectsOrdering>(projectsOrderingState);
+  const [projectsOrderingOption, setProjectsOrderingOption] = useRecoilState(
+    projectsOrderingOptionState,
+  );
+  const [isProjectGridView, setIsProjectGridView] =
+    useRecoilState(projectGridViewState);
 
   const projectOwnerFilterOptions = [
     ...PROJECT_OWNERS_DEFAULT_OPTION,
     ...projectOwnersId,
   ];
-  
+
   return (
     <s.ProjectSortOptionPanelWrapper>
       <s.TitleWrapper>Project Boards</s.TitleWrapper>
       <s.OptionsWrapper>
         <s.DropdownWrapper>
-          <Dropdown<ProjectsOwnerSortOption>
+          <Dropdown<ProjectsOwnerFilter>
+            dropdownIcon="user"
             items={projectOwnerFilterOptions}
             selectedItem={projectOwnerFilterOption}
             setSelectedItem={setProjectOwnerFilterOption}
+            borderNone
           />
         </s.DropdownWrapper>
         <s.DropdownWrapper>
-          <Dropdown
-            items={DATE_SORT_OPTIONS}
-            selectedItem={projectsDateSortOption}
-            setSelectedItem={setProjectsDateSortOption}
+          <GroupedDropdown<ProjectsOrdering, ProjectsOrderingOption>
+            groups={structuredClone(projectOrderingWithOptions)}
+            selectedGroup={projectsOrdering}
+            setSelectedGroup={(group) => setProjectsOrdering(group)}
+            selectedItem={projectsOrderingOption}
+            setSelectedItem={(item) => setProjectsOrderingOption(item)}
+            borderNone
           />
         </s.DropdownWrapper>
-        <IconButton icon="menu" onClick={() => {}} />
-        <IconButton icon="viewBoxes" onClick={() => {}} />
+        <s.GridSelectorWrapper>
+          <s.SelectedIconWrapper selected={!isProjectGridView}>
+            <IconButton
+              icon="menu"
+              onClick={() => {
+                setIsProjectGridView(false);
+              }}
+            />
+          </s.SelectedIconWrapper>
+          <s.SelectedIconWrapper selected={isProjectGridView}>
+            <IconButton
+              icon="viewBoxes"
+              onClick={() => {
+                setIsProjectGridView(true);
+              }}
+            />
+          </s.SelectedIconWrapper>
+        </s.GridSelectorWrapper>
       </s.OptionsWrapper>
     </s.ProjectSortOptionPanelWrapper>
   );
 };
-
 export default ProjectSortOptionPanel;

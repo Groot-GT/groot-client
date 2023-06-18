@@ -24,11 +24,13 @@ const PageList = () => {
   return (
     <>
       <s.IconButtonWrapper>
-        <IconButton icon='add' onClick={addPage} />
+        <IconButton icon="add" onClick={addPage} />
       </s.IconButtonWrapper>
       <List>
         {pageList.map(([id, page]) => (
-          <ListItem key={id} itemTitle={page.name} deleteItem={() => deletePage(id)} />
+          <ListItem key={id} deleteItem={() => deletePage(id)}>
+            {page.name}
+          </ListItem>
         ))}
       </List>
     </>

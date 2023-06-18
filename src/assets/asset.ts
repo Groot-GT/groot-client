@@ -12,6 +12,9 @@ import horizontalTree from './icons/horizontal-tree.svg';
 import bothSideTree from './icons/both-side-tree.svg';
 import menu from './icons/menu.svg';
 import viewBoxes from './icons/view-boxes.svg';
+import user from './icons/user.svg';
+import more_vertical from './icons/more-vertical.svg';
+import check_small from './icons/check-small.svg';
 
 export const ToggleButtonAssets = {
   chevronDown,
@@ -28,4 +31,7 @@ export const ToggleButtonAssets = {
   _delete,
   menu,
   viewBoxes,
+  user,
+  more_vertical,
+  check_small,
 };

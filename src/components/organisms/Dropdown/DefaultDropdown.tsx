@@ -5,6 +5,7 @@ import Icon from 'src/components/atoms/Icon';
 import { IconType } from 'src/types/icon';
 import { SetterOrUpdater } from 'recoil';
 import * as s from './style';
+import useDetectClickOutside from '../../../hooks/useDetectClickOutside';
 
 interface DropdownProps<T> {
   items: T[];
@@ -15,19 +16,16 @@ interface DropdownProps<T> {
     | ((value: T) => void);
   icons?: IconType[];
   borderNone?: boolean;
+  dropdownIcon?: IconType | undefined;
 }
-
-const defaultProps = {
-  icons: undefined,
-  borderNone: false,
-};
 
 const Dropdown = <T extends string | number>({
   items,
   selectedItem,
   setSelectedItem,
-  icons,
-  borderNone,
+  icons = undefined,
+  borderNone = false,
+  dropdownIcon = undefined,
 }: DropdownProps<T>) => {
   const [open, setOpen] = useState<boolean>(false);
   const [dropdownWidth, setDropdownWidth] = useState<number | undefined>(0);
@@ -39,17 +37,10 @@ const Dropdown = <T extends string | number>({
     setDropdownWidth(dropdownRef.current?.getBoundingClientRect().width);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (ev: globalThis.MouseEvent): void => {
-      const target = ev.target as HTMLElement;
-      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', (ev) => handleClickOutside(ev));
-    return () =>
-      document.removeEventListener('mousedown', (ev) => handleClickOutside(ev));
-  }, [dropdownRef, setOpen]);
+  useDetectClickOutside({
+    ref: dropdownRef,
+    callback: () => setOpen(false),
+  });
 
   const handleOptionClick = (option: T) => {
     setSelectedItem(option);
@@ -62,26 +53,33 @@ const Dropdown = <T extends string | number>({
         borderNone={borderNone}
         onClick={() => setOpen(!open)}
       >
-        {icons ? (
-          <s.SelectedIconWrapper>
-            <Icon iconImg={icons[selectedItemIdx]} />
-          </s.SelectedIconWrapper>
+        {dropdownIcon ? (
+          <s.DropdownIconWrapper>
+            <Icon iconImg={dropdownIcon} />
+          </s.DropdownIconWrapper>
         ) : null}
-        <s.SelectedItemWrapper>{selectedItem}</s.SelectedItemWrapper>
+        <s.SelectedItemWrapper>
+          {icons ? (
+            <s.SelectedIconWrapper>
+              <Icon iconImg={icons[selectedItemIdx]} />
+            </s.SelectedIconWrapper>
+          ) : null}
+          {selectedItem}
+        </s.SelectedItemWrapper>
         <ToggleButton clicked={open} onClick={() => setOpen(!open)} />
       </s.SelectedItemPlaceHolder>
-      {open ? (
-        <DropdownList<T>
-          items={items}
-          icons={icons}
-          dropdownWidth={dropdownWidth}
-          handleOptionClick={handleOptionClick}
-        />
-      ) : null}
+      <s.DropdownListWrapper width={dropdownWidth}>
+        {open ? (
+          <DropdownList<T>
+            items={items}
+            selectedItem={selectedItem}
+            icons={icons}
+            handleOptionClick={handleOptionClick}
+          />
+        ) : null}
+      </s.DropdownListWrapper>
     </s.DropdownWrapper>
   );
 };
-
-Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;

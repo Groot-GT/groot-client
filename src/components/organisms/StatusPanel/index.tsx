@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import MagnifyAmountState from 'src/recoil/magnifyAmountState';
 import Divider from 'src/components/atoms/Divider';
 import Icon from 'src/components/atoms/Icon';
-import Dropdown from 'src/components/organisms/Dropdown';
+import Dropdown from 'src/components/organisms/Dropdown/DefaultDropdown';
 import { magnifyAmountOptions } from 'src/constants/magnify';
 import * as s from './style';
 
@@ -22,7 +22,7 @@ const StatusPanel = () => {
         </s.IconWrapper>
         <Divider />
         <s.MagnificationWrapper>
-          <Dropdown
+          <Dropdown<string>
             borderNone
             selectedItem={`${magnifyAmount}%`}
             setSelectedItem={handleMagnifyAmountChange}

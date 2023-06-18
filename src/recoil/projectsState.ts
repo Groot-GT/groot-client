@@ -1,37 +1,70 @@
 import { atom, selector } from 'recoil';
-import {
-  Projects,
-  ProjectsOwnerSortOption,
-  ProjectsDateSortOption,
-  ProjectId,
-  ProjectCreatedAt,
-} from 'src/types/project';
-import { UserId } from 'src/types/user';
+import { currentUserState } from 'src/recoil/usersState';
+import localStorageEffect from 'src/recoil/localStorageEffect';
 import { projects } from 'src/mock';
 import {
-  projectsOwnerSortOptions,
-  projectsDateSortOptions,
+  ProjectId,
+  Projects,
+  ProjectsOrdering,
+  ProjectsOrderingOption,
+  ProjectsOwnerFilter,
+} from 'src/types/project';
+import { UserId } from 'src/types/user';
+import {
+  NEWEST_FIRST,
+  projectOrderings,
+  projectOrderingWithOptions,
+  projectsOwnerFilterOptions,
+  UPDATED_AT,
+  CREATED_AT,
 } from 'src/constants/project';
-import { currentUserState } from './usersState';
-
-// #TODO: Project 정렬 상태를 어떻게 저장해야 할 지 논의
-// Localstorage에 저장해야 하나
-// 추가적으로 저장한다면, Recoil-Persist: https://github.com/polemius/recoil-persist#readme
-// vs AtomEffect https://recoiljs.org/docs/guides/atom-effects/#local-storage-persistence
+import {
+  getCreatedAtTimePhrase,
+  getUpdateAtTimePhrase,
+} from 'src/utils/getTimeIntervalPhrase';
+import sortProjectsByOptions from 'src/utils/sortProjectsByOptions';
 
 const projectsState = atom<Projects>({
   key: 'projectsState',
   default: projects,
 });
 
-export const projectsOwnerSortOptionState = atom<ProjectsOwnerSortOption>({
-  key: 'projectOwnerSortOptionState',
-  default: projectsOwnerSortOptions[0],
+export const projectsOwnerFilterState = atom<ProjectsOwnerFilter>({
+  key: 'projectsOwnerFilterState',
+  default: projectsOwnerFilterOptions[0],
+  effects: [
+    localStorageEffect<ProjectsOwnerFilter>({
+      key: 'projectsOwnerFilterState',
+      defaultValue: projectsOwnerFilterOptions[0],
+    }),
+  ],
 });
 
-export const ProjectsDateSortOptionState = atom<ProjectsDateSortOption>({
-  key: 'projectRecentSortOptionState',
-  default: projectsDateSortOptions[0],
+export const projectsOrderingState = atom<ProjectsOrdering>({
+  key: 'projectsOrderingState',
+  default: UPDATED_AT,
+  effects: [
+    localStorageEffect<ProjectsOrdering>({
+      key: 'projectsOrderingState',
+      defaultValue: projectOrderings[0],
+    }),
+  ],
+});
+
+export const projectsOrderingOptionState = atom<ProjectsOrderingOption>({
+  key: 'projectsOrderingOptionState',
+  default: NEWEST_FIRST,
+});
+
+export const projectGridViewState = atom<boolean>({
+  key: 'projectGridViewState',
+  default: true,
+  effects: [
+    localStorageEffect<boolean>({
+      key: 'projectGridViewState',
+      defaultValue: true,
+    }),
+  ],
 });
 
 export const projectOwnersSelector = selector<UserId[]>({
@@ -45,47 +78,74 @@ export const projectOwnersSelector = selector<UserId[]>({
   },
 });
 
-// #TODO: 정렬 기준이 CreatedAt, ModifiedAt임. 추가 정렬해야 할 것이 있는지.. 예시: 알파벳순 정렬 ..
+export const updatedAtTimePhrasesSelector = selector<{
+  [key in ProjectId]: string;
+}>({
+  key: 'updatedAtTimePhrasesSelector',
+  get: ({ get }) => {
+    const currentProjects = get(projectsState);
+    return Object.keys(currentProjects).reduce(
+      (acc, currentKey) => ({
+        [currentKey]: getUpdateAtTimePhrase(
+          currentProjects[currentKey].updatedAt,
+        ),
+        ...acc,
+      }),
+      {},
+    );
+  },
+});
+
+export const createdAtTimePhrasesSelector = selector<{
+  [key in ProjectId]: string;
+}>({
+  key: 'createdAtTimePhrasesSelector',
+  get: ({ get }) => {
+    const currentProjects = get(projectsState);
+    return Object.keys(currentProjects).reduce(
+      (acc, currentKey) => ({
+        [currentKey]: getCreatedAtTimePhrase(
+          currentProjects[currentKey].createdAt,
+        ),
+        ...acc,
+      }),
+      {},
+    );
+  },
+});
+
+export const projectDatePhrasesSelector = selector<{
+  [key in ProjectId]: string;
+}>({
+  key: 'projectDatePhrasesSelector',
+  get: ({ get }) => {
+    const projectsOrdering = get(projectsOrderingState);
+    const updatedAtTimePhrases = get(updatedAtTimePhrasesSelector);
+    const createdAtTimePhrases = get(createdAtTimePhrasesSelector);
+
+    return projectsOrdering === CREATED_AT
+      ? createdAtTimePhrases
+      : updatedAtTimePhrases;
+  },
+});
 
 export const sortedProjectsSelector = selector<Projects>({
   key: 'sortedProjectsSelector',
   get: ({ get }) => {
     const currentProjects = get(projectsState);
-    const projectsOwnerSortOption = get(projectsOwnerSortOptionState);
-    const projectsDateSortOption = get(ProjectsDateSortOptionState);
+    const projectOwnerFilter = get(projectsOwnerFilterState);
+    const projectOrdering = get(projectsOrderingState);
     const currentUser = get(currentUserState);
+    const isReverse =
+      get(projectsOrderingOptionState) ===
+      projectOrderingWithOptions[projectOrdering][1];
 
-    const filteredProjectsKeysByOwner: ProjectId[] = Object.keys(
+    return sortProjectsByOptions(
       currentProjects,
-    ).filter((key: keyof Projects) => {
-      const project = currentProjects[key];
-      return (
-        // Owned by specific user
-        project.owner.id === projectsOwnerSortOption ||
-        // Owned by anyone
-        projectsOwnerSortOption === projectsOwnerSortOptions[0] ||
-        // Owned by me
-        (projectsOwnerSortOption === projectsOwnerSortOptions[1] &&
-          project.owner.id === currentUser.id)
-      );
-    });
-
-    const sortedProjectsKeysByDate: ProjectId[] =
-      filteredProjectsKeysByOwner.sort((a: ProjectId, b: ProjectId) => {
-        const aDate: ProjectCreatedAt = currentProjects[a].createdAt;
-        const bDate: ProjectCreatedAt = currentProjects[b].createdAt;
-
-        return projectsDateSortOption === projectsDateSortOptions[0]
-          ? bDate.localeCompare(aDate)
-          : -bDate.localeCompare(aDate);
-      });
-
-    return sortedProjectsKeysByDate.reduce(
-      (acc, currentKey) => ({
-        [currentKey]: currentProjects[currentKey],
-        ...acc,
-      }),
-      {},
+      projectOwnerFilter,
+      projectOrdering,
+      currentUser,
+      isReverse,
     );
   },
 });

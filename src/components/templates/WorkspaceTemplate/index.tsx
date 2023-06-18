@@ -1,7 +1,7 @@
 import ProjectPanel from 'src/components/organisms/ProjectPanel';
 import CurrentUsersPanel from 'src/components/organisms/CurrentUsersPanel';
 import StatusPanel from 'src/components/organisms/StatusPanel';
-import WorkspaceProjectBoards from 'src/components/organisms/WorkspaceProjectBorads';
+import WorkspaceProjectBoard from 'src/components/organisms/WorkspaceProjectBoard';
 import * as s from './style';
 
 const WorkspaceTemplate = () => (
@@ -14,7 +14,7 @@ const WorkspaceTemplate = () => (
       </s.TopRightWrapper>
     </s.LayerWrapper>
     <s.MiddleWrapper>
-      <WorkspaceProjectBoards />
+      <WorkspaceProjectBoard />
     </s.MiddleWrapper>
   </s.WorkspaceWrapper>
 );

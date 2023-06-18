@@ -9,6 +9,7 @@ export const ListItem = styled.li`
   margin: 0;
   height: 48px;
   padding: 0 18px;
+  font-size: 12px;
 
   transition: background-color 0.1s ease-in-out;
 
@@ -21,5 +22,3 @@ export const ListItem = styled.li`
 export const ListItemTitle = styled.p`
   font-size: 12px;
 `;
-
-

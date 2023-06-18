@@ -12,6 +12,4 @@ export const ListItem = styled.div`
   flex-direction: column;
   padding: 0;
   margin: 0;
-  height: 48px;
 `;
-

@@ -21,6 +21,30 @@ export const OptionsWrapper = styled.div`
 `;
 
 export const DropdownWrapper = styled.div`
-  width: 160px;
+  background-color: ${({ theme }) => theme.colors.white[0]};
+  width: 180px;
+  height: fit-content;
   margin-left: 16px;
+  border-radius: 4px;
+`;
+
+export const GridSelectorWrapper = styled.div`
+  padding: 0 6px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 8px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SelectedIconWrapper = styled.div<{ selected: boolean }>`
+  width: 28px;
+  height: 28px;
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme, selected }) =>
+    selected ? theme.colors.white[0] : `transparent`};
+  border-radius: 4px;
 `;
