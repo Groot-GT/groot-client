@@ -2,25 +2,21 @@ import * as s from './style';
 
 type SideBarItemProps = {
   title: string | undefined;
-  element?: JSX.Element;
+  element?: JSX.Element | undefined;
   noPadding?: boolean;
 };
 
-const defaultProps = {
-  element: null,
-  noPadding: false,
-};
-const SideBarItem = ({ title, element, noPadding }: SideBarItemProps) => (
+const SideBarItem = ({
+  title,
+  element = undefined,
+  noPadding = false,
+}: SideBarItemProps) => (
   <s.SideBarItemWrapper noPadding={noPadding}>
-    {title?.length ?
-      <s.SideBarItemTitle noPadding={noPadding}>
-        {title}
-      </s.SideBarItemTitle>
-      : null}
+    {title?.length ? (
+      <s.SideBarItemTitle noPadding={noPadding}>{title}</s.SideBarItemTitle>
+    ) : null}
     {element}
   </s.SideBarItemWrapper>
 );
-
-SideBarItem.defaultProps = defaultProps;
 
 export default SideBarItem;

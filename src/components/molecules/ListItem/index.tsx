@@ -9,17 +9,11 @@ type ListItemProps = {
   onClick?: MouseEventHandler<HTMLDivElement>;
 };
 
-const defaultProps = {
-  deleteItem: undefined,
-  onClick: () => {},
-  backgroundColor: 'transparent',
-};
-
 const ListItem = ({
   children,
-  onClick,
-  backgroundColor,
-  deleteItem,
+  onClick = () => {},
+  backgroundColor = 'transparent',
+  deleteItem = undefined,
 }: ListItemProps) => (
   <s.ListItem>
     <Item
@@ -31,6 +25,5 @@ const ListItem = ({
     </Item>
   </s.ListItem>
 );
-ListItem.defaultProps = defaultProps;
 
 export default ListItem;

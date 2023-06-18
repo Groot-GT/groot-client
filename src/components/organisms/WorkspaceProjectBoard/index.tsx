@@ -9,6 +9,7 @@ import { ProjectId } from 'src/types/project';
 import ProjectSortOptionPanel from 'src/components/organisms/ProjectSortOptionPanel';
 import ProjectsList from 'src/components/organisms/ProjectsList';
 import ProjectsGrid from 'src/components/organisms/ProjectsGrid';
+import { Route } from 'src/constants/routes';
 import * as s from './style';
 
 const WorkspaceProjectBoard = () => {
@@ -19,7 +20,7 @@ const WorkspaceProjectBoard = () => {
   const navigate = useNavigate();
 
   const handleProjectItemClick = (projectId: ProjectId) => {
-    navigate(`/projects/${projectId}`);
+    navigate(Route.PROJECT_DETAIL.replace(':projectId', projectId));
   };
 
   const projectsProps = {

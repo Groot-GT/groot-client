@@ -1,10 +1,4 @@
-import {
-  MouseEvent,
-  MouseEventHandler,
-  ReactNode,
-  useRef,
-  useState,
-} from 'react';
+import { MouseEvent, MouseEventHandler, ReactNode, useState } from 'react';
 import IconButton from 'src/components/molecules/IconButton';
 import * as s from './style';
 
@@ -16,21 +10,13 @@ type ListItemProps = {
   hoverColor?: string;
 };
 
-const defaultProps = {
-  onClick: () => {},
-  deleteItem: undefined,
-  backgroundColor: 'transparent',
-  hoverColor: 'transparent',
-};
-
 const Item = ({
   children,
-  onClick,
-  deleteItem,
-  backgroundColor,
-  hoverColor,
+  onClick = () => {},
+  deleteItem = undefined,
+  backgroundColor = 'transparent',
+  hoverColor = 'transparent',
 }: ListItemProps) => {
-  const itemRef = useRef(null);
   const [isHover, setIsHover] = useState(false);
 
   const handleItemDeleteClick = (e: MouseEvent) => {
@@ -43,7 +29,6 @@ const Item = ({
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onClick={onClick}
-      ref={itemRef}
       backgroundColor={backgroundColor}
       hoverColor={hoverColor}
     >
@@ -54,6 +39,4 @@ const Item = ({
     </s.Item>
   );
 };
-Item.defaultProps = defaultProps;
-
 export default Item;

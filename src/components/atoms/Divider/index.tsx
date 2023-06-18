@@ -10,14 +10,12 @@ type DividerProps = {
   color?: string;
 };
 
-const defaultProps = {
-  length: 60,
-  thickness: 1,
-  vertical: true,
-  color: theme.colors.black[4],
-};
-
-const Divider = ({ length, thickness, vertical, color }: DividerProps) => {
+const Divider = ({
+  length = 60,
+  thickness = 1,
+  vertical = true,
+  color = theme.colors.black[4],
+}: DividerProps) => {
   const theme2 = useTheme();
   return (
     <s.DividerLine
@@ -29,7 +27,5 @@ const Divider = ({ length, thickness, vertical, color }: DividerProps) => {
     />
   );
 };
-
-Divider.defaultProps = defaultProps;
 
 export default Divider;

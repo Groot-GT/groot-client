@@ -4,18 +4,14 @@ import * as s from './style';
 
 interface DropDownOptionProps<T> {
   value: T;
-  icon?: IconType | null;
+  icon?: IconType | undefined;
   onClick: () => void;
 }
-
-const defaultProps = {
-  icon: null,
-};
 
 const DropDownOption = <T extends string | number>({
   value,
   onClick,
-  icon,
+  icon = undefined,
 }: DropDownOptionProps<T>) => (
   <s.Option onClick={onClick}>
     <s.DropdownIconWrapper>
@@ -24,7 +20,5 @@ const DropDownOption = <T extends string | number>({
     {value}
   </s.Option>
 );
-
-DropDownOption.defaultProps = defaultProps;
 
 export default DropDownOption;

@@ -13,27 +13,18 @@ type ButtonAttributes = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-const defaultProps = {
-  children: null,
-  variant: 'primary',
-  disabled: false,
-  onClick: () => {},
-};
-
 export type ButtonProps = ButtonAttributes &
   ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
-  children,
-  variant,
-  disabled,
-  onClick,
+  children = null,
+  variant = 'primary',
+  disabled = false,
+  onClick = () => {},
 }: PropsWithChildren & ButtonProps) => (
   <s.Button onClick={onClick} variant={variant} disabled={disabled}>
     {children}
   </s.Button>
 );
-
-Button.defaultProps = defaultProps;
 
 export default Button;
